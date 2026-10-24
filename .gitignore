@@ -1,0 +1,16 @@
+# macOS / editorer
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Miljøvariabler og hemmeligheder – må aldrig committes
+.env
+.env.*
+*.pem
+*.key
+
+# Vercel og værktøjer
+.vercel
+node_modules/
+*.log
