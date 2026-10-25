@@ -1,0 +1,60 @@
+/* Vanta Studio – hamburgermenu (alle sider) */
+@font-face{font-family:"Fraunces";src:url("/assets/fonts/fraunces.woff2") format("woff2");font-weight:100 400;font-style:normal;font-display:swap}
+@font-face{font-family:"Inter";src:url("/assets/fonts/inter.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+/* ================= Menu (bruges på alle sider) ================= */
+.vm,.vm-burger{--navy:#030318;--slate:#0F172A;--violet:#7c3aed;--cyan:#22d3ee;--lilac:#a78bfa;--mist:#ede9fe;--mist-80:rgba(237,233,254,.8);--mist-60:rgba(237,233,254,.6);--line:rgba(167,139,250,.16);--ease:cubic-bezier(.22,1,.36,1);--px:20px}
+@media (min-width:640px){.vm,.vm-burger{--px:32px}}
+@media (min-width:1024px){.vm,.vm-burger{--px:56px}}
+.vm-burger{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;margin-right:-10px;border:0;background:none;color:#fff;cursor:pointer}
+.vm-burger i{display:block;width:24px;height:1.5px;background:currentColor}
+
+.vm{position:fixed;inset:0;z-index:100;display:grid;grid-template-rows:auto 1fr;background:radial-gradient(70% 60% at 85% 0%,rgba(124,58,237,.35),rgba(124,58,237,0) 70%),radial-gradient(50% 50% at 0% 100%,rgba(34,211,238,.10),rgba(34,211,238,0) 70%),var(--navy);color:var(--mist);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .7s var(--ease),visibility 0s .7s;overflow:hidden}
+.vm.open{clip-path:inset(0);visibility:visible;transition:clip-path .7s var(--ease)}
+.vm-top{display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 var(--px);font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase}
+.vm-close{position:relative;width:44px;height:44px;margin-right:-10px;border:0;background:none;color:#fff;cursor:pointer}
+.vm-close i{position:absolute;left:10px;top:21px;width:24px;height:1.5px;background:currentColor;transform:rotate(45deg)}
+.vm-close i+i{transform:rotate(-45deg)}
+.vm-body{display:grid;align-content:start;gap:40px;min-height:0;padding:clamp(8px,4vh,40px) var(--px) 40px;overflow-y:auto;overscroll-behavior:contain}
+@media (min-width:1024px){.vm-body{grid-template-columns:minmax(0,1fr) 320px;align-content:center;gap:80px;padding-top:0}}
+.vm-list{margin:0;padding:0;list-style:none;counter-reset:vm}
+.vm-list > li{border-top:1px solid var(--line);opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.vm-list > li:last-child{border-bottom:1px solid var(--line)}
+.vm.open .vm-list > li{opacity:1;transform:none;transition-delay:calc(.18s + var(--i) * .045s)}
+.vm-row{display:flex;align-items:center;gap:12px}
+.vm-link{flex:1;display:flex;align-items:baseline;gap:18px;padding:12px 0;font-family:"Fraunces","Times New Roman",serif;font-weight:200;font-variation-settings:"opsz" 144;font-size:clamp(28px,4.4vw,52px);line-height:1.05;letter-spacing:-.025em;color:var(--mist);text-decoration:none;transition:color .3s,transform .5s var(--ease)}
+.vm-link::before{counter-increment:vm;content:counter(vm,decimal-leading-zero);font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.14em;color:var(--mist-60);transform:translateY(-.9em)}
+.vm-link:hover{color:#fff;transform:translateX(6px)}
+.vm-link[aria-current="page"]{color:#fff}
+.vm-link[aria-current="page"]::before{color:var(--cyan)}
+.vm-toggle{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:rgba(237,233,254,.06);color:var(--mist);cursor:pointer;transition:background-color .3s}
+.vm-toggle:hover{background:rgba(237,233,254,.12)}
+.vm-toggle svg{transition:transform .4s var(--ease)}
+.vm-toggle[aria-expanded="true"] svg{transform:rotate(45deg)}
+.vm-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.vm-sub.open{grid-template-rows:1fr}
+.vm-sub ul{min-height:0;overflow:hidden;margin:0;padding:0 0 0 calc(18px + 2.2ch);list-style:none}
+.vm-sub li:last-child{padding-bottom:14px}
+.vm-sub a{display:inline-block;padding:7px 0;font-size:16px;color:var(--mist-80);text-decoration:none;transition:color .3s}
+.vm-sub a:hover,.vm-sub a[aria-current="page"]{color:var(--cyan)}
+.vm-aside{display:grid;align-content:start;gap:24px;opacity:0;transition:opacity .6s var(--ease)}
+.vm.open .vm-aside{opacity:1;transition-delay:.5s}
+.vm-aside p{margin:0;font-size:14px;line-height:1.6;color:var(--mist-60)}
+.vm-aside a.mail{font-size:16px;color:var(--mist);text-decoration:none;border-bottom:1px solid rgba(237,233,254,.3);justify-self:start;padding-bottom:2px}
+.vm-aside a.mail:hover{border-color:var(--mist)}
+html.vm-lock,html.vm-lock body{overflow:hidden}
+@media (prefers-reduced-motion:reduce){
+  .vm,.vm.open,.vm-list > li,.vm-aside,.vm-sub{transition:none}
+}
+
+/* Knap i glas – samme som på forsiden */
+.glass-btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:15px 28px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.01);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1);color:#fff;font-size:12px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background-color .3s}
+.glass-btn::before{content:"";position:absolute;inset:0;padding:1.4px;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.15) 80%,rgba(255,255,255,.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.glass-btn:hover{background-color:rgba(255,255,255,.05)}
+.glass-btn svg{transition:transform .3s}
+.glass-btn:hover svg{transform:translate(2px,-2px)}
+
+
+/* Sociale medier (footer) */
+.socials{display:flex;align-items:center;gap:12px}
+.socials a{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;color:inherit;box-shadow:inset 0 0 0 1px rgba(237,233,254,.22);transition:color .3s,box-shadow .3s,background-color .3s}
+.socials a:hover{color:#fff;background:rgba(237,233,254,.06);box-shadow:inset 0 0 0 1px rgba(237,233,254,.5)}

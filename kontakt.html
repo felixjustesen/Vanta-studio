@@ -4,8 +4,52 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Start et projekt – Vanta Studio</title>
-<meta name="description" content="Fortæl os kort om din virksomhed, så vender vi tilbage inden for 24 timer.">
+<meta name="description" content="Fortæl kort om din virksomhed, så vender jeg tilbage inden for 24 timer.">
 <link rel="canonical" href="https://www.vantastudio.dk/kontakt">
+<!-- vm:seo -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="da_DK">
+<meta property="og:site_name" content="Vanta Studio">
+<meta property="og:title" content="Kontakt – start et projekt | Vanta Studio">
+<meta property="og:description" content="Fortæl kort om din virksomhed, så vender Vanta Studio tilbage inden for 24 timer.">
+<meta property="og:url" content="https://www.vantastudio.dk/kontakt">
+<meta property="og:image" content="https://www.vantastudio.dk/assets/og-vanta.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ProfessionalService",
+   "@id": "https://www.vantastudio.dk/#org",
+   "name": "Vanta Studio",
+   "url": "https://www.vantastudio.dk/",
+   "email": "kontakt@vantastudio.dk",
+   "image": "https://www.vantastudio.dk/assets/og-vanta.jpg",
+   "description": "Digitalt bureau, der udvikler hjemmesider, AI-løsninger og automatiseringer til virksomheder.",
+   "founder": {
+    "@type": "Person",
+    "name": "Felix Nylander Justesen"
+   },
+   "areaServed": {
+    "@type": "Country",
+    "name": "Danmark"
+   },
+   "knowsLanguage": "da"
+  },
+  {
+   "@type": "ContactPage",
+   "url": "https://www.vantastudio.dk/kontakt",
+   "about": {
+    "@id": "https://www.vantastudio.dk/#org"
+   }
+  }
+ ]
+}
+</script>
+<!-- /vm:seo -->
 <meta name="theme-color" content="#0F172A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23030318'/%3E%3Cpath d='M8 9h3.4l4.6 11.2L20.6 9H24l-6.6 15h-2.8z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
@@ -40,7 +84,7 @@ button,input,textarea{font:inherit;color:inherit}
 @keyframes rise{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
 
 .mark{display:block;width:44px;height:44px;margin:0 auto 22px}
-h1{margin:0;font-size:clamp(32px,4.4vw,42px);font-weight:600;line-height:1.05;letter-spacing:-.035em;text-align:center}
+h1,.h1{margin:0;font-size:clamp(32px,4.4vw,42px);font-weight:600;line-height:1.05;letter-spacing:-.035em;text-align:center}
 .sub{margin:10px 0 30px;font-size:14px;text-align:center;color:rgba(237,233,254,.75)}
 
 form{display:grid;gap:14px}
@@ -61,15 +105,20 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
 .card.sent .done{display:block;animation:rise .8s var(--ease) both}
 
 @media (prefers-reduced-motion:reduce){.card,.card.sent .done{animation:none}}
+.kt-burger{position:fixed;top:20px;right:30px;z-index:3;width:44px;height:44px;margin:0;border-radius:50%;background:rgba(15,23,42,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.kt-burger i{width:18px}
 </style>
+<link rel="stylesheet" href="/assets/menu.css">
 </head>
 <body>
 <canvas class="scene" aria-hidden="true"></canvas>
 
-<a class="back" href="index.html">
+<a class="back" href="/">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
   Vanta Studio
 </a>
+
+<button class="vm-burger kt-burger" type="button" data-vm-open aria-expanded="false" aria-controls="vm" aria-label="Åbn menu"><i></i><i></i><i></i></button>
 
 <main class="wrap">
   <section class="card" aria-labelledby="titel">
@@ -78,7 +127,7 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       <path d="M6 8h9.5l6.5 17.5L28.5 8H38L26.5 36h-9z" fill="url(#mk)"/>
     </svg>
     <h1 class="ask" id="titel">Start et projekt</h1>
-    <p class="sub">Vi svarer inden for 24 timer.</p>
+    <p class="sub">Jeg svarer inden for 24 timer.</p>
 
     <form novalidate>
       <label>Navn
@@ -93,11 +142,11 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       <button class="send" type="submit">Send</button>
     </form>
 
-    <p class="alt">Eller skriv til <a href="mailto:hej@vantastudio.dk">hej@vantastudio.dk</a></p>
+    <p class="alt">Eller skriv til <a href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a></p>
 
     <div class="done" role="status" aria-live="polite">
-      <h1>Tak!</h1>
-      <p>Vi vender tilbage inden for 24 timer.</p>
+      <p class="h1" role="heading" aria-level="2">Tak!</p>
+      <p>Jeg vender tilbage inden for 24 timer.</p>
     </div>
   </section>
 </main>
@@ -118,7 +167,7 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       return;
     }
     var body = f.besked.value + "\n\n" + f.navn.value + "\n" + f.email.value;
-    window.location.href = "mailto:hej@vantastudio.dk?subject=" + encodeURIComponent("Nyt projekt – " + f.navn.value) + "&body=" + encodeURIComponent(body);
+    window.location.href = "mailto:kontakt@vantastudio.dk?subject=" + encodeURIComponent("Nyt projekt – " + f.navn.value) + "&body=" + encodeURIComponent(body);
     card.classList.add("sent");
   });
 
@@ -323,5 +372,19 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
   window.addEventListener("resize", function () { build(); draw(performance.now() / 1000); });
 })();
 </script>
+<!-- vm:menu -->
+<div class="vm" id="vm" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="vm-top"><a href="/" style="color:inherit;text-decoration:none">Vanta Studio</a><button class="vm-close" type="button" aria-label="Luk menu"><i></i><i></i></button></div>
+  <div class="vm-body">
+    <nav aria-label="Hovedmenu"><ol class="vm-list"><li style="--i:0"><div class="vm-row"><a class="vm-link" href="/">Forside</a></div></li><li style="--i:1"><div class="vm-row"><a class="vm-link" href="/ydelser">Ydelser</a><button class="vm-toggle" type="button" aria-expanded="false" aria-controls="vm-sub-ydelser" aria-label="Vis undersider til Ydelser"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="vm-sub" id="vm-sub-ydelser"><ul><li><a href="/ydelser/hjemmesider">Hjemmesider</a></li><li><a href="/ydelser/ai-automatisering">AI & automatisering</a></li><li><a href="/ydelser/seo-aeo-geo">SEO, AEO & GEO</a></li><li><a href="/ydelser/integrationer">Digitale integrationer</a></li></ul></div></li><li style="--i:2"><div class="vm-row"><a class="vm-link" href="/loesninger">Løsninger</a><button class="vm-toggle" type="button" aria-expanded="false" aria-controls="vm-sub-loesninger" aria-label="Vis undersider til Løsninger"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="vm-sub" id="vm-sub-loesninger"><ul><li><a href="/loesninger/ai-chatbot">AI-chatbot</a></li><li><a href="/loesninger/automatisk-genbooking">Automatisk genbooking</a></li><li><a href="/loesninger/bookingpaamindelser">Bookingpåmindelser</a></li><li><a href="/loesninger/kundeopfoelgning">Kundeopfølgning</a></li></ul></div></li><li style="--i:3"><div class="vm-row"><a class="vm-link" href="/metode">Metode</a></div></li><li style="--i:4"><div class="vm-row"><a class="vm-link" href="/om-vanta">Om Vanta</a></div></li><li style="--i:5"><div class="vm-row"><a class="vm-link" href="/faq">FAQ</a></div></li><li style="--i:6"><div class="vm-row"><a class="vm-link" href="/indsigter">Indsigter</a></div></li><li style="--i:7"><div class="vm-row"><a class="vm-link" href="/kontakt" aria-current="page">Kontakt</a></div></li></ol></nav>
+    <div class="vm-aside">
+      <p>Har du en idé eller et problem, der skal løses? Skriv direkte til mig – jeg svarer inden for 24 timer.</p>
+      <a class="mail" href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a>
+      <a class="glass-btn" href="/kontakt" style="justify-self:start">Start et projekt <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+    </div>
+  </div>
+</div>
+<!-- /vm:menu -->
+<script src="/assets/menu.js" defer></script>
 </body>
 </html>

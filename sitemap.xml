@@ -2,14 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.vantastudio.dk/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/ydelser</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/ydelser/hjemmesider</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/ydelser/ai-automatisering</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/ydelser/seo-aeo-geo</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/ydelser/integrationer</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/loesninger</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/loesninger/ai-chatbot</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/loesninger/automatisk-genbooking</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/loesninger/bookingpaamindelser</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/loesninger/kundeopfoelgning</loc>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://www.vantastudio.dk/metode</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/om-vanta</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/faq</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/indsigter</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/indsigter/seo-aeo-geo-forskel</loc>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://www.vantastudio.dk/indsigter/hvad-kan-automatiseres</loc>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://www.vantastudio.dk/kontakt</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
 </urlset>
