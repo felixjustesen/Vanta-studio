@@ -126,7 +126,7 @@ def crumbs_html(crumbs):
     return f'<nav aria-label="Brødkrummer"><ol class="crumbs">{"".join(parts)}</ol></nav>'
 
 
-FOOT_LINKS_LIST = [("/ydelser", "Ydelser"), ("/metode", "Metode"), ("/faq", "FAQ"), ("/kontakt", "Kontakt"),
+FOOT_LINKS_LIST = [("/ydelser", "Ydelser"), ("/metode", "Metode"), ("/om-vanta", "Om Vanta"), ("/indsigter", "Indsigter"), ("/faq", "FAQ"), ("/kontakt", "Kontakt"),
                    ("/privacy-policy", "Privatlivspolitik"), ("/terms-of-service", "Handelsvilkår")]
 FOOT_LINKS = "".join(f'<a href="{h}">{l}</a>' for h, l in FOOT_LINKS_LIST)
 
@@ -266,7 +266,7 @@ add("/ydelser", page(
     "Ydelser – hjemmesider, AI, SEO og integrationer | Vanta Studio",
     "Vanta Studio udvikler hjemmesider, AI og automatisering, SEO/AEO/GEO og digitale integrationer – sammensat efter, hvad din virksomhed faktisk har brug for.",
     'Fire ydelser. <span class="grad">Én samlet tilgang.</span>',
-    sec('<div class="cards c4">' + "".join(card(h, f"{i + 1:02d}", l, Y_INTRO[h]) for i, (h, l) in enumerate(YDELSER)) + "</div>")
+    sec('<h2 class="sr-only">Mine fire kerneydelser</h2><div class="cards c4">' + "".join(card(h, f"{i + 1:02d}", l, Y_INTRO[h]) for i, (h, l) in enumerate(YDELSER)) + "</div>")
     + prose('''
 <h2 class="serif">Kombineret efter behov – ikke solgt i pakker</h2>
 <p>En virksomhed har brug for en ny hjemmeside. En anden har en fin hjemmeside, men mister kunder, fordi ingen følger op efter første besøg. En tredje bruger for mange timer på at svare på de samme spørgsmål.</p>
@@ -484,7 +484,7 @@ add("/loesninger", page(
     "Løsninger – chatbot, genbooking, påmindelser og opfølgning | Vanta Studio",
     "Konkrete digitale værktøjer, Vanta Studio kan udvikle eller integrere: AI-chatbot, automatisk genbooking, bookingpåmindelser og kundeopfølgning.",
     'Konkrete værktøjer til <span class="grad">konkrete problemer</span>',
-    sec('<div class="cards c4">' + "".join(card(h, f"{i + 1:02d}", l, L_INTRO[h]) for i, (h, l) in enumerate(LOESNINGER)) + "</div>")
+    sec('<h2 class="sr-only">Fire konkrete løsninger</h2><div class="cards c4">' + "".join(card(h, f"{i + 1:02d}", l, L_INTRO[h]) for i, (h, l) in enumerate(LOESNINGER)) + "</div>")
     + prose('''
 <h2 class="serif">Problemet kommer først</h2>
 <p>Løsningerne her er eksempler på værktøjer, jeg kan udvikle eller integrere. Hvilke der giver mening for dig, afhænger af, hvor din virksomhed i dag mister tid, kunder eller omsætning. Det finder jeg ud af sammen med dig – se hvordan på siden om <a href="/metode">min metode</a>.</p>
@@ -556,6 +556,10 @@ add("/om-vanta", page(
 <p>Vanta Studio er et selvstændigt digitalt bureau, grundlagt og drevet af mig, {FOUNDER}. Jeg hjælper virksomheder med at udnytte deres digitale potentiale gennem hjemmesider, AI, automatisering og skræddersyede løsninger.</p>
 <h2 class="serif">Direkte kontakt – fra første samtale til færdig løsning</h2>
 <p>Hos Vanta Studio bliver du ikke sendt videre mellem en sælger, en projektleder og en udvikler. Du taler med mig – og det er også mig, der analyserer dine behov, designer og udvikler løsningen. Det giver korte beslutningsveje, og intet går tabt i oversættelsen.</p>
+<h2 class="serif">Hvad laver Vanta Studio?</h2>
+<p>Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger til virksomheder: <a href="/ydelser/hjemmesider">hjemmesider</a>, <a href="/ydelser/ai-automatisering">AI og automatisering</a>, <a href="/ydelser/seo-aeo-geo">synlighed i Google og AI-søgning</a> og <a href="/ydelser/integrationer">integrationer</a> mellem eksisterende systemer. Konkret kan det være en ny hjemmeside, en <a href="/loesninger/ai-chatbot">AI-chatbot</a>, <a href="/loesninger/automatisk-genbooking">automatisk genbooking</a>, <a href="/loesninger/bookingpaamindelser">bookingpåmindelser</a> eller <a href="/loesninger/kundeopfoelgning">kundeopfølgning</a>.</p>
+<h2 class="serif">Hvem hjælper jeg?</h2>
+<p>Jeg arbejder med mindre og mellemstore virksomheder på tværs af brancher – særligt virksomheder, hvor kunderne booker tider, stiller mange af de samme spørgsmål eller kommer igen, fx saloner, klinikker, håndværkere og rådgivere. Fælles for dem er, at de ønsker en professionel digital tilstedeværelse og løsninger, der sparer tid, fastholder kunder eller skaber flere henvendelser.</p>
 <h2 class="serif">Design og teknologi</h2>
 <p>Jeg interesserer mig for skæringspunktet mellem design og teknologi: hjemmesider, der ser gennemarbejdede ud og føles levende, og bagved løsninger, der faktisk gør en forskel i hverdagen – med AI og automatisering, hvor det giver mening.</p>
 <h2 class="serif">Min tilgang</h2>
@@ -738,6 +742,229 @@ ARTICLES = [
     },
 ]
 
+ARTICLES += [
+    {
+        "slug": "hvad-skal-en-hjemmeside-indeholde",
+        "title": "Hvad skal en professionel hjemmeside til en virksomhed indeholde?",
+        "desc": "En tjekliste over det, en professionel hjemmeside til en virksomhed bør indeholde – fra tydelige budskaber og kontaktmuligheder til hastighed, SEO og jura.",
+        "teaser": "En praktisk tjekliste over de elementer, der gør en hjemmeside troværdig, nem at bruge og let at finde.",
+        "date": "2026-10-25",
+        "body": """
+<p>En hjemmeside skal ikke kunne alt. Den skal gøre det let for en besøgende at forstå, hvad du tilbyder, stole på dig og tage næste skridt. Her er de elementer, jeg mener, enhver professionel virksomhedshjemmeside bør have på plads.</p>
+<h2 class="serif">1. Et klart budskab øverst</h2>
+<p>Inden for få sekunder skal den besøgende kunne svare på tre spørgsmål: Hvad laver virksomheden? Er det relevant for mig? Hvad gør jeg nu? En tydelig overskrift, en kort forklaring og én primær knap – fx «Book tid» eller «Kontakt mig» – er vigtigere end et flot billede alene.</p>
+<h2 class="serif">2. Ydelser beskrevet i kundens sprog</h2>
+<p>Beskriv, hvad kunden får ud af ydelsen, ikke kun hvad den hedder. Har du flere ydelser, så giv de vigtigste hver deres side. Det hjælper både de besøgende og søgemaskinerne med at forstå, hvad du tilbyder.</p>
+<h2 class="serif">3. Tydelige kontaktmuligheder</h2>
+<ul>
+<li>Kontaktformular, telefonnummer og e-mail, der er lette at finde på alle sider.</li>
+<li>Adresse og åbningstider, hvis kunderne kommer fysisk forbi.</li>
+<li>Online booking, hvis din forretning bygger på tidsbestilling.</li>
+</ul>
+<h2 class="serif">4. Troværdighed</h2>
+<p>En side om virksomheden og personerne bag, ægte anmeldelser og eksempler på tidligere arbejde gør det lettere at vælge dig. Brug kun ægte udtalelser – opdigtede anmeldelser skader troværdigheden og er ulovlig markedsføring.</p>
+<h2 class="serif">5. Mobilvenlighed og hastighed</h2>
+<p>Mange besøgende kommer fra mobilen. Siden skal være let at læse og navigere på en lille skærm og indlæse hurtigt. Store, uoptimerede billeder og unødvendige tredjepartsscripts er de typiske syndere.</p>
+<h2 class="serif">6. Teknisk SEO</h2>
+<p>Unikke titler og beskrivelser på hver side, én tydelig hovedoverskrift, sitemap, robots.txt og strukturerede data giver Google og AI-tjenester bedre forudsætninger for at forstå og vise din hjemmeside. Læs mere om <a href="/ydelser/seo-aeo-geo">SEO, AEO og GEO</a>.</p>
+<h2 class="serif">7. Tilgængelighed</h2>
+<p>Tilstrækkelig kontrast, beskrivende alternativ tekst til billeder, labels på formularfelter og mulighed for at navigere med tastatur gør siden brugbar for flere – og er et kvalitetstegn.</p>
+<h2 class="serif">8. Det juridiske</h2>
+<p>Indsamler hjemmesiden personoplysninger, fx via en kontaktformular, skal der være en privatlivspolitik. Bruger den cookies til statistik eller markedsføring, kræver det samtykke. Sælger du online, skal handelsbetingelser være tilgængelige.</p>
+<h2 class="serif">Kort sagt</h2>
+<p>En god hjemmeside er tydelig, hurtig, troværdig og let at kontakte dig fra. Vil du have en hjemmeside, der er bygget med det hele fra start, kan du læse om <a href="/ydelser/hjemmesider">hjemmesider hos Vanta Studio</a>.</p>""",
+    },
+    {
+        "slug": "hvad-paavirker-prisen-paa-en-hjemmeside",
+        "title": "Hvad påvirker prisen på en hjemmeside?",
+        "desc": "Hvorfor varierer prisen på hjemmesider så meget? Her er de faktorer, der bestemmer prisen – fra antal sider og funktioner til indhold, integrationer og drift.",
+        "teaser": "Priserne på hjemmesider spænder vidt. Her er de faktorer, der faktisk afgør, hvad en hjemmeside koster.",
+        "date": "2026-10-25",
+        "body": """
+<p>Spørger du fem udbydere om prisen på en hjemmeside, får du ofte fem meget forskellige svar. Det skyldes sjældent, at nogen tager for meget eller for lidt – men at «en hjemmeside» kan dække over meget forskellige opgaver. Her er de faktorer, der betyder mest.</p>
+<h2 class="serif">Skabelon eller skræddersyet</h2>
+<p>En hjemmeside bygget på en færdig skabelon er hurtigere at sætte op, mens et skræddersyet design kræver mere arbejde, men passer præcist til virksomheden. Læs mere om forskellen i artiklen <a href="/indsigter/skabelon-eller-skraeddersyet-hjemmeside">Skabelon eller skræddersyet hjemmeside?</a></p>
+<h2 class="serif">Antal sider og mængden af indhold</h2>
+<p>En enkelt landingsside er en mindre opgave end en hjemmeside med mange ydelsessider, artikler og undersider. Hvem der skriver teksterne og skaffer billederne, påvirker også prisen.</p>
+<h2 class="serif">Funktioner</h2>
+<ul>
+<li>Kontaktformularer og online booking</li>
+<li>Webshop og betaling</li>
+<li>Flersprogede sider</li>
+<li>Animationer og interaktive elementer</li>
+<li>AI-chatbot eller andre automatiseringer</li>
+</ul>
+<p>Hver funktion kræver design, udvikling og test – og nogle kræver løbende abonnementer hos tredjepartsleverandører.</p>
+<h2 class="serif">Integrationer</h2>
+<p>Skal hjemmesiden tale sammen med fx bookingsystem, kundekartotek eller regnskabsprogram, afhænger opgavens omfang af, hvilke tekniske muligheder systemerne giver. Det kan være enkelt eller kræve mere arbejde. Læs om <a href="/ydelser/integrationer">digitale integrationer</a>.</p>
+<h2 class="serif">SEO og synlighed</h2>
+<p>Teknisk SEO bør altid være en del af en professionel hjemmeside. Arbejde med indhold og synlighed i Google og AI-tjenester ud over det grundlæggende er en selvstændig opgave.</p>
+<h2 class="serif">Drift efter lancering</h2>
+<p>Domæne, hosting, e-mail og eventuelle licenser koster typisk løbende. Spørg altid, hvad der er inkluderet efter lanceringen, og hvem der står for opdateringer.</p>
+<h2 class="serif">Sådan får du en retvisende pris</h2>
+<p>Den mest præcise pris får du ved at beskrive, hvad hjemmesiden skal opnå, hvilke funktioner der er nødvendige, og hvad du selv kan levere af indhold. Hos Vanta Studio starter det med en uforpligtende samtale, hvorefter du får et konkret tilbud, før noget går i gang. <a href="/kontakt">Kontakt mig</a>, hvis du vil have et bud på din hjemmeside.</p>""",
+    },
+    {
+        "slug": "skabelon-eller-skraeddersyet-hjemmeside",
+        "title": "Skabelon eller skræddersyet hjemmeside – hvad passer til din virksomhed?",
+        "desc": "Fordele og ulemper ved hjemmesideskabeloner og skræddersyede hjemmesider – og hvordan du vælger, hvad der passer til din virksomhed.",
+        "teaser": "Begge dele kan være det rigtige valg. Her er forskellene, og hvornår hvad giver mening.",
+        "date": "2026-10-25",
+        "body": """
+<p>Der findes i dag mange gode værktøjer, hvor man kan bygge en hjemmeside ud fra en færdig skabelon. Samtidig vælger mange virksomheder en skræddersyet løsning. Hvad er forskellen, og hvad passer til dig?</p>
+<h2 class="serif">Skabelon</h2>
+<h3>Fordele</h3>
+<ul>
+<li>Hurtigt at komme i gang.</li>
+<li>Du kan ofte selv redigere indholdet.</li>
+<li>Lavere startomkostning.</li>
+</ul>
+<h3>Ulemper</h3>
+<ul>
+<li>Designet ligner ofte andre hjemmesider.</li>
+<li>Du er begrænset af skabelonens struktur og platformens muligheder.</li>
+<li>Mange skabeloner indeholder funktioner og kode, du ikke bruger, hvilket kan gøre siden langsommere.</li>
+</ul>
+<h2 class="serif">Skræddersyet</h2>
+<h3>Fordele</h3>
+<ul>
+<li>Design og struktur bygges ud fra din virksomhed, dine kunder og dine mål.</li>
+<li>Kun den funktionalitet, du har brug for – ofte hurtigere sider.</li>
+<li>Lettere at tilføje særlige funktioner og integrationer.</li>
+</ul>
+<h3>Ulemper</h3>
+<ul>
+<li>Kræver mere arbejde fra start.</li>
+<li>Ændringer i struktur og design kræver typisk hjælp fra udvikleren.</li>
+</ul>
+<h2 class="serif">Hvornår giver hvad mening?</h2>
+<p>En skabelon kan være fint, hvis du har brug for en simpel tilstedeværelse og selv vil vedligeholde den. En skræddersyet hjemmeside giver mening, når hjemmesiden skal adskille dig fra konkurrenterne, skabe henvendelser eller hænge sammen med andre systemer – fx booking eller automatiseringer.</p>
+<p>Det vigtigste er ikke teknologien, men om hjemmesiden løser den opgave, den skal. Læs om, hvordan jeg arbejder med <a href="/ydelser/hjemmesider">skræddersyede hjemmesider</a>, eller hvad der <a href="/indsigter/hvad-paavirker-prisen-paa-en-hjemmeside">påvirker prisen</a>.</p>""",
+    },
+    {
+        "slug": "hvordan-fungerer-en-ai-chatbot",
+        "title": "Hvordan fungerer en AI-chatbot til virksomheder?",
+        "desc": "Sådan fungerer en AI-chatbot på en virksomheds hjemmeside: hvad den kan svare på, hvor den får sin viden fra, hvad den ikke bør gøre, og hvordan man kommer i gang.",
+        "teaser": "Hvad en AI-chatbot kan, hvor den henter sin viden, og hvor grænserne bør gå.",
+        "date": "2026-10-25",
+        "body": """
+<p>En AI-chatbot er et chatvindue på din hjemmeside, hvor besøgende kan stille spørgsmål og få svar i almindeligt sprog. Moderne chatbots bygger på store sprogmodeller, der forstår spørgsmål formuleret på mange forskellige måder – også med stavefejl eller på andre sprog.</p>
+<h2 class="serif">Hvor får chatbotten sin viden fra?</h2>
+<p>En sprogmodel ved meget generelt, men intet om netop din virksomhed. Derfor får chatbotten adgang til den viden, den skal bruge: ydelser, priser, åbningstider, betingelser og svar på de spørgsmål, kunderne typisk stiller. Når en besøgende spørger, finder chatbotten de relevante oplysninger og formulerer et svar ud fra dem.</p>
+<h2 class="serif">Hvad kan den typisk hjælpe med?</h2>
+<ul>
+<li>Svar på almindelige spørgsmål – også uden for åbningstiden.</li>
+<li>Guide besøgende til den rigtige side, fx booking eller kontakt.</li>
+<li>Tage imod en henvendelse med kontaktoplysninger, så en person kan følge op.</li>
+<li>Slå oplysninger op i andre systemer, hvor det teknisk er muligt og aftalt.</li>
+</ul>
+<h2 class="serif">Hvad bør den ikke gøre?</h2>
+<p>En god chatbot kender sine grænser. Den skal ikke gætte, når den ikke kender svaret, og den skal ikke træffe beslutninger, der kræver en faglig vurdering. I stedet bør den sige, at den ikke ved det, og tilbyde at sende spørgsmålet videre. Det er også vigtigt at fortælle de besøgende, at de taler med en chatbot, og at håndtere de oplysninger, de skriver, i overensstemmelse med reglerne om databeskyttelse.</p>
+<h2 class="serif">Hvornår giver det mening?</h2>
+<p>En chatbot giver mest værdi, når du får mange gentagne spørgsmål, eller når kunderne ofte har brug for svar uden for åbningstiden. Får du få og meget forskellige henvendelser, er en tydelig FAQ og en god kontaktformular måske nok.</p>
+<h2 class="serif">Kom i gang</h2>
+<p>Start med at samle de spørgsmål, kunderne oftest stiller, og de svar, du giver. Det er fundamentet for en chatbot, der svarer korrekt. Læs mere om <a href="/loesninger/ai-chatbot">AI-chatbot hos Vanta Studio</a>.</p>""",
+    },
+    {
+        "slug": "flere-tilbagevendende-kunder-frisoer",
+        "title": "Hvordan kan en frisørsalon få flere tilbagevendende kunder?",
+        "desc": "Praktiske måder, hvorpå en frisørsalon kan få flere kunder til at komme igen – fra booking ved kassen og påmindelser til automatisk genbooking og god opfølgning.",
+        "teaser": "Faste kunder er rygraden i en salon. Her er konkrete måder at få flere til at komme igen.",
+        "date": "2026-10-25",
+        "body": """
+<p>For de fleste frisørsaloner er det de faste kunder, der skaber en stabil hverdag. Alligevel sker det ofte, at kunder, der var glade for deres klipning, ikke kommer igen – ikke fordi de er utilfredse, men fordi de glemmer at booke, eller fordi en anden salon var nemmere at få en tid hos.</p>
+<h2 class="serif">1. Book næste tid, før kunden går</h2>
+<p>Den enkleste metode er at tilbyde at booke næste tid ved kassen. Mange kunder ved allerede, hvornår de skal klippes igen, og det tager kun et øjeblik.</p>
+<h2 class="serif">2. Gør det nemt at booke online</h2>
+<p>Online booking døgnet rundt fjerner en barriere. Linket til booking bør være let at finde på hjemmesiden, i Google-virksomhedsprofilen og på sociale medier.</p>
+<h2 class="serif">3. Påmindelser før aftalen</h2>
+<p>En automatisk sms eller mail dagen før aftalen kan mindske udeblivelser og gør det let for kunden at flytte tiden i stedet for bare at blive væk. Læs mere om <a href="/loesninger/bookingpaamindelser">bookingpåmindelser</a>.</p>
+<h2 class="serif">4. Automatisk genbooking</h2>
+<p>Har en kunde ikke booket igen inden for det normale interval – fx seks til otte uger efter en klipning – kan en venlig, personlig påmindelse med et direkte link til booking være nok til at få kunden tilbage. Det kan ofte bygges oven på det bookingsystem, salonen allerede bruger. Se <a href="/loesninger/automatisk-genbooking">automatisk genbooking</a>.</p>
+<h2 class="serif">5. Følg op efter besøget</h2>
+<p>En kort tak efter besøget og en invitation til at skrive en anmeldelse styrker relationen og hjælper nye kunder med at vælge salonen. Beskeder med markedsføring kræver kundens samtykke.</p>
+<h2 class="serif">6. Lær kunderne at kende</h2>
+<p>Notér præferencer og tidligere behandlinger, så næste besøg føles personligt. Det er svært for en konkurrent at matche.</p>
+<h2 class="serif">Start småt</h2>
+<p>Det behøver ikke være kompliceret. Ofte giver det mest at starte med én ting – fx påmindelser eller genbooking – og bygge videre derfra. Læs om, hvordan jeg <a href="/metode">griber opgaverne an</a>.</p>""",
+    },
+    {
+        "slug": "faerre-udeblivelser-fra-bookinger",
+        "title": "Sådan mindsker du udeblivelser fra bookinger",
+        "desc": "Konkrete metoder til at mindske udeblivelser fra aftaler: påmindelser, nem aflysning, ventelister, tydelige betingelser og opfølgning.",
+        "teaser": "Tomme tider koster. Her er de metoder, der typisk hjælper mest mod udeblivelser.",
+        "date": "2026-10-25",
+        "body": """
+<p>Når en kunde ikke møder op, står tiden tom – den kan hverken sælges eller bruges på en anden. For virksomheder, der lever af planlagte aftaler, som klinikker, saloner, behandlere og rådgivere, kan udeblivelser derfor koste mere, end man tror. Den gode nyhed er, at de fleste udeblivelser skyldes glemsomhed, og det kan man gøre noget ved.</p>
+<h2 class="serif">Send påmindelser</h2>
+<p>En påmindelse på sms eller mail dagen før – og eventuelt også nogle dage før ved aftaler, der er booket langt ude i fremtiden – er den mest udbredte metode. Den bør indeholde dato, tidspunkt, adresse og et let link eller svar for at flytte eller aflyse. Læs om <a href="/loesninger/bookingpaamindelser">automatiske bookingpåmindelser</a>.</p>
+<h2 class="serif">Gør det let at aflyse</h2>
+<p>Det lyder modsat, men en nem aflysning er bedre end en udeblivelse. Får du besked i tide, kan tiden gives til en anden.</p>
+<h2 class="serif">Hav en venteliste</h2>
+<p>Kunder, der gerne vil have en tid hurtigere, kan få besked, når en tid bliver ledig. Så bliver en aflysning ikke til en tom tid.</p>
+<h2 class="serif">Tydelige betingelser</h2>
+<p>Skriv klart, hvornår en tid senest skal aflyses, og hvad der sker ved udeblivelse. Har du et udeblivelsesgebyr, skal det fremgå tydeligt, før kunden booker.</p>
+<h2 class="serif">Bekræft ved booking</h2>
+<p>En bekræftelse lige efter bookingen – gerne med mulighed for at tilføje aftalen til kalenderen – gør det mindre sandsynligt, at aftalen bliver glemt.</p>
+<h2 class="serif">Følg op</h2>
+<p>Kontakt kunder, der er udeblevet, og tilbyd en ny tid. Ofte er der en forklaring, og en venlig opfølgning bevarer kunden.</p>
+<p>Påmindelser og opfølgning kan automatiseres, ofte oven på det bookingsystem, du allerede bruger. Læs om <a href="/ydelser/ai-automatisering">AI og automatisering</a> eller <a href="/kontakt">kontakt mig</a> for en snak om din situation.</p>""",
+    },
+    {
+        "slug": "synlig-i-chatgpt-og-ai-soegning",
+        "title": "Hvordan bliver din virksomhed synlig i ChatGPT og AI-søgning?",
+        "desc": "Praktiske råd til at gøre din virksomhed lettere at finde og omtale korrekt i ChatGPT, Google Gemini, Perplexity og Googles AI-svar.",
+        "teaser": "En praktisk tjekliste til virksomheder, der vil stå stærkere, når kunderne spørger en AI-tjeneste.",
+        "date": "2026-10-25",
+        "body": """
+<p>Flere og flere stiller spørgsmål som «Hvilken tandlæge på Nørrebro har gode anmeldelser?» direkte til ChatGPT, Google Gemini eller Perplexity. Svaret er en kort tekst – ikke en liste med ti links. Hvordan sikrer du, at din virksomhed har en chance for at blive nævnt?</p>
+<p>Ingen kan garantere, at en virksomhed bliver nævnt i et AI-svar. Men der er en række ting, der gør det lettere for AI-tjenesterne at forstå og omtale din virksomhed korrekt.</p>
+<h2 class="serif">1. Vær tydelig om, hvad du tilbyder – og hvor</h2>
+<p>Skriv klart på din hjemmeside, hvad du laver, for hvem og i hvilket område. Vage formuleringer som «løsninger, der skaber værdi» er svære at citere; konkrete beskrivelser er lette.</p>
+<h2 class="serif">2. Ensartede oplysninger overalt</h2>
+<p>Navn, adresse, telefonnummer, åbningstider og ydelser bør være de samme på hjemmesiden, i Google-virksomhedsprofilen og i relevante kataloger. Modstridende oplysninger gør det sværere at stole på dem.</p>
+<h2 class="serif">3. Svar på kundernes spørgsmål</h2>
+<p>En FAQ-side og artikler, der besvarer konkrete spørgsmål i de første sætninger, er nemme at bruge som kilde. Skriv svaret først og forklaringen bagefter.</p>
+<h2 class="serif">4. Strukturerede data</h2>
+<p>Strukturerede data (schema.org) fortæller maskiner, hvad indholdet er – fx virksomhed, ydelse, artikel eller FAQ. Læs mere i artiklen om <a href="/indsigter/hvad-er-strukturerede-data">strukturerede data</a>.</p>
+<h2 class="serif">5. En side om virksomheden</h2>
+<p>En om-side, der beskriver virksomheden, personerne bag og hvem den hjælper, giver tydelig kontekst om dit brand.</p>
+<h2 class="serif">6. Omtale og anmeldelser</h2>
+<p>AI-tjenester sammenstykker svar fra mange kilder. Ægte anmeldelser og omtale på relevante steder i din branche styrker billedet af virksomheden.</p>
+<h2 class="serif">7. Et teknisk sundt fundament</h2>
+<p>Hurtige sider, korrekt indeksering, sitemap og ingen blokering af relevante crawlere er grundlaget for både klassisk SEO og AI-synlighed.</p>
+<p>Læs om forskellen på <a href="/indsigter/seo-aeo-geo-forskel">SEO, AEO og GEO</a>, eller se hvordan jeg arbejder med <a href="/ydelser/seo-aeo-geo">synlighed i Google og AI-søgning</a>.</p>""",
+    },
+    {
+        "slug": "hvad-er-strukturerede-data",
+        "title": "Hvad er strukturerede data, og hvorfor betyder de noget?",
+        "desc": "Strukturerede data forklaret enkelt: hvad schema.org er, hvilke typer der er relevante for virksomheder, og hvordan de hjælper Google og AI-tjenester med at forstå din hjemmeside.",
+        "teaser": "En enkel forklaring på schema.org – og hvorfor det hjælper søgemaskiner og AI med at forstå din virksomhed.",
+        "date": "2026-10-25",
+        "body": """
+<p>Når et menneske ser en hjemmeside, forstår det hurtigt, hvad der er virksomhedens navn, telefonnummer og ydelser. For en maskine er det sværere. Strukturerede data er en måde at fortælle søgemaskiner og AI-tjenester præcis, hvad indholdet betyder.</p>
+<h2 class="serif">Hvordan ser det ud?</h2>
+<p>Strukturerede data skrives typisk i formatet JSON-LD og lægges usynligt i hjemmesidens kode. De bruger et fælles ordforråd fra schema.org, som de store søgemaskiner står bag. Et eksempel kunne være oplysningen om, at siden handler om en virksomhed med et bestemt navn, en e-mailadresse og et område, den betjener.</p>
+<h2 class="serif">Relevante typer for virksomheder</h2>
+<ul>
+<li><strong>Organization / LocalBusiness</strong> – virksomhedens navn, kontaktoplysninger, logo og eventuelt adresse og åbningstider.</li>
+<li><strong>Service</strong> – de ydelser, virksomheden tilbyder.</li>
+<li><strong>FAQPage</strong> – spørgsmål og svar.</li>
+<li><strong>Article</strong> – artikler med forfatter og dato.</li>
+<li><strong>BreadcrumbList</strong> – hvor en side ligger i hjemmesidens struktur.</li>
+</ul>
+<h2 class="serif">Hvorfor er det vigtigt?</h2>
+<p>Strukturerede data gør det lettere for søgemaskiner at forstå og præsentere dit indhold, og de kan i nogle tilfælde give mulighed for udvidede visninger i søgeresultaterne. De giver også AI-tjenester en entydig beskrivelse af, hvem du er, og hvad du tilbyder. Strukturerede data er dog ikke en genvej til bedre placeringer – de forudsætter, at indholdet på siden er godt og stemmer overens med det, der er markeret.</p>
+<h2 class="serif">Gode råd</h2>
+<ul>
+<li>Markér kun det, der faktisk står på siden.</li>
+<li>Hold oplysningerne opdaterede og ens med resten af nettet.</li>
+<li>Test markeringen med Googles værktøj til udvidede resultater.</li>
+</ul>
+<p>Alle sider på vantastudio.dk har strukturerede data. Vil du have det på din egen hjemmeside, er det en del af mit arbejde med <a href="/ydelser/seo-aeo-geo">SEO, AEO og GEO</a>.</p>""",
+    },
+]
+
 for a in ARTICLES:
     path = "/indsigter/" + a["slug"]
     add(path, page(
@@ -832,6 +1059,7 @@ PRIVATLIV = f"""
 <li><strong>Vercel Inc.</strong> (USA) – hosting af hjemmesiden og serverfunktionerne, herunder serverlogs.</li>
 <li><strong>Resend</strong> (USA) – afsendelse af e-mails fra formularerne til min indbakke.</li>
 <li><strong>Neo</strong> – e-mailudbyder for {EMAIL}.</li>
+</ul>
 <p>Hjemmesiden henter desuden billeder og video fra eksterne leveringsnetværk (Amazon CloudFront og images.higgs.ai, og på konceptsiderne også Pexels og Figma). Når din browser henter disse filer, modtager udbyderne din IP-adresse, ligesom det sker ved besøg på andre hjemmesider.</p>
 
 <h2 class="serif">6. Overførsel til lande uden for EU/EØS</h2>

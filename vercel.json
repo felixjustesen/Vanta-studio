@@ -34,5 +34,27 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/about",
+      "destination": "/om-vanta",
+      "permanent": true
+    },
+    {
+      "source": "/om",
+      "destination": "/om-vanta",
+      "permanent": true
+    },
+    {
+      "source": "/om-os",
+      "destination": "/om-vanta",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/om-vanta",
+      "permanent": true
+    }
   ]
 }
