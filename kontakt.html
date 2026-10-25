@@ -139,6 +139,7 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       <label>Hvad drømmer I om?
         <textarea name="besked" rows="3" placeholder="Fx ny hjemmeside, AI-chat eller flere genbookinger"></textarea>
       </label>
+      <input name="firma" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <button class="send" type="submit">Send</button>
     </form>
 
@@ -154,9 +155,10 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
 <script>
 (function () {
   // ---------- Formular ----------
-  // Der er ingen server endnu, så beskeden åbnes som en færdig mail
+  // Sendes til /api/kontakt (Telegram). Fejler det, åbnes beskeden som en færdig mail
   var card = document.querySelector(".card");
   var form = card.querySelector("form");
+  var btn = form.querySelector(".send");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var f = form.elements;
@@ -166,9 +168,21 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       bad[0].reportValidity();
       return;
     }
-    var body = f.besked.value + "\n\n" + f.navn.value + "\n" + f.email.value;
-    window.location.href = "mailto:kontakt@vantastudio.dk?subject=" + encodeURIComponent("Nyt projekt – " + f.navn.value) + "&body=" + encodeURIComponent(body);
-    card.classList.add("sent");
+    function mail() {
+      var body = f.besked.value + "\n\n" + f.navn.value + "\n" + f.email.value;
+      window.location.href = "mailto:kontakt@vantastudio.dk?subject=" + encodeURIComponent("Nyt projekt – " + f.navn.value) + "&body=" + encodeURIComponent(body);
+    }
+    btn.disabled = true;
+    btn.textContent = "Sender …";
+    fetch("/api/kontakt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ navn: f.navn.value, email: f.email.value, besked: f.besked.value, firma: f.firma.value })
+    }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+    }).catch(mail).then(function () {
+      card.classList.add("sent");
+    });
   });
 
   // ---------- Lavendelmark under stjernehimlen ----------
