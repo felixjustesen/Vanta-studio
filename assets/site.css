@@ -149,3 +149,15 @@ a.post:hover h2,a.post:hover h3{color:var(--cyan)}
 .rv.in{opacity:1;transform:none}
 .no-js .rv{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* Juridiske sider */
+.legal{max-width:760px}
+.legal h2{font-size:clamp(24px,2.6vw,32px)}
+.legal code{font-size:.85em;padding:.1em .35em;border-radius:6px;background:rgba(237,233,254,.08);word-break:break-all}
+.legal ol{padding-left:1.3em}
+mark.todo{padding:.05em .4em;border-radius:6px;background:rgba(250,204,21,.16);box-shadow:inset 0 0 0 1px rgba(250,204,21,.45);color:#fde68a;font-weight:500}
+
+/* Links nederst i footeren */
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 22px}
+.foot-links a{text-decoration:none}
+.foot-links a:hover{color:var(--mist)}

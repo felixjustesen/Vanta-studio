@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   if (!key) return res.status(500).json({ ok: false, error: "Formularen er ikke sat op endnu." });
 
   const subject = data.type === "booking"
-    ? `Booking af samtale – ${data.navn}${data.virksomhed ? ` (${data.virksomhed})` : ""}`
+    ? `Forespørgsel om samtale – ${data.navn}${data.virksomhed ? ` (${data.virksomhed})` : ""}`
     : `Ny henvendelse – ${data.navn}`;
 
   const rows = [
@@ -53,9 +53,9 @@ export default async function handler(req, res) {
   ];
   if (data.besked) rows.push(["Besked", data.besked]);
 
-  const text = (data.type === "booking" ? "Ny booking af en kort, uforpligtende samtale.\n\n" : "Ny henvendelse fra hjemmesiden.\n\n")
+  const text = (data.type === "booking" ? "Ny forespørgsel om en kort, uforpligtende samtale. Kontakt kunden for at aftale et tidspunkt.\n\n" : "Ny henvendelse fra hjemmesiden.\n\n")
     + rows.map(([k, v]) => `${k}: ${v}`).join("\n");
-  const html = `<p>${data.type === "booking" ? "Ny booking af en kort, uforpligtende samtale." : "Ny henvendelse fra hjemmesiden."}</p>`
+  const html = `<p>${data.type === "booking" ? "Ny forespørgsel om en kort, uforpligtende samtale. Kontakt kunden for at aftale et tidspunkt." : "Ny henvendelse fra hjemmesiden."}</p>`
     + `<table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">`
     + rows.map(([k, v]) => `<tr><td style="color:#666;vertical-align:top">${k}</td><td>${esc(v).replace(/\n/g, "<br>")}</td></tr>`).join("")
     + `</table>`;

@@ -4,19 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Vanta Studio – Design og teknologi der skaber vækst</title>
-<meta name="description" content="Vanta Studio designer og bygger levende, eksklusive hjemmesider, der gør indtryk og sælger.">
+<meta name="description" content="Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.">
 <link rel="canonical" href="https://www.vantastudio.dk/">
 <!-- vm:seo -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="da_DK">
 <meta property="og:site_name" content="Vanta Studio">
 <meta property="og:title" content="Vanta Studio – Design og teknologi der skaber vækst">
-<meta property="og:description" content="Vanta Studio udvikler hjemmesider, AI-løsninger og automatiseringer, der sparer tid, reducerer omkostninger og øger omsætningen.">
+<meta property="og:description" content="Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.">
 <meta property="og:url" content="https://www.vantastudio.dk/">
 <meta property="og:image" content="https://www.vantastudio.dk/assets/og-vanta.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vanta Studio – Design og teknologi der skaber vækst">
+<meta name="twitter:description" content="Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -28,6 +30,7 @@
    "url": "https://www.vantastudio.dk/",
    "email": "kontakt@vantastudio.dk",
    "image": "https://www.vantastudio.dk/assets/og-vanta.jpg",
+   "logo": "https://www.vantastudio.dk/icon-512.png",
    "description": "Digitalt bureau, der udvikler hjemmesider, AI-løsninger og automatiseringer til virksomheder.",
    "founder": {
     "@type": "Person",
@@ -54,7 +57,10 @@
 </script>
 <!-- /vm:seo -->
 <meta name="theme-color" content="#030318">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23030318'/%3E%3Cpath d='M8 9h3.4l4.6 11.2L20.6 9H24l-6.6 15h-2.8z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -334,16 +340,19 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 .hf-send{justify-self:start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:12px 22px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:background-color .2s,color .2s}
 .hf-send:hover{background:#000;color:#fff}
 .hf-done{margin:0;font-size:14px;min-height:0}
+.hf-privacy{margin:0;font-size:12px;color:rgba(255,255,255,.7)}
+.hf-privacy a{color:#fff}
 .hej :focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 .cta-foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px var(--px) calc(var(--py) + 4px);background:var(--slate);font-size:13px;color:rgba(237,233,254,.7)}
 .cta-foot nav{display:flex;gap:28px}
 .cta-foot a{transition:color .3s}
 .cta-foot a:hover{color:#fff}
-.top{position:absolute;left:50%;top:50%;display:grid;place-items:center;width:40px;height:40px;transform:translate(-50%,-50%)}
+.top{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(237,233,254,.22)}
+.foot-end{display:flex;align-items:center;gap:12px}
+.cta-foot{flex-wrap:wrap}
 @media (max-width:639px){
-  .cta-foot{flex-direction:column-reverse;gap:14px}
-  .top{position:static;transform:none}
+  .cta-foot{flex-direction:column;align-items:flex-start;gap:18px}
 }
 @media (prefers-reduced-motion:reduce){
   .hej-title,.hej-form{opacity:1;transform:none;transition:none}
@@ -605,10 +614,11 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
           <input id="hf-tlf" name="telefon" type="tel" autocomplete="tel" placeholder="Valgfrit">
         </div>
       </div>
-      <button class="hf-send" type="submit">Book samtale
+      <button class="hf-send" type="submit">Send forespørgsel
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
       </button>
       <p class="hf-done" role="status" aria-live="polite"></p>
+      <p class="hf-privacy">Sådan behandler jeg dine oplysninger: <a href="/privacy-policy">privatlivspolitik</a>.</p>
     </form>
   </div>
 </section>
@@ -616,10 +626,10 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 
 <footer class="cta-foot">
   <span>© 2026 Vanta Studio</span>
-  <a class="top" href="#" aria-label="Til toppen">
+  <nav class="bottom-links" aria-label="Genveje og juridisk"><a href="/ydelser">Ydelser</a><a href="/metode">Metode</a><a href="/faq">FAQ</a><a href="/kontakt">Kontakt</a><a href="/privacy-policy">Privatlivspolitik</a><a href="/terms-of-service">Handelsvilkår</a></nav>
+  <div class="foot-end"><nav class="socials" aria-label="Sociale medier"><a href="#" aria-label="Vanta Studio på X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.48 21H2.4l7.17-8.19L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45Z"/></svg></a><a href="#" aria-label="Vanta Studio på Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></nav><a class="top" href="#" aria-label="Til toppen">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
-  </a>
-  <nav class="socials" aria-label="Sociale medier"><a href="#" aria-label="Vanta Studio på X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.48 21H2.4l7.17-8.19L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45Z"/></svg></a><a href="#" aria-label="Vanta Studio på Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></nav>
+  </a></div>
 </footer>
 
 <script>
@@ -1470,7 +1480,7 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
       .then(function (j) {
         if (!j.ok) throw new Error(j.error || "fejl");
         form.reset();
-        done.textContent = "Tak! Jeg vender tilbage inden for 24 timer.";
+        done.textContent = "Tak! Din forespørgsel er sendt. Jeg kontakter dig personligt inden for 24 timer for at aftale et tidspunkt.";
       })
       .catch(function () {
         done.innerHTML = 'Beskeden kunne ikke sendes. Skriv i stedet direkte til <a href="mailto:kontakt@vantastudio.dk" style="color:inherit">kontakt@vantastudio.dk</a>.';

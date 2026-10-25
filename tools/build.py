@@ -98,6 +98,7 @@ ORG = {
     "url": SITE + "/",
     "email": EMAIL,
     "image": OG_IMAGE,
+    "logo": SITE + "/icon-512.png",
     "description": "Digitalt bureau, der udvikler hjemmesider, AI-løsninger og automatiseringer til virksomheder.",
     "founder": {"@type": "Person", "name": FOUNDER},
     "areaServed": {"@type": "Country", "name": "Danmark"},
@@ -125,6 +126,11 @@ def crumbs_html(crumbs):
     return f'<nav aria-label="Brødkrummer"><ol class="crumbs">{"".join(parts)}</ol></nav>'
 
 
+FOOT_LINKS_LIST = [("/ydelser", "Ydelser"), ("/metode", "Metode"), ("/faq", "FAQ"), ("/kontakt", "Kontakt"),
+                   ("/privacy-policy", "Privatlivspolitik"), ("/terms-of-service", "Handelsvilkår")]
+FOOT_LINKS = "".join(f'<a href="{h}">{l}</a>' for h, l in FOOT_LINKS_LIST)
+
+
 def footer_html():
     def col(title, links):
         return f'<div><h2>{title}</h2><ul>' + "".join(f'<li><a href="{h}">{l}</a></li>' for h, l in links) + "</ul></div>"
@@ -135,7 +141,7 @@ def footer_html():
     {col("Løsninger", LOESNINGER)}
     {col("Vanta", [("/metode", "Metode"), ("/om-vanta", "Om Vanta"), ("/faq", "FAQ"), ("/indsigter", "Indsigter"), ("/kontakt", "Kontakt")])}
   </div>
-  <div class="foot-legal"><span>© 2026 {BRAND}</span><a href="/">Til forsiden</a></div>
+  <div class="foot-legal"><span>© 2026 {BRAND}</span><nav class="foot-links" aria-label="Juridisk og genveje">{FOOT_LINKS}</nav></div>
 </div></footer>'''
 
 
@@ -177,7 +183,12 @@ def page(path, title, desc, h1, body, crumbs=None, lead=None, actions=True, ld=N
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23030318'/%3E%3Cpath d='M8 9h3.4l4.6 11.2L20.6 9H24l-6.6 15h-2.8z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="twitter:title" content="{escape(title)}">
+<meta name="twitter:description" content="{escape(desc)}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="/assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/menu.css">
@@ -761,6 +772,180 @@ add("/indsigter", page(
 
 
 # ---------------------------------------------------------------------------
+# Juridiske sider
+# ---------------------------------------------------------------------------
+# Felter markeret med todo() mangler eller kræver Felix' godkendelse før offentliggørelse.
+def todo(t):
+    return f'<mark class="todo">{t}</mark>'
+
+LEGAL_DATO = "25. oktober 2026"
+
+def legal_page(path, title, desc, h1, lead, body, crumb):
+    return page(path, title, desc, h1,
+                sec(f'<div class="prose legal rv"><p class="art-meta">Senest opdateret: {LEGAL_DATO}</p>{body}</div>'),
+                crumbs=[("/", "Forside"), (path, crumb)], lead=lead, actions=False)
+
+PRIVATLIV = f"""
+<h2 class="serif">1. Dataansvarlig</h2>
+<p>Den dataansvarlige for behandlingen af dine personoplysninger er:</p>
+<p><strong>Vanta Studio</strong> v/ {FOUNDER}<br>E-mail: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+<p>Vanta Studio er en hobbyvirksomhed, der drives af én person. Det er derfor {FOUNDER}, der modtager og behandler de oplysninger, du sender.</p>
+
+<h2 class="serif">2. Hvilke oplysninger behandler jeg?</h2>
+<h3>Når du udfylder en formular</h3>
+<p>Hjemmesiden har to formularer: forespørgslen «Book en kort, uforpligtende samtale» på forsiden og formularen på <a href="/kontakt">kontaktsiden</a>. Afhængigt af formularen behandles:</p>
+<ul>
+<li>navn (påkrævet)</li>
+<li>e-mailadresse (påkrævet)</li>
+<li>virksomhedsnavn (frivilligt)</li>
+<li>telefonnummer (frivilligt – kun relevant, hvis du ønsker at blive ringet op)</li>
+<li>din besked (frivilligt)</li>
+</ul>
+<h3>Når en samtale aftales</h3>
+<p>Det tidspunkt, der aftales, når jeg kontakter dig, og eventuelle noter fra samtalen.</p>
+<h3>Når du skriver til mig</h3>
+<p>Indholdet af korrespondancen mellem dig og mig på e-mail, og de oplysninger, du selv vælger at give mig.</p>
+<h3>Tekniske oplysninger</h3>
+<p>Når du besøger hjemmesiden, registrerer hostingudbyderen automatisk tekniske oplysninger som IP-adresse, browsertype og tidspunkt i sine serverlogs. Det sker for at levere og beskytte hjemmesiden. Jeg bruger ikke oplysningerne til at identificere dig.</p>
+<p>Jeg indsamler ikke følsomme personoplysninger og beder dig om ikke at sende sådanne via formularerne.</p>
+
+<h2 class="serif">3. Formål og behandlingsgrundlag</h2>
+<ul>
+<li><strong>At besvare din henvendelse og aftale en samtale med dig.</strong> Grundlaget er, at du selv har bedt om det, og at behandlingen er nødvendig for at tage skridt forud for en eventuel aftale (databeskyttelsesforordningens art. 6, stk. 1, litra b) samt min legitime interesse i at besvare henvendelser (art. 6, stk. 1, litra f).</li>
+<li><strong>At levere en aftalt ydelse.</strong> Når der er indgået en aftale, behandles oplysningerne for at opfylde den (art. 6, stk. 1, litra b).</li>
+<li><strong>At overholde lovkrav,</strong> fx bogføringsloven, når der er udstedt faktura (art. 6, stk. 1, litra c).</li>
+<li><strong>At drive og beskytte hjemmesiden,</strong> herunder serverlogs og spamfiltrering (art. 6, stk. 1, litra f).</li>
+</ul>
+<p>Jeg bruger ikke dine oplysninger til markedsføring, nyhedsbreve, profilering eller automatiske afgørelser, og jeg sælger dem ikke.</p>
+
+<h2 class="serif">4. Sådan behandles en henvendelse – trin for trin</h2>
+<ol>
+<li>Når du sender en formular, overføres oplysningerne krypteret til en serverfunktion på hjemmesiden. Hjemmesiden gemmer ikke oplysningerne i en database.</li>
+<li>Serverfunktionen sender oplysningerne som en e-mail til <a href="mailto:{EMAIL}">{EMAIL}</a> via e-mailtjenesten Resend.</li>
+<li>Du ser en bekræftelse på hjemmesiden af, at din forespørgsel er sendt. Det er ikke en bekræftet mødeaftale.</li>
+<li>Jeg kontakter dig personligt på e-mail eller telefon for at aftale et tidspunkt.</li>
+</ol>
+
+<h2 class="serif">5. Databehandlere og andre modtagere</h2>
+<p>Jeg bruger følgende tjenester til at drive hjemmesiden og modtage henvendelser:</p>
+<ul>
+<li><strong>Vercel Inc.</strong> (USA) – hosting af hjemmesiden og serverfunktionerne, herunder serverlogs.</li>
+<li><strong>Resend</strong> (USA) – afsendelse af e-mails fra formularerne til min indbakke.</li>
+<li><strong>Neo</strong> – e-mailudbyder for {EMAIL}.</li>
+<p>Hjemmesiden henter desuden billeder og video fra eksterne leveringsnetværk (Amazon CloudFront og images.higgs.ai, og på konceptsiderne også Pexels og Figma). Når din browser henter disse filer, modtager udbyderne din IP-adresse, ligesom det sker ved besøg på andre hjemmesider.</p>
+
+<h2 class="serif">6. Overførsel til lande uden for EU/EØS</h2>
+<p>Nogle af ovennævnte udbydere er etableret i USA. Overførsler sker på grundlag af EU-U.S. Data Privacy Framework, hvor udbyderen er certificeret, og ellers på grundlag af EU-Kommissionens standardkontraktbestemmelser.</p>
+<h2 class="serif">7. Hvor længe opbevarer jeg oplysningerne?</h2>
+<ul>
+<li><strong>Henvendelser, der ikke fører til en aftale:</strong> slettes senest 12 måneder efter seneste kontakt.</li>
+<li><strong>Kunder:</strong> opbevares, så længe samarbejdet varer, og derefter i op til 3 år af hensyn til eventuelle krav. Bogføringsmateriale opbevares i 5 år fra udgangen af det regnskabsår, det vedrører, jf. bogføringsloven.</li>
+<li><strong>Serverlogs:</strong> opbevares i den periode, hostingudbyderen anvender, typisk kort tid.</li>
+</ul>
+
+<h2 class="serif">8. Cookies</h2>
+<p>Hjemmesiden bruger <strong>ikke cookies</strong> og ingen analyse-, statistik- eller sporingsværktøjer. Skrifttyperne ligger på hjemmesidens egen server. Derfor vises der ikke et cookie-banner.</p>
+
+<h2 class="serif">9. Dine rettigheder</h2>
+<p>Efter databeskyttelsesforordningen har du ret til at:</p>
+<ul>
+<li>få indsigt i de oplysninger, jeg behandler om dig,</li>
+<li>få urigtige oplysninger rettet,</li>
+<li>få dine oplysninger slettet,</li>
+<li>få behandlingen begrænset,</li>
+<li>gøre indsigelse mod behandling, der sker på grundlag af legitim interesse,</li>
+<li>modtage de oplysninger, du selv har givet, i et struktureret format (dataportabilitet).</li>
+</ul>
+<p>Skriv til <a href="mailto:{EMAIL}">{EMAIL}</a>, så svarer jeg hurtigst muligt og senest inden for en måned.</p>
+<p>Du kan også klage til Datatilsynet på <a href="https://www.datatilsynet.dk" rel="noopener">datatilsynet.dk</a>.</p>
+
+<h2 class="serif">10. Sikkerhed</h2>
+<p>Al trafik til hjemmesiden er krypteret (HTTPS). Adgangsnøglen til e-mailtjenesten ligger som en beskyttet miljøvariabel hos hostingudbyderen og ikke i hjemmesidens kode. Formularerne har et skjult spamfilter. Det er kun {FOUNDER}, der har adgang til henvendelserne.</p>
+
+<h2 class="serif">11. Ændringer</h2>
+<p>Jeg opdaterer denne privatlivspolitik, hvis behandlingen ændrer sig, fx hvis nye tjenester tages i brug. Datoen øverst viser, hvornår den senest er ændret.</p>
+
+<h2 class="serif">12. Kontakt</h2>
+<p>Har du spørgsmål om behandlingen af dine personoplysninger, så skriv til <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+"""
+
+VILKAAR = f"""
+<h2 class="serif">1. Om Vanta Studio</h2>
+<p>Disse vilkår gælder for brugen af vantastudio.dk og for de ydelser, Vanta Studio leverer.</p>
+<p><strong>Vanta Studio</strong> v/ {FOUNDER}<br>E-mail: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+
+<h2 class="serif">2. Ydelser</h2>
+<p>Vanta Studio udvikler digitale løsninger til virksomheder, herunder <a href="/ydelser/hjemmesider">hjemmesider</a>, <a href="/ydelser/ai-automatisering">AI og automatisering</a>, <a href="/ydelser/seo-aeo-geo">synlighed i søgemaskiner og AI-tjenester (SEO, AEO og GEO)</a> og <a href="/ydelser/integrationer">digitale integrationer</a>. Beskrivelserne på hjemmesiden er generelle. Det konkrete indhold, omfang, pris og tidsplan for en opgave fremgår af det tilbud, der ligger til grund for aftalen.</p>
+
+<h2 class="serif">3. Brug af hjemmesiden</h2>
+<p>Indholdet på hjemmesiden er generel information og udgør ikke rådgivning i den enkelte sag. Konceptsiderne under <em>Hvad kan jeg forvente?</em> (fx tegnestuen «HALD &amp; VANG» og tandklinikken «Smilværket») er fiktive designeksempler; virksomheder, navne, kontaktoplysninger og resultater på disse sider er ikke virkelige.</p>
+<p>Du må ikke bruge hjemmesiden eller formularerne til at sende spam, skadelig kode eller indhold, der krænker andres rettigheder, eller forsøge at omgå hjemmesidens sikkerhed.</p>
+
+<h2 class="serif">4. Kontakt og forespørgsel om samtaler</h2>
+<p>Du kan kontakte Vanta Studio via formularerne eller på e-mail. Formularen «Book en kort, uforpligtende samtale» er en <strong>forespørgsel</strong> – ikke en bekræftet mødeaftale, og der vælges ikke et tidspunkt på hjemmesiden. Når du har sendt den, kontakter jeg dig personligt for at aftale et tidspunkt.</p>
+<p>En henvendelse eller forespørgsel er <strong>ikke en bindende aftale</strong> for nogen af parterne. Den indledende samtale er gratis og uforpligtende, og den kan til enhver tid aflyses eller flyttes ved at give besked på e-mail.</p>
+
+<h2 class="serif">5. Tilbud og indgåelse af aftaler</h2>
+<p>På baggrund af samtalen kan du modtage et skriftligt tilbud med beskrivelse af opgaven, pris og tidsplan. En aftale er først bindende, når tilbuddet er accepteret skriftligt, fx på e-mail. Et tilbud er gældende i 30 dage fra afsendelse, medmindre andet fremgår af tilbuddet.</p>
+<p>Ændringer eller tilføjelser til en aftalt opgave aftales skriftligt og kan påvirke pris og tidsplan.</p>
+
+<h2 class="serif">6. Priser og betaling</h2>
+<p>Prisen og betalingsbetingelserne, herunder betalingsfrist og eventuel forudbetaling, fremgår af tilbuddet.</p>
+
+<h2 class="serif">7. Levering og samarbejde</h2>
+<p>Tidsplanen fremgår af tilbuddet. En hjemmeside er som udgangspunkt klar inden for 14 dage, men tidsrammen afhænger af projektets omfang og kompleksitet. Levering forudsætter, at kunden leverer tekster, billeder, adgange og feedback til aftalt tid. Forsinkelser, der skyldes manglende materiale eller feedback, kan forskyde tidsplanen.</p>
+<p>Kunden er ansvarlig for, at materiale, der stilles til rådighed (fx tekster, logoer, billeder og varemærker), ikke krænker tredjemands rettigheder, og at kunden har ret til at bruge det.</p>
+
+<h2 class="serif">8. Immaterielle rettigheder</h2>
+<p>Indholdet på vantastudio.dk – herunder tekster, design, grafik og kode – tilhører Vanta Studio eller de respektive rettighedshavere og må ikke kopieres eller genbruges uden skriftlig tilladelse.</p>
+<p>Kunden opnår brugsret til det færdige, kundespecifikke resultat, når fuld betaling er modtaget. Vanta Studio bevarer retten til generelle metoder, værktøjer og genbrugelig kode og må vise løsningen i sin portefølje, medmindre andet er aftalt.</p>
+<p>Tredjepartskomponenter, fx skrifttyper, billeder eller softwarebiblioteker, er omfattet af deres egne licenser.</p>
+
+<h2 class="serif">9. Tredjepartstjenester</h2>
+<p>Løsninger kan bygge på eller forbindes med tredjepartstjenester som hosting, domæner, e-mail, bookingsystemer, betalingsløsninger, AI-tjenester og API'er. Sådanne tjenester er omfattet af leverandørernes egne vilkår og priser. Integrationer afhænger af de tekniske muligheder og vilkår i de systemer, der forbindes, og Vanta Studio er ikke ansvarlig for ændringer, nedetid eller ophør hos tredjepart.</p>
+
+<h2 class="serif">10. Ansvar</h2>
+<p>Vanta Studio udfører opgaver fagligt forsvarligt og i overensstemmelse med aftalen. Inden for rammerne af gældende lovgivning gælder følgende:</p>
+<ul>
+<li>Vanta Studio er ikke ansvarlig for indirekte tab, herunder driftstab, tabt omsætning, tabt fortjeneste eller tab af data.</li>
+<li>Vanta Studios samlede ansvar er begrænset til det beløb, kunden har betalt for den ydelse, kravet vedrører.</li>
+<li>Der gives ingen garanti for bestemte placeringer i søgemaskiner, omtale i AI-tjenester eller bestemte forretningsmæssige resultater, da disse afhænger af forhold uden for Vanta Studios kontrol.</li>
+</ul>
+<p>Begrænsningerne gælder ikke, hvor ansvar ikke kan begrænses efter ufravigelig lovgivning, herunder ved forsæt eller grov uagtsomhed.</p>
+
+<h2 class="serif">11. Forbrugere</h2>
+<p>Vanta Studios ydelser henvender sig primært til virksomheder. Er du forbruger, gælder de ufravigelige regler i dansk forbrugerlovgivning, herunder reglerne om fortrydelsesret ved aftaler indgået på afstand.</p>
+
+<h2 class="serif">12. Personoplysninger</h2>
+<p>Vanta Studios behandling af personoplysninger er beskrevet i <a href="/privacy-policy">privatlivspolitikken</a>.</p>
+
+<h2 class="serif">13. Ændringer af vilkårene</h2>
+<p>Vanta Studio kan opdatere disse vilkår. Datoen øverst viser, hvornår de senest er ændret. For indgåede aftaler gælder de vilkår, der var gældende, da aftalen blev indgået, medmindre andet aftales.</p>
+
+<h2 class="serif">14. Lovvalg og tvister</h2>
+<p>Vilkårene og aftaler med Vanta Studio er underlagt dansk ret. Uenigheder søges løst i dialog. Kan det ikke lade sig gøre, afgøres tvisten ved de danske domstole.</p>
+
+<h2 class="serif">15. Kontakt</h2>
+<p>Spørgsmål til vilkårene kan sendes til <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+"""
+
+add("/privacy-policy", legal_page(
+    "/privacy-policy",
+    "Privatlivspolitik | Vanta Studio",
+    "Sådan behandler Vanta Studio personoplysninger fra kontaktformularer og forespørgsler om samtaler – hvilke oplysninger, hvorfor, hvor længe og dine rettigheder.",
+    "Privatlivspolitik",
+    "Her kan du læse, hvilke oplysninger Vanta Studio behandler, hvorfor, hvor længe – og hvilke rettigheder du har.",
+    PRIVATLIV, "Privatlivspolitik"))
+
+add("/terms-of-service", legal_page(
+    "/terms-of-service",
+    "Handels- og brugsvilkår | Vanta Studio",
+    "Vilkår for brug af vantastudio.dk og for Vanta Studios ydelser inden for hjemmesider, AI, automatisering, SEO og integrationer.",
+    "Handels- og brugsvilkår",
+    "Vilkår for brugen af hjemmesiden og for samarbejde med Vanta Studio.",
+    VILKAAR, "Handels- og brugsvilkår"))
+
+# ---------------------------------------------------------------------------
 # Skriv filer
 # ---------------------------------------------------------------------------
 def out_file(path):
@@ -792,7 +977,7 @@ for fname, path in (("index.html", "/"), ("metode.html", "/metode"), ("kontakt.h
 # OG-tags og strukturerede data i de håndskrevne sider (mellem <!-- vm:seo --> … <!-- /vm:seo -->)
 HAND = {
     "index.html": ("/", "Vanta Studio – Design og teknologi der skaber vækst",
-                   "Vanta Studio udvikler hjemmesider, AI-løsninger og automatiseringer, der sparer tid, reducerer omkostninger og øger omsætningen.",
+                   "Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.",
                    [{"@type": "WebSite", "@id": SITE + "/#site", "url": SITE + "/", "name": BRAND, "inLanguage": "da", "publisher": {"@id": SITE + "/#org"}}]),
     "metode.html": ("/metode", "Metode – fra analyse til løsning | Vanta Studio",
                     "Jeg starter ikke med løsningen. Jeg starter med problemet. Sådan går Vanta Studio fra analyse til hjemmesider, AI og automatisering.",
@@ -817,6 +1002,8 @@ for fname, (path, title, desc, extra) in HAND.items():
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{escape(title)}">
+<meta name="twitter:description" content="{escape(desc)}">
 <script type="application/ld+json">
 {ldjson}
 </script>
@@ -828,7 +1015,7 @@ for fname, (path, title, desc, extra) in HAND.items():
 
 # Sitemap
 public = ["/", "/ydelser"] + [h for h, _ in YDELSER] + ["/loesninger"] + [h for h, _ in LOESNINGER] + \
-         ["/metode", "/om-vanta", "/faq", "/indsigter"] + ["/indsigter/" + a["slug"] for a in ARTICLES] + ["/kontakt"]
+         ["/metode", "/om-vanta", "/faq", "/indsigter"] + ["/indsigter/" + a["slug"] for a in ARTICLES] + ["/kontakt", "/privacy-policy", "/terms-of-service"]
 sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for p in public:
     sm.append(f"  <url>\n    <loc>{SITE}{p}</loc>\n    <lastmod>{UPDATED}</lastmod>\n  </url>")
