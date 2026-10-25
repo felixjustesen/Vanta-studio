@@ -208,13 +208,11 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 .hud-intro p{margin:0;font-size:14px;line-height:1.6;color:rgba(237,233,254,.72)}
 .hint{position:absolute;left:50%;bottom:var(--py);display:flex;align-items:center;gap:14px;transform:translateX(-50%);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(237,233,254,.6);white-space:nowrap}
 .hint::before{content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--cyan),var(--lilac))}
-.year{font-size:13px;color:rgba(237,233,254,.8);white-space:nowrap}
 @media (max-width:767px){
   .hud{flex-direction:column;align-items:flex-start;gap:12px;padding-bottom:calc(var(--py) + 30px)}
-  .hud-intro p{display:none}
+  .hud-intro p{font-size:13px;line-height:1.5}
   .hud-intro img{width:40px;height:40px}
   .hud-intro h3{font-size:22px}
-  .year{display:none}
 }
 
 /* ---------- CTA: galoperende ASCII-hest, der opløses i pixels ---------- */
@@ -305,35 +303,38 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
   .offers-actions a.more{display:none}
 }
 
-/* ---------- Afsluttende CTA med strikket figur ---------- */
+/* ---------- Afsluttende CTA: video der styres af musen + skrivemaskine ---------- */
 .hej-run{position:relative;z-index:1;height:190vh;margin-top:-190vh}
-.hej{position:sticky;top:0;display:flex;flex-direction:column;align-items:center;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(70% 60% at 50% 35%,#ffffff 0%,#f5f3ff 40%,var(--mist) 70%,#ddd3fd 100%);color:var(--slate);text-align:center}
-.hej-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:clamp(72px,12vh,128px) var(--px) 0}
-.hej-pill{padding:6px 14px;border-radius:999px;background:#fff;box-shadow:0 2px 10px -4px rgba(91,33,182,.25);font-size:13px;color:#4c3a8a}
-.hej h2{margin:22px 0 0;font-size:clamp(40px,6.4vw,96px);font-weight:800;line-height:.98;letter-spacing:-.045em;color:var(--slate)}
-.hej-note{margin:18px 0 0;font-size:13px;color:#5b5480}
-.hej-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px;margin-top:30px}
-.hej-btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border-radius:999px;background:var(--slate);color:#fff;font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 14px 30px -14px rgba(15,23,42,.7);transition:transform .3s var(--ease),background-color .3s}
-.hej-btn:hover{transform:translateY(-2px);background:var(--violet)}
-.hej-btn svg{transition:transform .3s}
-.hej-btn:hover svg{transform:translate(2px,-2px)}
-.hej-mail{font-size:15px;font-weight:500;color:var(--violet);border-bottom:1px solid rgba(124,58,237,.35);padding-bottom:2px}
-.hej-mail:hover{border-color:var(--violet)}
-.hej-copy > *{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.hej.in .hej-copy > *{opacity:1;transform:none}
-.hej.in .hej-copy > :nth-child(2){transition-delay:.08s}
-.hej.in .hej-copy > :nth-child(3){transition-delay:.16s}
-.hej.in .hej-copy > :nth-child(4){transition-delay:.24s}
-
-.buddy{position:absolute;left:50%;bottom:0;width:min(1080px,135vw);height:auto;max-height:58vh;transform:translate(-50%,2%);transition:transform 1.2s var(--ease)}
-.hej:not(.in) .buddy{transform:translate(-50%,40%)}
-.breathe{transform-origin:500px 790px;animation:breathe 5.5s ease-in-out infinite}
-@keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.012,1.022)}}
-.heart-g{transform-origin:500px 560px;animation:beat 2.8s ease-in-out infinite}
-@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.045)}24%{transform:scale(1)}36%{transform:scale(1.03)}48%{transform:scale(1)}}
-.pupil{transition:transform .25s cubic-bezier(.2,.8,.3,1)}
-.lid{transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0);transition:transform .09s ease-in}
-.eyes.blink .lid{transform:scaleY(1)}
+.hej{position:sticky;top:0;display:flex;flex-direction:column;justify-content:flex-end;height:100vh;height:100svh;overflow:hidden;background:#2a1160;color:#fff;font-family:"Inter",system-ui,sans-serif;padding:0 var(--px) 48px}
+@media (min-width:768px){.hej{justify-content:center;padding-bottom:0}}
+.hej-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0;transition:opacity .4s}
+.hej.recolor .hej-canvas{opacity:1}
+.hej.recolor .hej-video{visibility:hidden}
+.hej-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% center;z-index:0}
+.hej::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(15,10,45,.4),rgba(15,10,45,0) 55%);pointer-events:none}
+@media (max-width:767px){.hej::after{background:linear-gradient(0deg,rgba(15,10,45,.75),rgba(15,10,45,.3) 45%,rgba(15,10,45,0) 65%)}}
+.hej-copy{position:relative;z-index:1;max-width:36rem}
+.hej-label{margin:0 0 22px;font-size:clamp(18px,4vw,26px);line-height:1.3;font-weight:400;filter:blur(4px);pointer-events:none;user-select:none}
+.hej-title{margin:0 0 22px;font-size:clamp(28px,3.4vw,44px);font-weight:500;line-height:1.08;letter-spacing:-.03em}
+.hej-form{display:grid;gap:12px;max-width:34rem;padding:22px;border-radius:20px;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),0 30px 60px -30px rgba(15,10,45,.6);opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.hej.in .hej-form,.hej.in .hej-title{opacity:1;transform:none}
+.hej-title{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.hej.in .hej-form{transition-delay:.15s}
+.hf-row{display:grid;gap:12px}
+@media (min-width:560px){.hf-row{grid-template-columns:1fr 1fr}}
+.hf-field{display:grid;gap:6px;font-size:13px;color:rgba(255,255,255,.85)}
+.hf-lab{position:relative;display:flex;align-items:center;gap:8px}
+.hf-field input{width:100%;padding:11px 14px;border:0;border-radius:12px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);color:#fff;font:inherit;font-size:15px;transition:box-shadow .25s,background-color .25s}
+.hf-field input::placeholder{color:rgba(255,255,255,.55)}
+.hf-field input:focus{outline:none;background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 1px #fff}
+.hf-field input[aria-invalid="true"]{box-shadow:inset 0 0 0 1.5px #ffd1d8}
+.hf-help{display:grid;place-items:center;width:18px;height:18px;padding:0;border:1px solid rgba(255,255,255,.7);border-radius:50%;background:none;color:#fff;font:inherit;font-size:11px;line-height:1;cursor:help}
+.hf-tip{position:absolute;left:0;bottom:calc(100% + 10px);z-index:5;width:max-content;max-width:240px;padding:10px 12px;border-radius:10px;background:#fff;color:#1a1a1a;font-size:13px;line-height:1.4;box-shadow:0 12px 30px -12px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .2s,transform .2s,visibility 0s .2s;pointer-events:none}
+.hf-help:hover + .hf-tip,.hf-help:focus-visible + .hf-tip,.hf-tip.show{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+.hf-send{justify-self:start;display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:12px 22px;border:0;border-radius:999px;background:#fff;color:#000;font:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:background-color .2s,color .2s}
+.hf-send:hover{background:#000;color:#fff}
+.hf-done{margin:0;font-size:14px;min-height:0}
+.hej :focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 .cta-foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px var(--px) calc(var(--py) + 4px);background:var(--slate);font-size:13px;color:rgba(237,233,254,.7)}
 .cta-foot nav{display:flex;gap:28px}
@@ -343,12 +344,9 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 @media (max-width:639px){
   .cta-foot{flex-direction:column-reverse;gap:14px}
   .top{position:static;transform:none}
-  .buddy{max-height:52vh}
 }
 @media (prefers-reduced-motion:reduce){
-  .breathe,.heart-g{animation:none}
-  .hej-copy > *{opacity:1;transform:none}
-  .hej:not(.in) .buddy{transform:translate(-50%,2%)}
+  .hej-title,.hej-form{opacity:1;transform:none;transition:none}
 }
 
 /* Rolig udgave: ingen eksplosion, kuglen står klar */
@@ -365,6 +363,12 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
   *,*::before,*::after{animation:none!important;transition:none!important}
   .char,.mark,.info div,.cta{opacity:1;transform:none}
 }
+.vm-float-brand{position:fixed;top:14px;left:max(16px,calc(var(--px) - 2px));z-index:90;display:flex;align-items:baseline;gap:.28em;height:48px;color:#fff;font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 144;font-size:clamp(22px,2vw,27px);letter-spacing:-.025em;line-height:48px;text-decoration:none;text-shadow:0 1px 18px rgba(3,3,24,.55),0 0 2px rgba(3,3,24,.35);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s}
+.vm-float-brand em{font-style:italic;font-weight:200}
+.vm-float-brand.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.vm-float{position:fixed;top:16px;right:max(16px,calc(var(--px) - 6px));z-index:90;width:48px;height:48px;margin:0;border-radius:50%;background:rgba(15,23,42,.55);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 10px 30px -12px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-8px) scale(.9);transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s}
+.vm-float i{width:18px}
+.vm-float.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
 </style>
 <link rel="stylesheet" href="/assets/menu.css">
 </head>
@@ -431,10 +435,9 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
           <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260717_095034_599c0e43-e5a1-48c0-b169-f1267d71a58c.png&amp;w=1280&amp;q=85" alt="">
           <h3>Ni koncepter</h3>
         </header>
-        <p>Hvert koncept er en levende skitse af, hvad en hjemmeside fra Vanta kan blive – fra tegnestue til tandklinik. Drej kuglen, og vælg et koncept for at se det i fuld skærm.</p>
+        <p>Sektionen er et preview af den visuelle standard, du kan forvente fra Vanta Studio. Hvert koncept er en levende skitse – fra tegnestue til tandklinik. Drej kuglen, og vælg et koncept for at se det i fuld skærm.</p>
       </div>
       <span class="hint" aria-hidden="true">Træk for at rotere</span>
-      <span class="year">Koncepter 2026.</span>
     </div>
   </div>
 </section>
@@ -580,108 +583,34 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 
 <div class="hej-run">
 <section class="hej" id="kontakt" aria-labelledby="hej-titel">
+  <video class="hej-video" muted playsinline preload="auto" aria-hidden="true"
+    crossorigin="anonymous" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4"></video>
+  <canvas class="hej-canvas" aria-hidden="true"></canvas>
   <div class="hej-copy">
-    <span class="hej-pill">har du en idé?</span>
-    <h2 id="hej-titel">lad os bygge noget,<br>der virker*</h2>
-    <p class="hej-note">*det starter med en uforpligtende snak om din virksomhed.</p>
-    <div class="hej-actions">
-      <a class="hej-btn" href="/kontakt">Start et projekt
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </a>
-      <a class="hej-mail" href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a>
-    </div>
+    <p class="hej-label" aria-hidden="true">Hej, og velkommen til Vanta Studio,<br>et digitalt studie drevet af Felix Nylander Justesen</p>
+    <h2 class="hej-title" id="hej-titel">Book en kort, uforpligtende samtale</h2>
+    <form class="hej-form" novalidate>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <div class="hf-row">
+        <label class="hf-field"><span>Navn</span><input name="navn" type="text" autocomplete="name" required></label>
+        <label class="hf-field"><span>Virksomhed</span><input name="virksomhed" type="text" autocomplete="organization"></label>
+      </div>
+      <div class="hf-row">
+        <label class="hf-field"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
+        <div class="hf-field">
+          <span class="hf-lab"><label for="hf-tlf">Telefon</label>
+            <button class="hf-help" type="button" aria-describedby="hf-tip" aria-label="Hvorfor telefonnummer?">?</button>
+            <span class="hf-tip" id="hf-tip" role="tooltip">Kun nødvendigt, hvis du ønsker at blive ringet op. Ellers svarer jeg på mail.</span>
+          </span>
+          <input id="hf-tlf" name="telefon" type="tel" autocomplete="tel" placeholder="Valgfrit">
+        </div>
+      </div>
+      <button class="hf-send" type="submit">Book samtale
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+      </button>
+      <p class="hf-done" role="status" aria-live="polite"></p>
+    </form>
   </div>
-
-  <svg class="buddy" viewBox="0 0 1000 800" aria-hidden="true">
-    <defs>
-      <!-- Fnuggede kanter og strikstruktur -->
-      <filter id="fuzz" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/>
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="fuzzSoft" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="1" seed="9" result="n"/>
-        <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="14"/>
-      </filter>
-      <pattern id="knit" width="16" height="13" patternUnits="userSpaceOnUse">
-        <path d="M1 1 8 11 15 1" fill="none" stroke="#5b21b6" stroke-opacity=".16" stroke-width="3.2" stroke-linecap="round"/>
-      </pattern>
-      <pattern id="knitLight" width="12" height="10" patternUnits="userSpaceOnUse">
-        <path d="M1 1 6 8 11 1" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2.4" stroke-linecap="round"/>
-      </pattern>
-      <radialGradient id="fur" cx="42%" cy="30%" r="75%">
-        <stop offset="0" stop-color="#ede9fe"/>
-        <stop offset=".45" stop-color="#c4b5fd"/>
-        <stop offset=".85" stop-color="#a78bfa"/>
-        <stop offset="1" stop-color="#8b5cf6"/>
-      </radialGradient>
-      <radialGradient id="paw" cx="45%" cy="25%" r="80%">
-        <stop offset="0" stop-color="#f5f3ff"/>
-        <stop offset=".6" stop-color="#d8ccfd"/>
-        <stop offset="1" stop-color="#b8a4fb"/>
-      </radialGradient>
-      <radialGradient id="heart" cx="35%" cy="30%" r="80%">
-        <stop offset="0" stop-color="#a5f3fc"/>
-        <stop offset=".45" stop-color="#22d3ee"/>
-        <stop offset="1" stop-color="#7c3aed"/>
-      </radialGradient>
-      <radialGradient id="eyeW" cx="40%" cy="35%" r="70%">
-        <stop offset="0" stop-color="#fff"/>
-        <stop offset="1" stop-color="#e4defb"/>
-      </radialGradient>
-      <clipPath id="bodyClip"><path id="bodyShape" d="M110 790C70 590 150 400 300 300 380 248 410 150 520 140 640 130 690 230 770 300 900 410 960 600 905 790Z"/></clipPath>
-      <clipPath id="heartClip"><path d="M500 690C430 650 320 600 330 510 336 450 400 420 450 450 475 465 490 480 500 495 510 480 525 465 550 450 600 420 664 450 670 510 680 600 570 650 500 690Z"/></clipPath>
-    </defs>
-
-    <g class="breathe">
-      <!-- Krop -->
-      <g filter="url(#fuzz)">
-        <use href="#bodyShape" fill="url(#fur)"/>
-        <rect width="1000" height="800" fill="url(#knit)" clip-path="url(#bodyClip)"/>
-      </g>
-
-      <!-- Hjerte -->
-      <g class="heart-g">
-        <ellipse cx="500" cy="660" rx="190" ry="40" fill="#5b21b6" opacity=".22" filter="url(#shadow)"/>
-        <g filter="url(#fuzz)">
-          <path d="M500 690C430 650 320 600 330 510 336 450 400 420 450 450 475 465 490 480 500 495 510 480 525 465 550 450 600 420 664 450 670 510 680 600 570 650 500 690Z" fill="url(#heart)"/>
-          <rect width="1000" height="800" fill="url(#knitLight)" clip-path="url(#heartClip)"/>
-        </g>
-      </g>
-
-      <!-- Hænder, der holder hjertet -->
-      <g filter="url(#fuzz)">
-        <path d="M250 800C250 700 280 640 330 640 360 640 365 670 362 690 380 660 420 655 435 690 455 665 495 670 498 705 520 690 555 700 548 740 545 770 530 800 520 800Z" fill="url(#paw)"/>
-        <path d="M750 800C752 700 720 640 672 640 642 640 638 670 640 690 622 660 584 655 568 690 548 665 510 672 510 708 492 695 462 705 470 742 474 770 486 800 496 800Z" fill="url(#paw)"/>
-      </g>
-
-      <!-- Øjenbryn og smil i cyan "garn" -->
-      <g fill="none" stroke="#22d3ee" stroke-linecap="round" filter="url(#fuzzSoft)">
-        <path d="M418 232C432 210 458 200 482 204" stroke-width="15"/>
-        <path d="M600 200C624 196 650 206 664 226" stroke-width="15"/>
-        <path class="smile" d="M632 392C650 420 690 420 708 392" stroke-width="18"/>
-      </g>
-
-      <!-- Øjne -->
-      <g class="eyes">
-        <g class="eye" data-cx="470" data-cy="300">
-          <ellipse cx="470" cy="304" rx="56" ry="62" fill="#3b2a7a" opacity=".18" filter="url(#shadow)"/>
-          <ellipse class="sclera" cx="470" cy="300" rx="54" ry="60" fill="url(#eyeW)"/>
-          <g class="pupil"><circle cx="470" cy="300" r="33" fill="#0b0a1a"/><circle cx="458" cy="288" r="9" fill="#fff" opacity=".9"/></g>
-          <ellipse class="lid" cx="470" cy="300" rx="56" ry="62" fill="#c4b5fd"/>
-        </g>
-        <g class="eye" data-cx="612" data-cy="290">
-          <ellipse cx="612" cy="294" rx="56" ry="62" fill="#3b2a7a" opacity=".18" filter="url(#shadow)"/>
-          <ellipse class="sclera" cx="612" cy="290" rx="54" ry="60" fill="url(#eyeW)"/>
-          <g class="pupil"><circle cx="612" cy="290" r="33" fill="#0b0a1a"/><circle cx="600" cy="278" r="9" fill="#fff" opacity=".9"/></g>
-          <ellipse class="lid" cx="612" cy="290" rx="56" ry="62" fill="#c4b5fd"/>
-        </g>
-      </g>
-    </g>
-  </svg>
 </section>
 </div>
 
@@ -1440,54 +1369,126 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 </script>
 <script>
 (function () {
-  // ---------- CTA-figuren: øjnene følger musen og blinker ----------
+  // ---------- Afsluttende CTA: video der spoles med musen, og en skrivemaskine ----------
   var hej = document.getElementById("kontakt");
-  var svg = hej.querySelector(".buddy");
-  var eyesG = hej.querySelector(".eyes");
-  var eyes = Array.prototype.map.call(hej.querySelectorAll(".eye"), function (g) {
-    return { cx: +g.dataset.cx, cy: +g.dataset.cy, pupil: g.querySelector(".pupil") };
-  });
+  var video = hej.querySelector(".hej-video");
   var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var MAX = 20; // hvor langt pupillen må bevæge sig (SVG-enheder)
+  var SENSITIVITY = 0.8;
 
-  function look(clientX, clientY) {
-    var m = svg.getScreenCTM();
-    if (!m) return;
-    var p = new DOMPoint(clientX, clientY).matrixTransform(m.inverse());
-    eyes.forEach(function (e) {
-      var dx = p.x - e.cx, dy = p.y - e.cy;
-      var d = Math.hypot(dx, dy) || 1;
-      var k = Math.min(MAX, d / 8) / d;
-      e.pupil.setAttribute("transform", "translate(" + (dx * k).toFixed(1) + " " + (dy * k).toFixed(1) + ")");
-    });
+  // Videoen afspilles ikke – den spoles frem og tilbage, når musen bevæger sig vandret
+  var prevX = null, targetTime = 0, seeking = false;
+  function seek() {
+    if (!video.duration) return;
+    seeking = true;
+    video.currentTime = targetTime;
   }
-  window.addEventListener("pointermove", function (e) { look(e.clientX, e.clientY); }, { passive: true });
-  // Uden mus (touch) kigger figuren op mod knappen
-  var btn = hej.querySelector(".hej-btn");
-  function lookAtButton() {
-    var r = btn.getBoundingClientRect();
-    look(r.left + r.width / 2, r.top + r.height / 2);
+  video.addEventListener("seeked", function () {
+    seeking = false;
+    if (Math.abs(video.currentTime - targetTime) > 0.01) seek();
+  });
+  function move(x) {
+    if (prevX === null) { prevX = x; return; }
+    var delta = x - prevX;
+    prevX = x;
+    if (!video.duration) return;
+    var r = hej.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) return;
+    targetTime = Math.min(video.duration, Math.max(0, targetTime + (delta / window.innerWidth) * SENSITIVITY * video.duration));
+    if (!seeking) seek();
   }
+  window.addEventListener("mousemove", function (e) { move(e.clientX); }, { passive: true });
+  window.addEventListener("touchmove", function (e) { if (e.touches[0]) move(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener("touchend", function () { prevX = null; });
 
-  function blink() {
-    if (!calm) {
-      eyesG.classList.add("blink");
-      setTimeout(function () { eyesG.classList.remove("blink"); }, 140);
+  // ---------- Omfarvning: kun den røde baggrund drejes over i Vantas violet ----------
+  // Figurens hud, hår og trøje har lavere mætning eller en anden nuance og bliver ikke rørt.
+  var cv = hej.querySelector(".hej-canvas");
+  var cx = cv.getContext("2d", { willReadFrequently: true });
+  var HUE = -92 * Math.PI / 180;           // rød (~350°) -> violet (~258°)
+  var cH = Math.cos(HUE), sH = Math.sin(HUE);
+  // Lysstyrkebevarende hue-rotationsmatrix
+  var M = [
+    0.213 + cH * 0.787 - sH * 0.213, 0.715 - cH * 0.715 - sH * 0.715, 0.072 - cH * 0.072 + sH * 0.928,
+    0.213 - cH * 0.213 + sH * 0.143, 0.715 + cH * 0.285 + sH * 0.140, 0.072 - cH * 0.072 - sH * 0.283,
+    0.213 - cH * 0.213 - sH * 0.787, 0.715 - cH * 0.715 + sH * 0.715, 0.072 + cH * 0.928 + sH * 0.072
+  ];
+  var ss = function (a, b, x) { x = Math.min(1, Math.max(0, (x - a) / (b - a))); return x * x * (3 - 2 * x); };
+  function paint() {
+    if (!video.videoWidth) return;
+    var W = cv.clientWidth, H = cv.clientHeight;
+    var scale = Math.min(1, 1400 / W);
+    var cw = Math.round(W * scale), ch = Math.round(H * scale);
+    if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
+    // Samme beskæring som object-fit: cover; object-position: 70% center
+    var vr = video.videoWidth / video.videoHeight, k = cw / ch > vr ? cw / video.videoWidth : ch / video.videoHeight;
+    var dw = video.videoWidth * k, dh = video.videoHeight * k;
+    cx.drawImage(video, (cw - dw) * 0.7, (ch - dh) / 2, dw, dh);
+    var img;
+    try { img = cx.getImageData(0, 0, cw, ch); } catch (e) { return; } // CORS: vis originalen
+    var d = img.data;
+    for (var i = 0; i < d.length; i += 4) {
+      var r = d[i], g = d[i + 1], b = d[i + 2];
+      var mx = r > g ? (r > b ? r : b) : (g > b ? g : b), mn = r < g ? (r < b ? r : b) : (g < b ? g : b);
+      if (mx < 20 || r !== mx) continue;
+      var sat = (mx - mn) / mx;
+      // nuance: hvor tæt på ren rød (g og b lave i forhold til hinanden)
+      var hueOff = (g - b) / (mx - mn + 1);         // 0 = rød/magenta, 1 = orange
+      // Baggrunden: meget mættet, ren rød og ikke mørk. Hår og bryn er mere orange (hueOff > 0.1) eller mørkere.
+      var w = ss(0.6, 0.8, sat) * (1 - ss(0.03, 0.09, hueOff)) * ss(70, 115, mx);
+      if (w <= 0) continue;
+      var nr = M[0] * r + M[1] * g + M[2] * b, ng = M[3] * r + M[4] * g + M[5] * b, nb = M[6] * r + M[7] * g + M[8] * b;
+      d[i] = r + (nr - r) * w; d[i + 1] = g + (ng - g) * w; d[i + 2] = b + (nb - b) * w;
     }
-    setTimeout(blink, 2600 + Math.random() * 3200);
+    cx.putImageData(img, 0, 0);
+    hej.classList.add("recolor");
   }
+  video.addEventListener("seeked", paint);
+  video.addEventListener("loadeddata", function () { paint(); });
+  window.addEventListener("resize", paint);
+  if (video.readyState >= 2) paint();
+
+  // Booking-formular: sendes direkte til kontakt@vantastudio.dk via /api/kontakt
+  var form = hej.querySelector(".hej-form");
+  var done = hej.querySelector(".hf-done");
+  var sendBtn = hej.querySelector(".hf-send");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = form.elements, bad = null;
+    [f.navn, f.email].forEach(function (el) {
+      var ok = el.checkValidity();
+      el.setAttribute("aria-invalid", String(!ok));
+      if (!ok && !bad) bad = el;
+    });
+    if (bad) { bad.focus(); bad.reportValidity(); return; }
+    sendBtn.disabled = true;
+    done.textContent = "Sender …";
+    fetch("/api/kontakt", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "booking", navn: f.navn.value, virksomhed: f.virksomhed.value, email: f.email.value, telefon: f.telefon.value, website: f.website.value })
+    }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (j) {
+        if (!j.ok) throw new Error(j.error || "fejl");
+        form.reset();
+        done.textContent = "Tak! Jeg vender tilbage inden for 24 timer.";
+      })
+      .catch(function () {
+        done.innerHTML = 'Beskeden kunne ikke sendes. Skriv i stedet direkte til <a href="mailto:kontakt@vantastudio.dk" style="color:inherit">kontakt@vantastudio.dk</a>.';
+      })
+      .then(function () { sendBtn.disabled = false; });
+  });
+  // Spørgsmålstegnet kan også tappes på mobil
+  var help = hej.querySelector(".hf-help"), tip = hej.querySelector(".hf-tip");
+  help.addEventListener("click", function () { tip.classList.toggle("show"); });
+  document.addEventListener("click", function (e) { if (e.target !== help) tip.classList.remove("show"); });
 
   var started = false;
   function wake() {
+    if (started) return;
+    started = true;
     hej.classList.add("in");
-    if (!started) {
-      started = true;
-      lookAtButton();
-      setTimeout(blink, 1800);
-    }
   }
-  // Bølgen fra hestesektionen afslører CTA'en; teksten og figuren kommer frem,
-  // når bølgen er nået et godt stykke ind over skærmen
+  // Bølgen fra hestesektionen afslører CTA'en; teksten starter, når bølgen er nået godt ind
   function check() {
     var r = hej.getBoundingClientRect();
     if (r.top > window.innerHeight * 0.5) return;
@@ -1498,6 +1499,8 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
   check();
 })();
 </script>
+<a class="vm-float-brand" href="/" aria-label="Vanta Studio – til forsiden">Vanta <em>Studio</em></a>
+<button class="vm-burger vm-float" type="button" data-vm-open aria-expanded="false" aria-controls="vm" aria-label="Åbn menu"><i></i><i></i><i></i></button>
 <!-- vm:menu -->
 <div class="vm" id="vm" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="vm-top"><a href="/" style="color:inherit;text-decoration:none">Vanta Studio</a><button class="vm-close" type="button" aria-label="Luk menu"><i></i><i></i></button></div>
@@ -1511,6 +1514,18 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
   </div>
 </div>
 <!-- /vm:menu -->
+<script>
+// Flydende menuknap: vises, når topbjælkens egen knap er scrollet ud af syne
+(function () {
+  var els = document.querySelectorAll(".vm-float, .vm-float-brand");
+  var onScroll = function () {
+    var on = window.scrollY > window.innerHeight * 0.6;
+    els.forEach(function (el) { el.classList.toggle("on", on); });
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+})();
+</script>
 <script src="/assets/menu.js" defer></script>
 </body>
 </html>
