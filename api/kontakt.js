@@ -2,7 +2,9 @@
 // Kræver miljøvariablen RESEND_API_KEY i Vercel (Settings → Environment Variables).
 
 const TO = "kontakt@vantastudio.dk";
-const FROM = "Vanta Studio <kontakt@vantastudio.dk>";
+// Afsenderen skal ligge på et domæne, der er verificeret i Resend (mail.vantastudio.dk).
+// Kan overskrives med miljøvariablen RESEND_FROM.
+const FROM = process.env.RESEND_FROM || "Vanta Studio <kontakt@mail.vantastudio.dk>";
 
 const clean = (v, max) => String(v == null ? "" : v).trim().slice(0, max);
 const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
