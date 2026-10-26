@@ -202,8 +202,12 @@ img,svg,video{display:block}
 .mface::after{content:"";position:absolute;inset:0;background:#120a2e;opacity:var(--shade);pointer-events:none}
 .card.soon{display:grid;place-items:center;background:radial-gradient(120% 90% at 30% 20%,rgba(124,58,237,.55),rgba(15,23,42,.95) 70%),var(--slate)}
 .card.soon .nr{font-family:"Fraunces",serif;font-weight:100;font-variation-settings:"opsz" 144;font-size:calc(var(--cw,220px) * .3);line-height:1;color:var(--mist);opacity:.9}
-a.card{transition:box-shadow .3s}
-a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6px rgba(34,211,238,.6);outline:none}
+.card.live{padding:0;border:0;font:inherit;color:inherit;cursor:pointer;transition:box-shadow .3s}
+.card.live:hover,.card.live:focus-visible,.card.open{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6px rgba(34,211,238,.6);outline:none}
+/* Det valgte koncept afspilles live i kortet: siden renderes i 1280×800 og skaleres ned */
+.card .play{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.card .play iframe{position:absolute;left:0;top:0;width:1280px;height:800px;border:0;transform-origin:0 0;transform:scale(var(--fs,.17));opacity:0;transition:opacity .6s}
+.card .play iframe.on{opacity:1}
 
 .hud{position:absolute;inset:auto 0 0;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:0 var(--px) var(--py);color:var(--mist);opacity:0;pointer-events:none}
 .hud.on{pointer-events:auto}
@@ -444,7 +448,7 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
           <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260717_095034_599c0e43-e5a1-48c0-b169-f1267d71a58c.png&amp;w=1280&amp;q=85" alt="">
           <h3>Ni koncepter</h3>
         </header>
-        <p>Sektionen er et preview af den visuelle standard, du kan forvente fra Vanta Studio. Hvert koncept er en levende skitse – fra tegnestue til tandklinik. Drej kuglen, og vælg et koncept for at se det i fuld skærm.</p>
+        <p>Sektionen er et preview af den visuelle standard, du kan forvente fra Vanta Studio. Hvert koncept er en levende skitse – fra tegnestue til tandklinik. Drej kuglen, og tryk på et koncept for at se det i bevægelse.</p>
       </div>
       <span class="hint" aria-hidden="true">Træk for at rotere</span>
     </div>
@@ -677,10 +681,10 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
   var KONCEPTER = [
     { nr: "01", navn: "Arkitekt", kunde: "HALD & VANG", billede: "billeder/koncepter/01-arkitekt.jpg", link: "/koncepter/01-arkitekt" },
     { nr: "02", navn: "Tandlæge", kunde: "Smilværket", billede: "billeder/koncepter/02-tandlaege.jpg", link: "/koncepter/02-tandlaege" },
-    { nr: "03" },
-    { nr: "04" },
-    { nr: "05" },
-    { nr: "06" },
+    { nr: "03", navn: "Frisør", kunde: "PARALLAX", billede: "billeder/koncepter/03-parallax.jpg", link: "/koncepter/03-parallax" },
+    { nr: "04", navn: "Ejendomsmægler", kunde: "HAVLINJE", billede: "billeder/koncepter/04-havlinje.jpg", link: "/koncepter/04-havlinje" },
+    { nr: "05", navn: "Solceller", kunde: "SOLHVERV", billede: "billeder/koncepter/05-solhverv.jpg", link: "/koncepter/05-solhverv" },
+    { nr: "06", navn: "Coaching", kunde: "KLARSYN", billede: "billeder/koncepter/06-klarsyn.jpg", link: "/koncepter/06-klarsyn" },
     { nr: "07" },
     { nr: "08" },
     { nr: "09" }
@@ -728,9 +732,11 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 
     var el;
     if (k.link) {
-      el = document.createElement("a");
-      el.href = k.link;
-      el.setAttribute("aria-label", "Koncept " + k.nr + ": " + k.navn + " – " + k.kunde);
+      el = document.createElement("button");
+      el.type = "button";
+      el.className = "live";
+      el.setAttribute("aria-pressed", "false");
+      el.setAttribute("aria-label", "Koncept " + k.nr + ": " + k.navn + " – " + k.kunde + ". Vis i bevægelse");
       el.innerHTML = '<img src="' + k.billede + '" alt="" draggable="false"><span class="tag"><b>' + k.nr + "</b>" + k.navn + "</span>";
     } else {
       el = document.createElement("div");
@@ -749,6 +755,10 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
     sphere.appendChild(el);
     return {
       el: el,
+      k: k,
+      f: 0,     // 0 = på kuglen, 1 = forstørret og afspillet
+      g: 1,
+      play: null,
       lon: lon,
       lat: lat,
       // Kortets normal (retning ud fra kuglen) i CSS-koordinater
@@ -821,6 +831,7 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
     measureDeck();
     R = W < 640 ? W * 0.42 : Math.min(W, H) * 0.3 + cw * 0.3;
     sphere.style.setProperty("--cw", cw.toFixed(1) + "px");
+    sphere.style.setProperty("--fs", (cw / 1280).toFixed(4));
     DPR = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(W * DPR);
     canvas.height = Math.round(H * DPR);
@@ -855,6 +866,7 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
     var now = performance.now();
     var dx = e.clientX - lastX, dy = e.clientY - lastY, dt = Math.max(8, now - lastT);
     moved += Math.abs(dx) + Math.abs(dy);
+    if (moved > 6 && active) close();
     yaw += dx * 0.006;
     pitch = clamp(pitch - dy * 0.006, -1.1, 1.1);
     vyaw = clamp(dx * 0.006 / dt, -0.004, 0.004);
@@ -870,9 +882,56 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
   }
   window.addEventListener("pointerup", release);
   window.addEventListener("pointercancel", release);
-  // Et træk må ikke åbne et koncept
-  sphere.addEventListener("click", function (e) {
-    if (moved > 6) e.preventDefault();
+  // ---------- Tryk på et kort: det drejer frem, forstørres og afspiller konceptet ----------
+  var active = null;
+  function open(c) {
+    if (active) close();
+    active = c;
+    c.el.classList.add("open");
+    c.el.setAttribute("aria-pressed", "true");
+    if (!c.play) {
+      c.play = document.createElement("div");
+      c.play.className = "play";
+      var fr = document.createElement("iframe");
+      fr.src = c.k.link;
+      fr.title = c.k.kunde + " – designkoncept";
+      fr.tabIndex = -1;
+      fr.setAttribute("aria-hidden", "true");
+      fr.setAttribute("scrolling", "no");
+      fr.addEventListener("load", function () {
+        // Lidt luft, så siden når at male sit første billede, før den toner frem
+        setTimeout(function () { if (active === c) fr.classList.add("on"); }, 120);
+      });
+      c.play.appendChild(fr);
+      c.el.insertBefore(c.play, c.el.querySelector(".tag"));
+    } else {
+      c.play.firstChild.classList.add("on");
+    }
+  }
+  function close() {
+    var c = active;
+    if (!c) return;
+    active = null;
+    c.el.classList.remove("open");
+    c.el.setAttribute("aria-pressed", "false");
+    var play = c.play;
+    if (!play) return;
+    play.firstChild.classList.remove("on");
+    // Siden fjernes helt, når den er tonet ud, så animationer og video stopper
+    setTimeout(function () {
+      if (c.play === play && active !== c) { play.remove(); c.play = null; }
+    }, 600);
+  }
+  // Et træk må ikke åbne et koncept; et tryk ved siden af lukker det åbne
+  space.addEventListener("click", function (e) {
+    if (e.detail && moved > 6) return;
+    var el = e.target.closest(".card.live");
+    var c = el && cards.filter(function (x) { return x.el === el; })[0];
+    if (!c) return close();
+    if (active === c) close(); else open(c);
+  });
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && active) close();
   });
   sphere.addEventListener("dragstart", function (e) { e.preventDefault(); });
 
@@ -935,6 +994,7 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
     morphHead.style.opacity = range(k, 0.6, 1).toFixed(3);
     offers.classList.toggle("live", offers.getBoundingClientRect().top <= 1);
     var nowMorph = k > 0;
+    if (nowMorph && active) close();
     if (nowMorph !== morphing) {
       morphing = nowMorph;
       sphere.classList.toggle("morphing", morphing);
@@ -948,9 +1008,32 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
 
     // 3) Kortene flyver ud og lægger sig på kuglen – og folder sig ud til kortbunken under morfen
     var sc0 = 0.15 + 0.85 * e;
+    // Det åbne kort rykker frem og vokser til en fast skærmbredde
+    var ease = Math.min(1, dt * 0.008);
+    var base = CW * PERSP / (PERSP - R);
+    var big = Math.min(W * 0.88, H * 0.72 / 0.625, base * 1.65);
+    var F = 0;
     cards.forEach(function (c, i) {
+      c.f = morphing ? 0 : c.f + ((c === active ? 1 : 0) - c.f) * ease;
+      if (c.f < 0.001) c.f = 0;
+      F = Math.max(F, c.f);
+      // Det åbne kort lægges ud i sin store størrelse og skaleres ned, så siden tegnes skarpt
+      var g = c === active || c.f > 0 ? big / CW : 1;
+      if (g !== c.g) {
+        c.g = g;
+        if (g === 1) {
+          c.el.style.removeProperty("--cw");
+          c.el.style.removeProperty("--fs");
+        } else {
+          c.el.style.setProperty("--cw", (CW * g).toFixed(1) + "px");
+          c.el.style.setProperty("--fs", (CW * g / 1280).toFixed(4));
+        }
+      }
       if (!morphing) {
-        c.el.style.transform = "rotateY(" + c.lon.toFixed(4) + "rad) rotateX(" + c.lat.toFixed(4) + "rad) translateZ(" + (R * e).toFixed(1) + "px) scale(" + sc0.toFixed(3) + ")";
+        var f = c.f * c.f * (3 - 2 * c.f);
+        var lift = R * 0.4 * f;
+        var grow = (base + (big - base) * f) / (CW * PERSP / (PERSP - R - lift));
+        c.el.style.transform = "rotateY(" + c.lon.toFixed(4) + "rad) rotateX(" + c.lat.toFixed(4) + "rad) translateZ(" + (R * e + lift).toFixed(1) + "px) scale(" + (sc0 * grow / g).toFixed(4) + ")";
         return;
       }
       var tg = targets[i];
@@ -974,6 +1057,12 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
     // Under morfen står kuglen stille og drejer sig på plads
     if (morphing) {
       yaw = wrapAngle(yaw);
+      vyaw = vpitch = 0;
+    } else if (active && !dragging) {
+      // Kuglen drejer det valgte kort lige ind foran beskueren
+      var turn = Math.min(1, dt * 0.006);
+      yaw += wrapAngle(-active.lon - yaw) * turn;
+      pitch += (-active.lat - pitch) * turn;
       vyaw = vpitch = 0;
     } else if (!dragging) {
       vyaw += (AUTO - vyaw) * Math.min(1, dt * 0.002);
@@ -1005,13 +1094,16 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
       var op0 = e * (0.18 + 0.82 * Math.pow(depth, 1.3));
       var br0 = 0.35 + 0.65 * depth;
       var tg = targets[i];
+      // De andre kort træder i baggrunden, mens et koncept spiller
+      op0 = op0 + (1 - op0) * c.f - op0 * 0.55 * (F - c.f);
+      br0 = br0 + (1 - br0) * c.f;
       c.el.style.opacity = (op0 + (tg.op - op0) * (i >= offCards.length ? range(k, 0, 0.5) : E)).toFixed(3);
-      c.el.style.filter = "brightness(" + (br0 + (1 - br0) * E).toFixed(3) + ")";
+      c.el.style.filter = c.f > 0.999 ? "none" : "brightness(" + (br0 + (1 - br0) * E).toFixed(3) + ")";
       var back = z < -0.05;
       if (back !== c.back) {
         c.back = back;
         c.el.classList.toggle("back", back);
-        if (c.el.tagName === "A") c.el.tabIndex = back ? -1 : 0;
+        if (c.k.link) c.el.tabIndex = back ? -1 : 0;
       }
     });
 
@@ -1051,6 +1143,7 @@ a.card:hover,a.card:focus-visible{box-shadow:0 0 0 1.5px var(--cyan),0 0 40px -6
       requestAnimationFrame(frame);
     } else if (!visible) {
       running = false;
+      close();
     }
   }).observe(section);
 
