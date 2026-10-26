@@ -678,12 +678,13 @@ img,svg,video{display:block}
 <script>
 (function () {
   // ---------- De ni koncepter – udfyld efterhånden som de bliver færdige ----------
+  // "skift": en knap i konceptet, der trykkes på med jævne mellemrum, mens kortet er åbent (fx dag/nat)
   var KONCEPTER = [
     { nr: "01", navn: "Arkitekt", kunde: "HALD & VANG", billede: "billeder/koncepter/01-arkitekt.jpg", link: "/koncepter/01-arkitekt" },
     { nr: "02", navn: "Tandlæge", kunde: "Smilværket", billede: "billeder/koncepter/02-tandlaege.jpg", link: "/koncepter/02-tandlaege" },
     { nr: "03", navn: "Frisør", kunde: "PARALLAX", billede: "billeder/koncepter/03-parallax.jpg", link: "/koncepter/03-parallax" },
     { nr: "04", navn: "Ejendomsmægler", kunde: "HAVLINJE", billede: "billeder/koncepter/04-havlinje.jpg", link: "/koncepter/04-havlinje" },
-    { nr: "05", navn: "Solceller", kunde: "SOLHVERV", billede: "billeder/koncepter/05-solhverv.jpg", link: "/koncepter/05-solhverv" },
+    { nr: "05", navn: "Solceller", kunde: "SOLHVERV", billede: "billeder/koncepter/05-solhverv.jpg", link: "/koncepter/05-solhverv", skift: ".toggle-btn:not(.active)" },
     { nr: "06", navn: "Coaching", kunde: "KLARSYN", billede: "billeder/koncepter/06-klarsyn.jpg", link: "/koncepter/06-klarsyn" },
     { nr: "07" },
     { nr: "08" },
@@ -901,6 +902,14 @@ img,svg,video{display:block}
       fr.addEventListener("load", function () {
         // Lidt luft, så siden når at male sit første billede, før den toner frem
         setTimeout(function () { if (active === c) fr.classList.add("on"); }, 120);
+        if (c.k.skift && active === c) {
+          c.timer = setInterval(function () {
+            try {
+              var btn = fr.contentDocument.querySelector(c.k.skift);
+              if (btn) btn.click();
+            } catch (err) {}
+          }, 3200);
+        }
       });
       c.play.appendChild(fr);
       c.el.insertBefore(c.play, c.el.querySelector(".tag"));
@@ -914,6 +923,7 @@ img,svg,video{display:block}
     active = null;
     c.el.classList.remove("open");
     c.el.setAttribute("aria-pressed", "false");
+    clearInterval(c.timer);
     var play = c.play;
     if (!play) return;
     play.firstChild.classList.remove("on");
