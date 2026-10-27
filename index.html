@@ -172,7 +172,7 @@ img,svg,video{display:block}
 }
 @media (min-width:1024px){.info{gap:56px}}
 
-/* ---------- Koncepter: "Hvad kan jeg forvente?" + big bang ---------- */
+/* ---------- Koncepter: "Den visuelle standard." + big bang ---------- */
 .univers{position:relative;height:560vh;background:linear-gradient(var(--navy),var(--slate) 70vh)}
 .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .nebula{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(124,58,237,.38),rgba(124,58,237,.12) 45%,rgba(15,23,42,0) 75%);opacity:0;pointer-events:none}
@@ -250,6 +250,22 @@ img,svg,video{display:block}
 .offers-stage{position:sticky;top:0;display:flex;flex-direction:column;align-items:center;height:100vh;height:100svh;padding:clamp(28px,5vh,56px) var(--px) clamp(20px,4vh,40px);overflow:hidden;text-align:center}
 .offers-head{display:grid;justify-items:center;gap:6px}
 .offers-head .eyebrow{margin:0;font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--mist)}
+/* Introteksten: en kort statement i serif og en dæmpet linje under.
+   På brede skærme rykker bunken til højre, og teksten står i sin egen kolonne til venstre */
+.offers-intro{position:relative;z-index:300;align-self:flex-start;max-width:26em;margin:clamp(36px,6vh,64px) 0 0;text-align:left}
+.offers-intro::before{content:"";display:block;width:40px;height:1px;margin-bottom:clamp(14px,2vh,22px);background:linear-gradient(90deg,var(--cyan),var(--lilac))}
+.oi-lede{margin:0;font-family:"Fraunces",serif;font-weight:200;font-variation-settings:"opsz" 144;font-size:clamp(21px,2.3vw,40px);line-height:1.08;letter-spacing:-.025em;color:#fff;text-wrap:balance}
+.oi-detail{max-width:30em;margin:clamp(10px,1.6vh,18px) 0 0;font-size:clamp(13px,1vw,15px);line-height:1.6;color:rgba(255,255,255,.72);text-wrap:pretty}
+.offers-intro::before,.oi-lede,.oi-detail{opacity:0;transform:translateY(14px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.offers.live .offers-intro::before,.offers.live .oi-lede,.offers.live .oi-detail{opacity:1;transform:none}
+.offers.live .offers-intro::before{transition-delay:.25s}
+.offers.live .oi-lede{transition-delay:.35s}
+.offers.live .oi-detail{transition-delay:.55s}
+@media (min-width:1180px){
+  .offers-stage{--shift:clamp(90px,9vw,200px)}
+  .deck,.offers-head{translate:var(--shift) 0}
+  .offers-intro{position:absolute;left:var(--px);top:50%;max-width:min(400px,calc(50% + var(--shift) - 420px - var(--px)));margin:0;translate:0 -50%}
+}
 .offers-count{margin:0;font-size:13px;color:rgba(255,255,255,.75)}
 .offers-count b{font-weight:400;color:#fff}
 .offers-dots{display:flex;gap:6px;margin-top:6px}
@@ -437,7 +453,7 @@ img,svg,video{display:block}
   <div class="sticky">
     <div class="nebula" aria-hidden="true"></div>
     <canvas class="stars" aria-hidden="true"></canvas>
-    <div class="q"><h2 class="serif" id="univers-titel">Hvad kan jeg forvente?</h2></div>
+    <div class="q"><h2 class="serif" id="univers-titel">Den visuelle standard.</h2></div>
     <div class="core" aria-hidden="true"></div>
     <div class="flash" aria-hidden="true"></div>
     <div class="morph-bg" aria-hidden="true"></div>
@@ -574,6 +590,10 @@ img,svg,video{display:block}
             <p>Nye funktioner koblet på de systemer, I allerede bruger.</p>
           </div>
         </article>
+      </div>
+      <div class="offers-intro">
+        <p class="oi-lede">Et udvalg af de digitale løsninger, vi udvikler for virksomheder.</p>
+        <p class="oi-detail">Hver med sit formål – at spare tid, reducere omkostninger eller skabe mere omsætning.</p>
       </div>
     </div>
   </div>
