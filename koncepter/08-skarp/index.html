@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SKARP – Barbershop (designkoncept) | Vanta Studio</title>
+<meta name="description" content="Designkoncept fra Vanta Studio: en hero med film til en barbershop på Vesterbro. Fiktiv virksomhed.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/koncepter/08-skarp/assets/skarp-poster.jpg" as="image">
+<style>
+:root{
+  --ink:#0f0b09;
+  --cream:#f3ebe1;
+  --cream-2:rgba(243,235,225,.78);
+  --cream-3:rgba(243,235,225,.5);
+  --copper:#c98a5b;
+  --copper-2:#dba077;
+  --line:rgba(243,235,225,.16);
+  --gut:clamp(20px,3.2vw,48px);
+  --display:"Bebas Neue","Oswald","Arial Narrow",Impact,sans-serif;
+  --sans:"Manrope",Inter,"Helvetica Neue",Arial,system-ui,sans-serif;
+  --out:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ink);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--sans);color:var(--cream);overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--copper-2);outline-offset:4px}
+
+.hero{position:relative;display:flex;flex-direction:column;align-items:center;height:100vh;min-height:520px;overflow:hidden;isolation:isolate}
+@supports (height:100svh){.hero{height:100svh}}
+
+/* ---------- Filmen ---------- */
+.film{position:absolute;inset:0;z-index:-2;background:var(--ink) url(/koncepter/08-skarp/assets/skarp-poster.jpg) 30% 50%/cover no-repeat}
+.film video{width:100%;height:100%;object-fit:cover;object-position:30% 50%;display:block;transition:opacity .7s ease}
+/* Loopet: filmen toner ud til posteren (= første billede) og starter forfra, så klippet fra nærbillede til overhead forsvinder */
+.film.dip video{opacity:0}
+/* Varm mørkning, så den lyse planke-gulv ikke drukner teksten */
+.film::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(90% 80% at 50% 52%,rgba(15,11,9,.42),rgba(15,11,9,.72) 100%),
+    linear-gradient(to bottom,rgba(15,11,9,.55),rgba(15,11,9,0) 30%,rgba(15,11,9,0) 70%,rgba(15,11,9,.7))}
+/* Let filmkorn skjuler, at filmen er i 720p på store skærme */
+.film::before{content:"";position:absolute;inset:-50%;z-index:1;pointer-events:none;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- Det store ord bag overskriften ---------- */
+.giant{position:absolute;left:50%;top:54%;z-index:-1;display:flex;align-items:center;gap:.14em;
+  font:400 clamp(150px,27vw,440px)/.82 var(--display);letter-spacing:.02em;white-space:nowrap;pointer-events:none;
+  transform:translate(calc(-50% + var(--px,0px)),-50%)}
+.giant span{display:block}
+.giant .fill{color:var(--copper);opacity:.62}
+.giant .stroke{color:transparent;-webkit-text-stroke:1.5px rgba(201,138,91,.7)}
+
+/* ---------- Top: logo og menu ---------- */
+.top{display:flex;flex-direction:column;align-items:center;gap:clamp(18px,4vh,46px);padding-top:calc(env(safe-area-inset-top) + clamp(26px,5vh,58px))}
+.logo{display:grid;justify-items:center;gap:8px;color:var(--copper)}
+.logo b{font:400 clamp(44px,5vw,70px)/.8 var(--display);letter-spacing:.34em;margin-right:-.34em}
+.logo small{font:500 10px/1 var(--sans);letter-spacing:.42em;margin-right:-.42em;text-transform:uppercase;color:var(--cream-3)}
+.links{display:flex;gap:clamp(24px,3vw,46px);list-style:none;font:500 15px/1 var(--sans)}
+.links a{position:relative;padding:8px 0;color:var(--cream-2);transition:color .2s}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:var(--copper);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--out)}
+.links a:hover{color:var(--cream)}
+.links a:hover::after{transform:scaleX(1);transform-origin:left}
+.links a[aria-current]{color:var(--copper-2)}
+.burger{display:none;position:absolute;top:calc(env(safe-area-inset-top) + 22px);right:var(--gut);width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+.burger i{position:absolute;left:14px;right:14px;height:1.5px;background:var(--cream);transition:transform .3s var(--out)}
+.burger i:first-child{top:18px}.burger i:last-child{top:25px}
+.burger[aria-expanded="true"] i:first-child{transform:translateY(3.5px) rotate(45deg)}
+.burger[aria-expanded="true"] i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+
+/* ---------- Midten: budskab ---------- */
+.copy{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3vh,30px);padding:0 var(--gut);text-align:center}
+h1{font:400 clamp(44px,6.4vw,108px)/.95 var(--display);letter-spacing:.2em;margin-right:-.2em;color:#fff;text-shadow:0 2px 40px rgba(15,11,9,.45)}
+h1 .w{display:inline-block}
+.lead{max-width:30em;font-size:clamp(15px,1.25vw,19px);line-height:1.5;color:var(--cream-2);text-shadow:0 1px 18px rgba(15,11,9,.7)}
+.ctas{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 30px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 30px;background:var(--copper);color:var(--ink);font:400 20px/1 var(--display);letter-spacing:.32em;
+  transition:background-color .25s,transform .16s var(--out)}
+.btn:hover{background:var(--copper-2)}
+.btn:active{transform:scale(.97)}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--out)}
+.btn:hover svg{transform:translateX(3px)}
+.textlink{position:relative;padding:6px 0;font:500 15px/1 var(--sans);color:var(--cream)}
+.textlink::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;opacity:.5;transition:opacity .2s}
+.textlink:hover::after{opacity:1}
+
+/* ---------- Bund: info og pause ---------- */
+.foot{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;width:100%;padding:0 var(--gut) calc(env(safe-area-inset-bottom) + clamp(18px,3vh,30px));font:500 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--cream-3)}
+.foot .open{display:flex;align-items:center;gap:10px}
+.foot .open i{width:7px;height:7px;border-radius:50%;background:#7fbf8a;box-shadow:0 0 0 4px rgba(127,191,138,.18)}
+.foot .mid{text-align:center}
+.foot .end{justify-self:end;display:flex;align-items:center;gap:16px}
+.pause{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .2s}
+.pause:hover{box-shadow:inset 0 0 0 1px var(--cream-3)}
+.pause svg{width:11px;height:11px}
+.pause .i-play,.pause[aria-pressed="true"] .i-pause{display:none}
+.pause[aria-pressed="true"] .i-play{display:block}
+
+/* ---------- Mobilmenu ---------- */
+.sheet{position:fixed;inset:0;z-index:5;display:grid;place-items:center;background:rgba(15,11,9,.94);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.sheet.open{opacity:1;visibility:visible;transition:opacity .3s}
+.sheet ul{display:grid;gap:26px;list-style:none;text-align:center;font:400 44px/1 var(--display);letter-spacing:.14em}
+.sheet a[aria-current]{color:var(--copper-2)}
+
+@media (max-width:820px){
+  .links{display:none}
+  .burger{display:block;z-index:6}
+  .top{gap:0}
+  .giant{top:50%;font-size:clamp(130px,44vw,300px)}
+  .foot{grid-template-columns:1fr auto;font-size:11px;letter-spacing:.1em}
+  .foot .mid{display:none}
+}
+@media (max-width:520px){
+  .film video,.film{object-position:45% 50%;background-position:45% 50%}
+  h1{letter-spacing:.12em;margin-right:-.12em}
+  .btn{height:50px;padding:0 24px;font-size:18px}
+  .foot .addr{display:none}
+}
+@media (max-height:600px) and (min-width:521px){.lead{display:none}.top{gap:12px}}
+
+/* ---------- Intro ---------- */
+@keyframes filmIn{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
+@keyframes down{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes giantIn{from{opacity:0;letter-spacing:.3em}to{opacity:1;letter-spacing:.02em}}
+@keyframes word{from{opacity:0;transform:translateY(.5em);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+.film{animation:filmIn 2.4s var(--out) both}
+.giant{animation:giantIn 2.2s var(--out) .25s both}
+.logo{animation:down 1s var(--out) .5s both}
+.links,.burger{animation:down 1s var(--out) .7s both}
+h1 .w{animation:word 1s var(--out) both;animation-delay:calc(.9s + var(--i) * .1s)}
+.lead{animation:up 1s var(--out) 1.45s both}
+.ctas{animation:up 1s var(--out) 1.6s both}
+.foot{animation:up 1s var(--out) 1.8s both}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main class="hero">
+  <div class="film">
+    <video muted playsinline preload="auto" poster="/koncepter/08-skarp/assets/skarp-poster.jpg" aria-hidden="true">
+      <source src="/koncepter/08-skarp/assets/skarp.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="giant" aria-hidden="true"><span class="stroke">KLIP</span><span class="fill">SKARP</span><span class="stroke">FADE</span></div>
+
+  <header class="top">
+    <a class="logo" href="#" aria-label="Skarp Barbershop, forside"><b>SKARP</b><small>Barbershop · Vesterbro</small></a>
+    <nav aria-label="Hovedmenu">
+      <ul class="links">
+        <li><a href="#" aria-current="page">Forside</a></li>
+        <li><a href="#">Behandlinger &amp; priser</a></li>
+        <li><a href="#">Galleri</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </nav>
+    <button class="burger" type="button" aria-label="Åbn menu" aria-expanded="false" aria-controls="sheet"><i></i><i></i></button>
+  </header>
+
+  <section class="copy" aria-labelledby="titel">
+    <h1 id="titel"><span class="w" style="--i:0">Håndværk</span> <span class="w" style="--i:1">i</span> <span class="w" style="--i:2">hver</span> <span class="w" style="--i:3">klipning</span></h1>
+    <p class="lead">Klassisk barberhåndværk, skarpe fades og varme håndklæder. Sæt dig i stolen – vi klarer resten.</p>
+    <div class="ctas">
+      <a class="btn" href="#">Book tid <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="textlink" href="#">Se priser</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="open"><i aria-hidden="true"></i>Åbent i dag 10–19</span>
+    <span class="mid">Klip fra 295 kr. · Skæg fra 195 kr.</span>
+    <span class="end"><span class="addr">Vesterbro, København</span>
+      <button class="pause" type="button" aria-pressed="false" aria-label="Sæt filmen på pause">
+        <svg class="i-pause" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="2.6" height="10" rx=".6"/><rect x="7.4" y="1" width="2.6" height="10" rx=".6"/></svg>
+        <svg class="i-play" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.4v9.2a.6.6 0 0 0 .9.5l7.4-4.6a.6.6 0 0 0 0-1L3.9.9a.6.6 0 0 0-.9.5z"/></svg>
+      </button>
+    </span>
+  </footer>
+</main>
+
+<div class="sheet" id="sheet">
+  <nav aria-label="Mobilmenu">
+    <ul>
+      <li><a href="#" aria-current="page">Forside</a></li>
+      <li><a href="#">Priser</a></li>
+      <li><a href="#">Galleri</a></li>
+      <li><a href="#">Kontakt</a></li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+(function(){
+  var video=document.querySelector(".film video"),
+      btn=document.querySelector(".pause"),
+      reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- Filmen: pause og afspil ----------
+  function setPaused(p){
+    btn.setAttribute("aria-pressed",p?"true":"false");
+    btn.setAttribute("aria-label",p?"Afspil filmen":"Sæt filmen på pause");
+  }
+  btn.addEventListener("click",function(){
+    if(video.paused){video.play();setPaused(false)}else{video.pause();setPaused(true)}
+  });
+  // Blødt loop: ud til posteren lige før slutningen, forfra og ind igen
+  var film=document.querySelector(".film"), dipping=false;
+  video.addEventListener("timeupdate",function(){
+    if(!dipping&&video.duration&&video.duration-video.currentTime<.75){dipping=true;film.classList.add("dip")}
+  });
+  video.addEventListener("ended",function(){
+    video.currentTime=0;
+    if(btn.getAttribute("aria-pressed")!=="true") video.play();
+    film.classList.remove("dip");
+    dipping=false;
+  });
+  // Ved reduceret bevægelse står filmen stille på første billede, indtil man selv trykker afspil
+  if(reduce){setPaused(true)}
+  else{var p=video.play();if(p&&p.catch)p.catch(function(){setPaused(true)})}
+
+  // ---------- Mobilmenu ----------
+  var burger=document.querySelector(".burger"), sheet=document.getElementById("sheet");
+  function menu(open){
+    sheet.classList.toggle("open",open);
+    burger.setAttribute("aria-expanded",open?"true":"false");
+    burger.setAttribute("aria-label",open?"Luk menu":"Åbn menu");
+  }
+  burger.addEventListener("click",function(){menu(!sheet.classList.contains("open"))});
+  sheet.addEventListener("click",function(e){if(e.target.closest("a"))menu(false)});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false)});
+
+  // ---------- Det store ord glider let med musen ----------
+  if(reduce||!matchMedia("(hover: hover)").matches) return;
+  var giant=document.querySelector(".giant"), target=0, x=0, raf=0;
+  function tick(){
+    x+=(target-x)*.06;
+    giant.style.setProperty("--px",x.toFixed(1)+"px");
+    raf=Math.abs(target-x)>.2?requestAnimationFrame(tick):0;
+  }
+  window.addEventListener("pointermove",function(e){
+    target=(e.clientX/window.innerWidth-.5)*-60;
+    if(!raf) raf=requestAnimationFrame(tick);
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
