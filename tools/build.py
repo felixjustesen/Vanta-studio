@@ -80,7 +80,7 @@ def menu_html(path):
     <div class="vm-aside">
       <p>Har du en idé eller et problem, der skal løses? Skriv direkte til mig – jeg svarer inden for 24 timer.</p>
       <a class="mail" href="mailto:{EMAIL}">{EMAIL}</a>
-      <a class="glass-btn" href="/kontakt" style="justify-self:start">Start et projekt {ARROW}</a>
+      <a class="glass-btn" href="/kontakt" style="justify-self:start">Book en samtale {ARROW}</a>
     </div>
   </div>
 </div>'''
@@ -150,7 +150,7 @@ def ending_html(title="Lad os finde ud af, hvad der giver mening for din virksom
     return f'''<section class="ending" aria-labelledby="end-t"><div class="wrap rv">
   <h2 class="serif" id="end-t">{title}</h2>
   <p>{text}</p>
-  <a class="glass-btn" href="/kontakt">Start et projekt {ARROW}</a>
+  <a class="glass-btn" href="/kontakt">Book en samtale {ARROW}</a>
 </div></section>'''
 
 
@@ -163,7 +163,7 @@ def page(path, title, desc, h1, body, crumbs=None, lead=None, actions=True, ld=N
     ldjson = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
     hero_actions = ""
     if actions:
-        hero_actions = f'<div class="actions"><a class="glass-btn" href="/kontakt">Start et projekt {ARROW}</a></div>'
+        hero_actions = f'<div class="actions"><a class="glass-btn" href="/kontakt">Book en samtale {ARROW}</a></div>'
     return f'''<!doctype html>
 <html lang="da">
 <head>
@@ -202,7 +202,7 @@ def page(path, title, desc, h1, body, crumbs=None, lead=None, actions=True, ld=N
 <a href="#indhold" style="position:absolute;left:-9999px" onfocus="this.style.left='12px';this.style.top='12px';this.style.zIndex=200" onblur="this.style.left='-9999px'">Spring til indhold</a>
 <header class="sp-hdr"><div class="sp-bar">
   <a href="/">{BRAND}</a>
-  <div class="sp-right"><a class="sp-cta" href="/kontakt">Start et projekt {ARROW}</a>{BURGER}</div>
+  <div class="sp-right"><a class="sp-cta" href="/kontakt">Book en samtale {ARROW}</a>{BURGER}</div>
 </div></header>
 <main id="indhold">
 <section class="pg-hero"><div class="wrap">
@@ -1210,7 +1210,7 @@ HAND = {
     "metode.html": ("/metode", "Metode – fra analyse til løsning | Vanta Studio",
                     "Jeg starter ikke med løsningen. Jeg starter med problemet. Sådan går Vanta Studio fra analyse til hjemmesider, AI og automatisering.",
                     [crumbs_ld([("/", "Forside"), ("/metode", "Metode")])]),
-    "kontakt.html": ("/kontakt", "Kontakt – start et projekt | Vanta Studio",
+    "kontakt.html": ("/kontakt", "Kontakt – book en samtale | Vanta Studio",
                      "Fortæl kort om din virksomhed, så vender Vanta Studio tilbage inden for 24 timer.",
                      [{"@type": "ContactPage", "url": SITE + "/kontakt", "about": {"@id": SITE + "/#org"}}]),
 }

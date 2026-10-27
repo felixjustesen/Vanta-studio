@@ -232,12 +232,11 @@ img,svg,video{display:block}
 .cta-sec::before{content:"";position:absolute;left:0;right:0;top:-35vh;height:35vh;background:linear-gradient(rgba(15,23,42,0),var(--slate));pointer-events:none}
 .horse-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .ascii{position:absolute;inset:0;width:100%;height:100%}
-.cta-body{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:22px;max-width:760px;padding:clamp(96px,14vh,150px) var(--px) 0;will-change:transform,opacity}
+.cta-body{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:22px;max-width:1000px;padding:clamp(96px,14vh,150px) var(--px) 0;will-change:transform,opacity}
 .cta-body h2{margin:0;font-size:clamp(44px,7vw,116px);font-weight:400;line-height:.95;letter-spacing:-.035em;color:var(--mist);text-shadow:0 2px 40px rgba(15,23,42,.9)}
 .cta-body h2 .s{font-family:"Fraunces",serif;font-weight:300;font-variation-settings:"opsz" 144;letter-spacing:-.04em}
 .cta-body h2 .n{display:block;font-family:"Inter",sans-serif;background:linear-gradient(100deg,var(--cyan),var(--lilac) 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .cta-body p{max-width:460px;margin:0;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:rgba(237,233,254,.8);text-shadow:0 1px 18px rgba(15,23,42,.95)}
-.cta-body .cta{animation:none;opacity:1;transform:none;color:var(--mist)}
 .credit{position:absolute;right:var(--px);bottom:var(--py);z-index:2;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,233,254,.45)}
 
 /* ---------- Ydelser: kortbunke på violet ---------- */
@@ -331,12 +330,13 @@ img,svg,video{display:block}
 .hej-title{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
 .hej.in .hej-form{transition-delay:.15s}
 .hf-row{display:grid;gap:12px}
-@media (min-width:560px){.hf-row{grid-template-columns:1fr 1fr}}
+@media (min-width:340px){.hf-row{grid-template-columns:1fr 1fr}}
 .hf-field{display:grid;gap:6px;font-size:13px;color:rgba(255,255,255,.85)}
 .hf-lab{position:relative;display:flex;align-items:center;gap:8px}
-.hf-field input{width:100%;padding:11px 14px;border:0;border-radius:12px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);color:#fff;font:inherit;font-size:15px;transition:box-shadow .25s,background-color .25s}
+.hf-field input,.hf-field textarea{width:100%;padding:11px 14px;border:0;border-radius:12px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);color:#fff;font:inherit;font-size:15px;transition:box-shadow .25s,background-color .25s}
+.hf-field textarea{min-height:72px;resize:vertical;line-height:1.5}
 .hf-field input::placeholder{color:rgba(255,255,255,.55)}
-.hf-field input:focus{outline:none;background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 1px #fff}
+.hf-field input:focus,.hf-field textarea:focus{outline:none;background:rgba(255,255,255,.2);box-shadow:inset 0 0 0 1px #fff}
 .hf-field input[aria-invalid="true"]{box-shadow:inset 0 0 0 1.5px #ffd1d8}
 .hf-help{display:grid;place-items:center;width:18px;height:18px;padding:0;border:1px solid rgba(255,255,255,.7);border-radius:50%;background:none;color:#fff;font:inherit;font-size:11px;line-height:1;cursor:help}
 .hf-tip{position:absolute;left:0;bottom:calc(100% + 10px);z-index:5;width:max-content;max-width:240px;padding:10px 12px;border-radius:10px;background:#fff;color:#1a1a1a;font-size:13px;line-height:1.4;box-shadow:0 12px 30px -12px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .2s,transform .2s,visibility 0s .2s;pointer-events:none}
@@ -395,7 +395,7 @@ img,svg,video{display:block}
     <header class="bar">
       <a href="/">Vanta Studio</a>
       <div class="bar-r">
-        <a class="cta-link" href="/kontakt">Start et projekt
+        <a class="cta-link" href="/kontakt">Book en samtale
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
         </a>
         <button class="vm-burger" type="button" data-vm-open aria-expanded="false" aria-controls="vm" aria-label="Åbn menu"><i></i><i></i><i></i></button>
@@ -584,11 +584,8 @@ img,svg,video{display:block}
   <div class="horse-stage">
     <canvas class="ascii" aria-hidden="true"></canvas>
     <div class="cta-body">
-      <h2 id="cta-titel"><span class="s">din vision,</span> <span class="n">mit værk.</span></h2>
-      <p>Vanta Studio designer og bygger hjemmesider og digitale løsninger med bevægelse, detaljer og sjæl. Fortæl mig om din virksomhed – jeg svarer inden for 24 timer.</p>
-      <a class="cta liquid-glass" href="/kontakt">Start et projekt
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-      </a>
+      <h2 id="cta-titel"><span class="s">Mindre arbejde.</span> <span class="n">Mere forretning.</span></h2>
+      <p>Vanta Studio udvikler hjemmesider og digitale løsninger, der gør din virksomhed lettere at drive og nemmere at vækste. Fra stærkt webdesign til intelligente værktøjer – altid med fokus på at spare tid, reducere omkostninger eller skabe flere kunder.</p>
     </div>
     <span class="credit">Hest: Eadweard Muybridge, 1878</span>
   </div>
@@ -618,6 +615,7 @@ img,svg,video{display:block}
           <input id="hf-tlf" name="telefon" type="tel" autocomplete="tel" placeholder="Valgfrit">
         </div>
       </div>
+      <label class="hf-field"><span>Hvad drømmer I om?</span><textarea name="besked" rows="2"></textarea></label>
       <button class="hf-send" type="submit">Send forespørgsel
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
       </button>
@@ -686,9 +684,9 @@ img,svg,video{display:block}
     { nr: "04", navn: "Ejendomsmægler", kunde: "HAVLINJE", billede: "billeder/koncepter/04-havlinje.jpg", link: "/koncepter/04-havlinje" },
     { nr: "05", navn: "Solceller", kunde: "SOLHVERV", billede: "billeder/koncepter/05-solhverv.jpg", link: "/koncepter/05-solhverv", skift: ".toggle-btn:not(.active)" },
     { nr: "06", navn: "Coaching", kunde: "KLARSYN", billede: "billeder/koncepter/06-klarsyn.jpg", link: "/koncepter/06-klarsyn" },
-    { nr: "07" },
-    { nr: "08" },
-    { nr: "09" }
+    { nr: "07", navn: "Kosttilskud", kunde: "TERRAELIX", billede: "billeder/koncepter/07-terraelix.jpg", link: "/koncepter/07-terraelix" },
+    { nr: "08", navn: "Barber", kunde: "SKARP", billede: "billeder/koncepter/08-skarp.jpg", link: "/koncepter/08-skarp" },
+    { nr: "09", navn: "Blomster", kunde: "KRONBLAD", billede: "billeder/koncepter/09-kronblad.jpg", link: "/koncepter/09-kronblad" }
   ];
 
   var section = document.getElementById("koncepter");
@@ -1479,85 +1477,12 @@ img,svg,video{display:block}
 
 })();
 </script>
+<script src="/assets/figur.js"></script>
 <script>
 (function () {
-  // ---------- Afsluttende CTA: video der spoles med musen, og en skrivemaskine ----------
+  // ---------- Afsluttende CTA: figuren, der spoles med musen (assets/figur.js) ----------
   var hej = document.getElementById("kontakt");
-  var video = hej.querySelector(".hej-video");
-  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var SENSITIVITY = 0.8;
-
-  // Videoen afspilles ikke – den spoles frem og tilbage, når musen bevæger sig vandret
-  var prevX = null, targetTime = 0, seeking = false;
-  function seek() {
-    if (!video.duration) return;
-    seeking = true;
-    video.currentTime = targetTime;
-  }
-  video.addEventListener("seeked", function () {
-    seeking = false;
-    if (Math.abs(video.currentTime - targetTime) > 0.01) seek();
-  });
-  function move(x) {
-    if (prevX === null) { prevX = x; return; }
-    var delta = x - prevX;
-    prevX = x;
-    if (!video.duration) return;
-    var r = hej.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > window.innerHeight) return;
-    targetTime = Math.min(video.duration, Math.max(0, targetTime + (delta / window.innerWidth) * SENSITIVITY * video.duration));
-    if (!seeking) seek();
-  }
-  window.addEventListener("mousemove", function (e) { move(e.clientX); }, { passive: true });
-  window.addEventListener("touchmove", function (e) { if (e.touches[0]) move(e.touches[0].clientX); }, { passive: true });
-  window.addEventListener("touchend", function () { prevX = null; });
-
-  // ---------- Omfarvning: kun den røde baggrund drejes over i Vantas violet ----------
-  // Figurens hud, hår og trøje har lavere mætning eller en anden nuance og bliver ikke rørt.
-  var cv = hej.querySelector(".hej-canvas");
-  var cx = cv.getContext("2d", { willReadFrequently: true });
-  var HUE = -92 * Math.PI / 180;           // rød (~350°) -> violet (~258°)
-  var cH = Math.cos(HUE), sH = Math.sin(HUE);
-  // Lysstyrkebevarende hue-rotationsmatrix
-  var M = [
-    0.213 + cH * 0.787 - sH * 0.213, 0.715 - cH * 0.715 - sH * 0.715, 0.072 - cH * 0.072 + sH * 0.928,
-    0.213 - cH * 0.213 + sH * 0.143, 0.715 + cH * 0.285 + sH * 0.140, 0.072 - cH * 0.072 - sH * 0.283,
-    0.213 - cH * 0.213 - sH * 0.787, 0.715 - cH * 0.715 + sH * 0.715, 0.072 + cH * 0.928 + sH * 0.072
-  ];
-  var ss = function (a, b, x) { x = Math.min(1, Math.max(0, (x - a) / (b - a))); return x * x * (3 - 2 * x); };
-  function paint() {
-    if (!video.videoWidth) return;
-    var W = cv.clientWidth, H = cv.clientHeight;
-    var scale = Math.min(1, 1400 / W);
-    var cw = Math.round(W * scale), ch = Math.round(H * scale);
-    if (cv.width !== cw || cv.height !== ch) { cv.width = cw; cv.height = ch; }
-    // Samme beskæring som object-fit: cover; object-position: 70% center
-    var vr = video.videoWidth / video.videoHeight, k = cw / ch > vr ? cw / video.videoWidth : ch / video.videoHeight;
-    var dw = video.videoWidth * k, dh = video.videoHeight * k;
-    cx.drawImage(video, (cw - dw) * 0.7, (ch - dh) / 2, dw, dh);
-    var img;
-    try { img = cx.getImageData(0, 0, cw, ch); } catch (e) { return; } // CORS: vis originalen
-    var d = img.data;
-    for (var i = 0; i < d.length; i += 4) {
-      var r = d[i], g = d[i + 1], b = d[i + 2];
-      var mx = r > g ? (r > b ? r : b) : (g > b ? g : b), mn = r < g ? (r < b ? r : b) : (g < b ? g : b);
-      if (mx < 20 || r !== mx) continue;
-      var sat = (mx - mn) / mx;
-      // nuance: hvor tæt på ren rød (g og b lave i forhold til hinanden)
-      var hueOff = (g - b) / (mx - mn + 1);         // 0 = rød/magenta, 1 = orange
-      // Baggrunden: meget mættet, ren rød og ikke mørk. Hår og bryn er mere orange (hueOff > 0.1) eller mørkere.
-      var w = ss(0.6, 0.8, sat) * (1 - ss(0.03, 0.09, hueOff)) * ss(70, 115, mx);
-      if (w <= 0) continue;
-      var nr = M[0] * r + M[1] * g + M[2] * b, ng = M[3] * r + M[4] * g + M[5] * b, nb = M[6] * r + M[7] * g + M[8] * b;
-      d[i] = r + (nr - r) * w; d[i + 1] = g + (ng - g) * w; d[i + 2] = b + (nb - b) * w;
-    }
-    cx.putImageData(img, 0, 0);
-    hej.classList.add("recolor");
-  }
-  video.addEventListener("seeked", paint);
-  video.addEventListener("loadeddata", function () { paint(); });
-  window.addEventListener("resize", paint);
-  if (video.readyState >= 2) paint();
+  vantaFigur(hej, hej.querySelector(".hej-video"), hej.querySelector(".hej-canvas"));
 
   // Booking-formular: sendes direkte til kontakt@vantastudio.dk via /api/kontakt
   var form = hej.querySelector(".hej-form");
@@ -1577,7 +1502,7 @@ img,svg,video{display:block}
     fetch("/api/kontakt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type: "booking", navn: f.navn.value, virksomhed: f.virksomhed.value, email: f.email.value, telefon: f.telefon.value, website: f.website.value })
+      body: JSON.stringify({ type: "booking", navn: f.navn.value, virksomhed: f.virksomhed.value, email: f.email.value, telefon: f.telefon.value, besked: f.besked.value, website: f.website.value })
     }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (j) {
         if (!j.ok) throw new Error(j.error || "fejl");
@@ -1621,7 +1546,7 @@ img,svg,video{display:block}
     <div class="vm-aside">
       <p>Har du en idé eller et problem, der skal løses? Skriv direkte til mig – jeg svarer inden for 24 timer.</p>
       <a class="mail" href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a>
-      <a class="glass-btn" href="/kontakt" style="justify-self:start">Start et projekt <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+      <a class="glass-btn" href="/kontakt" style="justify-self:start">Book en samtale <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
     </div>
   </div>
 </div>

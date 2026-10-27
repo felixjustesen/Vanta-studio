@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Start et projekt – Vanta Studio</title>
+<title>Book en samtale – Vanta Studio</title>
 <meta name="description" content="Fortæl kort om din virksomhed, så vender jeg tilbage inden for 24 timer.">
 <link rel="canonical" href="https://www.vantastudio.dk/kontakt">
 <!-- vm:seo -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="da_DK">
 <meta property="og:site_name" content="Vanta Studio">
-<meta property="og:title" content="Kontakt – start et projekt | Vanta Studio">
+<meta property="og:title" content="Kontakt – book en samtale | Vanta Studio">
 <meta property="og:description" content="Fortæl kort om din virksomhed, så vender Vanta Studio tilbage inden for 24 timer.">
 <meta property="og:url" content="https://www.vantastudio.dk/kontakt">
 <meta property="og:image" content="https://www.vantastudio.dk/assets/og-vanta.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kontakt – start et projekt | Vanta Studio">
+<meta name="twitter:title" content="Kontakt – book en samtale | Vanta Studio">
 <meta name="twitter:description" content="Fortæl kort om din virksomhed, så vender Vanta Studio tilbage inden for 24 timer.">
 <script type="application/ld+json">
 {
@@ -77,12 +77,24 @@ a{color:inherit;text-decoration:none}
 button,input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 
-.scene{position:fixed;inset:0;width:100%;height:100%;display:block}
+/* Baggrund: figuren fra forsidens bund, der spoles med musen (assets/figur.js) */
+.figur{position:fixed;inset:0;overflow:hidden;background:#2a1160}
+.figur video,.figur canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.figur video{object-fit:cover;object-position:70% center}
+.figur canvas{opacity:0;transition:opacity .4s}
+.figur.recolor canvas{opacity:1}
+.figur.recolor video{visibility:hidden}
+.figur::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,10,45,.5),rgba(15,10,45,0) 60%);pointer-events:none}
+@media (max-width:899px){.figur::after{background:linear-gradient(0deg,rgba(15,10,45,.6),rgba(15,10,45,0) 60%)}}
 
 .back{position:fixed;top:20px;left:20px;z-index:3;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border-radius:999px;background:rgba(15,23,42,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);font-size:12px;letter-spacing:.14em;text-transform:uppercase;transition:background-color .3s}
 .back:hover{background:rgba(15,23,42,.55)}
 
 .wrap{position:relative;z-index:2;display:grid;place-items:center;min-height:100vh;min-height:100svh;padding:84px 16px 40px}
+/* På store skærme står kortet til venstre, så figuren har plads til højre */
+@media (min-width:900px){.wrap{justify-items:start;padding-left:clamp(48px,9vw,160px)}}
+/* På mobil ses figuren først, og kortet glider op over den */
+@media (max-width:899px){.wrap{padding-top:48vh;padding-top:48svh}}
 
 /* Glaskort */
 .card{position:relative;width:min(440px,100%);padding:44px clamp(24px,5vw,44px) 36px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.05));-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 30px 80px -30px rgba(10,6,40,.8);animation:rise 1.1s var(--ease) .2s both}
@@ -97,6 +109,14 @@ form{display:grid;gap:14px}
 label{display:grid;gap:7px;font-size:13px;color:rgba(237,233,254,.85)}
 input,textarea{width:100%;padding:13px 16px;border:0;border-radius:14px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:15px;color:#fff;transition:box-shadow .3s,background-color .3s}
 textarea{min-height:92px;resize:vertical;line-height:1.5}
+.row{display:grid;gap:14px}
+@media (min-width:480px){.row{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:7px;font-size:13px;color:rgba(237,233,254,.85)}
+.lab{position:relative;display:flex;align-items:center;gap:8px}
+.lab label{display:inline}
+.help{display:grid;place-items:center;width:18px;height:18px;padding:0;border:1px solid rgba(255,255,255,.7);border-radius:50%;background:none;font-size:11px;line-height:1;cursor:help}
+.tip{position:absolute;left:0;bottom:calc(100% + 10px);z-index:5;width:max-content;max-width:220px;padding:10px 12px;border-radius:10px;background:#fff;color:#1a1a1a;font-size:13px;line-height:1.4;box-shadow:0 12px 30px -12px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .2s,transform .2s,visibility 0s .2s;pointer-events:none}
+.help:hover + .tip,.help:focus-visible + .tip,.tip.show{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
 input::placeholder,textarea::placeholder{color:rgba(237,233,254,.4)}
 input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(34,211,238,.7),0 0 0 4px rgba(34,211,238,.12)}
 .send{margin-top:8px;padding:15px;border:0;border-radius:999px;background:#fff;color:var(--slate);font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 10px 30px -10px rgba(167,139,250,.8);transition:transform .3s var(--ease),box-shadow .3s}
@@ -118,7 +138,10 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
 <link rel="stylesheet" href="/assets/menu.css">
 </head>
 <body>
-<canvas class="scene" aria-hidden="true"></canvas>
+<div class="figur" aria-hidden="true">
+  <video muted playsinline preload="auto" crossorigin="anonymous" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260826_041744_63efcd78-bf7d-4039-99e2-2461e8a61903.mp4"></video>
+  <canvas></canvas>
+</div>
 
 <a class="back" href="/">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
@@ -133,19 +156,33 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       <defs><linearGradient id="mk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#ede9fe"/></linearGradient></defs>
       <path d="M6 8h9.5l6.5 17.5L28.5 8H38L26.5 36h-9z" fill="url(#mk)"/>
     </svg>
-    <h1 class="ask" id="titel">Start et projekt</h1>
+    <h1 class="ask" id="titel">Book en samtale</h1>
     <p class="sub">Jeg svarer inden for 24 timer.</p>
 
     <form novalidate>
       <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-      <label>Navn
-        <input name="navn" type="text" autocomplete="name" required>
-      </label>
-      <label>E-mail
-        <input name="email" type="email" autocomplete="email" required>
-      </label>
+      <div class="row">
+        <label>Navn
+          <input name="navn" type="text" autocomplete="name" required>
+        </label>
+        <label>Virksomhed
+          <input name="virksomhed" type="text" autocomplete="organization">
+        </label>
+      </div>
+      <div class="row">
+        <label>E-mail
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+        <div class="field">
+          <span class="lab"><label for="tlf">Telefon</label>
+            <button class="help" type="button" aria-describedby="tip" aria-label="Hvorfor telefonnummer?">?</button>
+            <span class="tip" id="tip" role="tooltip">Kun nødvendigt, hvis du ønsker at blive ringet op. Ellers svarer jeg på mail.</span>
+          </span>
+          <input id="tlf" name="telefon" type="tel" autocomplete="tel" placeholder="Valgfrit">
+        </div>
+      </div>
       <label>Hvad drømmer I om?
-        <textarea name="besked" rows="3" placeholder="Fx ny hjemmeside, AI-chat eller flere genbookinger"></textarea>
+        <textarea name="besked" rows="3"></textarea>
       </label>
       <button class="send" type="submit">Send</button>
     </form>
@@ -160,6 +197,7 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
   </section>
 </main>
 
+<script src="/assets/figur.js"></script>
 <script>
 (function () {
   // ---------- Formular ----------
@@ -181,7 +219,7 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
     fetch("/api/kontakt", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type: "kontakt", navn: f.navn.value, email: f.email.value, besked: f.besked.value, website: f.website.value })
+      body: JSON.stringify({ type: "booking", navn: f.navn.value, virksomhed: f.virksomhed.value, email: f.email.value, telefon: f.telefon.value, besked: f.besked.value, website: f.website.value })
     }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (j) {
         if (!j.ok) throw new Error(j.error || "fejl");
@@ -195,205 +233,14 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
       });
   });
 
-  // ---------- Lavendelmark under stjernehimlen ----------
-  var canvas = document.querySelector(".scene");
-  var ctx = canvas.getContext("2d");
-  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var W, H, DPR, horizon, sky, flowers, stars, rows;
-  var ROWS = 15;
+  // Spørgsmålstegnet kan også tappes på mobil
+  var help = card.querySelector(".help"), tip = card.querySelector(".tip");
+  help.addEventListener("click", function () { tip.classList.toggle("show"); });
+  document.addEventListener("click", function (e) { if (e.target !== help) tip.classList.remove("show"); });
 
-  function rand(n) {
-    var x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
-    return x - Math.floor(x);
-  }
-
-  // Perspektiv: verdenskoordinat (x, z) -> skærm
-  function project(wx, z) {
-    var s = 1 / z;
-    return [W / 2 + wx * W * 0.62 * s, horizon + (H - horizon) * 1.05 * s, s];
-  }
-
-  function hillPath(c, base, amp, seed, color) {
-    c.beginPath();
-    c.moveTo(0, H);
-    for (var x = 0; x <= W; x += 8) {
-      var u = x / W;
-      var y = base - amp * (0.55 * Math.sin(u * 3.1 + seed) + 0.3 * Math.sin(u * 7.3 + seed * 2) + 0.15 * Math.sin(u * 13 + seed * 3) + 0.5);
-      c.lineTo(x, y);
-    }
-    c.lineTo(W, H);
-    c.closePath();
-    c.fillStyle = color;
-    c.fill();
-  }
-
-  function build() {
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    W = window.innerWidth;
-    H = window.innerHeight;
-    canvas.width = Math.round(W * DPR);
-    canvas.height = Math.round(H * DPR);
-    horizon = H * 0.5;
-
-    // Himmel, bakker og markens mørke rækker tegnes én gang
-    sky = document.createElement("canvas");
-    sky.width = canvas.width;
-    sky.height = canvas.height;
-    var c = sky.getContext("2d");
-    c.setTransform(DPR, 0, 0, DPR, 0, 0);
-    var g = c.createLinearGradient(0, 0, 0, horizon);
-    g.addColorStop(0, "#0b1024");
-    g.addColorStop(0.45, "#1e1b4b");
-    g.addColorStop(0.78, "#4c2f8f");
-    g.addColorStop(1, "#9b7ee8");
-    c.fillStyle = g;
-    c.fillRect(0, 0, W, horizon + 2);
-    // Slør af lyserødt lys bag bakkerne
-    var glow = c.createRadialGradient(W * 0.55, horizon, 0, W * 0.55, horizon, W * 0.6);
-    glow.addColorStop(0, "rgba(237,233,254,.35)");
-    glow.addColorStop(1, "rgba(237,233,254,0)");
-    c.fillStyle = glow;
-    c.fillRect(0, 0, W, horizon);
-
-    hillPath(c, horizon - H * 0.02, H * 0.12, 1.3, "#3b2f74");
-    hillPath(c, horizon + H * 0.005, H * 0.07, 4.1, "#2a2358");
-
-    // Jorden
-    var fg = c.createLinearGradient(0, horizon, 0, H);
-    fg.addColorStop(0, "#241d4f");
-    fg.addColorStop(1, "#140f2e");
-    c.fillStyle = fg;
-    c.fillRect(0, horizon, W, H - horizon);
-
-    // Lys sti midt igennem
-    var p1 = project(-0.04, 30), p2 = project(0.04, 30), p3 = project(0.32, 1), p4 = project(-0.32, 1);
-    var pg = c.createLinearGradient(0, horizon, 0, H);
-    pg.addColorStop(0, "rgba(167,139,250,.12)");
-    pg.addColorStop(1, "rgba(200,190,235,.2)");
-    c.beginPath();
-    c.moveTo(p1[0], p1[1]); c.lineTo(p2[0], p2[1]); c.lineTo(p3[0], H); c.lineTo(p4[0], H); c.closePath();
-    c.fillStyle = pg;
-    c.fill();
-
-    // Rækkernes mørke bund
-    rows = [];
-    for (var r = 0; r < ROWS; r++) {
-      var side = r < ROWS / 2 ? -1 : 1;
-      var k = side < 0 ? r : ROWS - 1 - r;
-      var wx = side * (0.62 + k * 0.5);
-      rows.push(wx);
-      var a = project(wx - 0.22, 40), b = project(wx + 0.22, 40), d = project(wx + 0.22, 0.9), e = project(wx - 0.22, 0.9);
-      c.beginPath();
-      c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.lineTo(d[0], d[1] + 40); c.lineTo(e[0], e[1] + 40); c.closePath();
-      c.fillStyle = "#2b2160";
-      c.fill();
-    }
-
-    // Blomster: mange små klynger langs rækkerne, bagerst først
-    flowers = [];
-    var COLORS = ["124,58,237", "167,139,250", "196,181,253", "237,233,254", "139,92,246", "34,211,238"];
-    var count = Math.round(Math.min(6500, W * H / 170));
-    for (var i = 0; i < count; i++) {
-      var row = rows[Math.floor(rand(i * 3.1) * ROWS)];
-      var z = 0.9 + Math.pow(rand(i * 7.7), 1.8) * 34;
-      var wxF = row + (rand(i * 1.3) - 0.5) * 0.46;
-      var pc = rand(i * 5.9);
-      flowers.push({
-        wx: wxF,
-        z: z,
-        h: 0.07 + rand(i * 2.2) * 0.1,
-        r: 0.008 + rand(i * 4.4) * 0.006,
-        c: COLORS[pc < 0.03 ? 5 : Math.floor(pc * 5)],
-        a: 0.55 + rand(i * 8.8) * 0.45,
-        ph: rand(i * 9.9) * 6.28
-      });
-    }
-    flowers.sort(function (p, q) { return q.z - p.z; });
-
-    stars = [];
-    for (var s = 0; s < 220; s++) {
-      stars.push([rand(s * 11.1) * W, Math.pow(rand(s * 13.7), 1.6) * horizon * 0.85, 0.3 + rand(s * 17.3) * 1.1, rand(s * 19.9) * 6.28]);
-    }
-  }
-
-  function draw(t) {
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    ctx.drawImage(sky, 0, 0, W, H);
-
-    // Stjerner, der blinker svagt
-    for (var i = 0; i < stars.length; i++) {
-      var st = stars[i];
-      ctx.globalAlpha = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * 1.3 + st[3]));
-      ctx.fillStyle = "#ede9fe";
-      ctx.fillRect(st[0], st[1], st[2], st[2]);
-    }
-
-    // Vinden: en langsom bølge, der ruller gennem marken
-    for (var j = 0; j < flowers.length; j++) {
-      var f = flowers[j];
-      var p = project(f.wx, f.z);
-      if (p[0] < -40 || p[0] > W + 40) continue;
-      var scale = p[2] * W * 0.62;
-      var stem = f.h * scale;
-      var sway = calm ? 0 : Math.sin(t * 1.1 - f.z * 0.35 + f.wx * 0.6 + f.ph * 0.3) * stem * 0.28;
-      var x = p[0] + sway, y = p[1] - stem;
-      var rad = Math.max(0.5, f.r * scale);
-      var alpha = f.a * Math.min(1, 0.3 + p[2] * 3);
-      // Stilk
-      if (rad > 1.2) {
-        ctx.globalAlpha = alpha * 0.55;
-        ctx.strokeStyle = "#2e2a5c";
-        ctx.lineWidth = Math.max(0.6, rad * 0.35);
-        ctx.beginPath();
-        ctx.moveTo(p[0], p[1]);
-        ctx.quadraticCurveTo(p[0] + sway * 0.3, p[1] - stem * 0.5, x, y + stem * 0.15);
-        ctx.stroke();
-      }
-      // Akset: små blomster stablet op ad stilken
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = "rgb(" + f.c + ")";
-      var dots = rad > 1.6 ? 6 : 3;
-      for (var k = 0; k < dots; k++) {
-        var q = k / dots;
-        var dx = x - sway * q * 0.35 + (k % 2 ? rad * 0.5 : -rad * 0.5);
-        var dy = y + stem * 0.32 - q * stem * 0.5;
-        var rr = rad * (1 - q * 0.45);
-        if (rr < 1.4) ctx.fillRect(dx - rr, dy - rr, rr * 2, rr * 2);
-        else {
-          ctx.beginPath();
-          ctx.arc(dx, dy, rr, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-    }
-    ctx.globalAlpha = 1;
-
-    // Dis ved horisonten og mørk kant
-    var haze = ctx.createLinearGradient(0, horizon - H * 0.06, 0, horizon + H * 0.12);
-    haze.addColorStop(0, "rgba(155,126,232,0)");
-    haze.addColorStop(0.5, "rgba(155,126,232,.28)");
-    haze.addColorStop(1, "rgba(155,126,232,0)");
-    ctx.fillStyle = haze;
-    ctx.fillRect(0, horizon - H * 0.06, W, H * 0.18);
-    var vig = ctx.createRadialGradient(W / 2, H * 0.55, Math.min(W, H) * 0.35, W / 2, H * 0.55, Math.max(W, H) * 0.85);
-    vig.addColorStop(0, "rgba(10,8,30,0)");
-    vig.addColorStop(1, "rgba(10,8,30,.55)");
-    ctx.fillStyle = vig;
-    ctx.fillRect(0, 0, W, H);
-  }
-
-  var last = 0;
-  function frame(now) {
-    requestAnimationFrame(frame);
-    if (now - last < 33 || document.hidden) return;
-    last = now;
-    draw(now / 1000);
-  }
-
-  build();
-  draw(0);
-  if (!calm) requestAnimationFrame(frame);
-  window.addEventListener("resize", function () { build(); draw(performance.now() / 1000); });
+  // ---------- Baggrund: figuren fra forsiden ----------
+  var figur = document.querySelector(".figur");
+  vantaFigur(figur, figur.querySelector("video"), figur.querySelector("canvas"));
 })();
 </script>
 <!-- vm:menu -->
@@ -404,7 +251,7 @@ input:focus,textarea:focus{outline:none;background:rgba(255,255,255,.1);box-shad
     <div class="vm-aside">
       <p>Har du en idé eller et problem, der skal løses? Skriv direkte til mig – jeg svarer inden for 24 timer.</p>
       <a class="mail" href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a>
-      <a class="glass-btn" href="/kontakt" style="justify-self:start">Start et projekt <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+      <a class="glass-btn" href="/kontakt" style="justify-self:start">Book en samtale <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
     </div>
   </div>
 </div>
