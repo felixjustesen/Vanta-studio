@@ -66,6 +66,8 @@ body.skarp{
 .skarp .toast--error{background:#e3907d}
 .skarp .demo-bar{background:#000;color:var(--ink-soft);border-bottom:1px solid var(--line)}
 .skarp .demo-bar strong{color:var(--accent-hover)}
+.vanta-back{display:flex;align-items:center;justify-content:center;gap:8px;min-height:36px;padding:6px 16px;background:#000;color:var(--ink-soft);font-size:.8125rem;letter-spacing:.04em;text-decoration:none;border-bottom:1px solid var(--line)}
+.vanta-back:hover,.vanta-back:focus-visible{color:var(--accent-hover)}
 .skarp .card{background:var(--surface);border-color:var(--line)}
 .skarp .receipt__status{background:var(--surface-2)}
 .skarp .receipt__icon{background:var(--ok-soft)}

@@ -64,11 +64,14 @@ if (!reduce && matchMedia("(hover: hover)").matches) {
   }, { passive: true });
 }
 
-// ---------- Demobjælken ----------
-// Heroen gøres lige så meget lavere, som bjælken fylder, så bunden af heroen altid ses
-const bar = document.getElementById("demo-bar");
-if (bar) {
-  const fit = () => document.documentElement.style.setProperty("--bar-h", `${bar.hidden ? 0 : bar.offsetHeight}px`);
-  new ResizeObserver(fit).observe(bar);
-  new MutationObserver(fit).observe(bar, { attributes: true, attributeFilter: ["hidden"] });
+// ---------- Bjælkerne øverst ----------
+// Heroen gøres lige så meget lavere, som "Tilbage til Vanta Studio" og demobjælken
+// fylder, så bunden af heroen altid ses
+// I kortet på Vanta Studios forside (iframe) giver tilbage-linket ingen mening
+if (window.self !== window.top) document.querySelector(".vanta-back")?.remove();
+const bars = [document.querySelector(".vanta-back"), document.getElementById("demo-bar")].filter(Boolean);
+const fit = () => document.documentElement.style.setProperty("--bar-h", `${bars.reduce((sum, el) => sum + (el.hidden ? 0 : el.offsetHeight), 0)}px`);
+for (const el of bars) {
+  new ResizeObserver(fit).observe(el);
+  new MutationObserver(fit).observe(el, { attributes: true, attributeFilter: ["hidden"] });
 }
