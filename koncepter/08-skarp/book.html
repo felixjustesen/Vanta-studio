@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book tid – SKARP</title>
+<meta name="description" content="Book tid hos SKARP online: vælg behandling, barber, dato og tidspunkt.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f0b09">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://fiszpthonodetuqclzsn.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<link rel="preload" href="/koncepter/08-skarp/assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/koncepter/08-skarp/assets/fonts/bebas-neue.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/koncepter/08-skarp/assets/salon.css">
+<link rel="stylesheet" href="/koncepter/08-skarp/assets/skarp.css">
+<script type="module" src="/koncepter/08-skarp/assets/booking.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="skarp">
+<a class="skip" href="#indhold">Spring til indhold</a>
+
+<div class="demo-bar" id="demo-bar" hidden>
+  <div class="wrap"><strong>Demoside</strong><span data-demo-text></span></div>
+</div>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="/koncepter/08-skarp">
+      <span class="brand__mark" data-salon-initial aria-hidden="true">F</span>
+      <span class="brand__name" data-salon-name>SKARP</span>
+    </a>
+    <div class="site-header__actions">
+      <a class="btn btn--quiet" href="/koncepter/08-skarp">Til forsiden</a>
+    </div>
+  </div>
+</header>
+
+<main id="indhold" class="booking-page">
+  <div class="wrap">
+    <div class="booking-head" id="booking-head">
+      <h1>Book tid</h1>
+      <ol class="progress" id="progress" aria-label="Trin i bookingen">
+        <li data-step="service"><span class="progress__bar"></span><span class="progress__label">Behandling</span></li>
+        <li data-step="time"><span class="progress__bar"></span><span class="progress__label">Tid</span></li>
+        <li data-step="details"><span class="progress__bar"></span><span class="progress__label">Oplysninger</span></li>
+        <li data-step="review"><span class="progress__bar"></span><span class="progress__label">Gennemse</span></li>
+      </ol>
+    </div>
+
+    <div class="booking-layout" id="layout">
+      <div class="card" id="flow">
+
+        <section class="step" data-step="service" aria-labelledby="t-service">
+          <h2 class="step__title" id="t-service" tabindex="-1">Vælg behandling</h2>
+          <p class="step__intro">Du kan se varighed og pris for hver behandling.</p>
+          <div class="step__error" id="service-error" hidden></div>
+          <div class="step__body">
+            <fieldset class="service-options" id="service-options" aria-busy="true">
+              <legend class="sr-only">Behandlinger</legend>
+              <span class="skeleton sk-option"></span>
+              <span class="skeleton sk-option"></span>
+              <span class="skeleton sk-option"></span>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="step" data-step="time" aria-labelledby="t-time" hidden>
+          <h2 class="step__title" id="t-time" tabindex="-1">Vælg dato og tid</h2>
+          <p class="step__intro" id="time-intro"></p>
+          <div class="step__error" id="time-error" hidden></div>
+          <fieldset class="staff-picker step__body" id="staff-picker" hidden>
+            <legend class="label">Frisør</legend>
+            <div class="staff-picker__options" id="staff-options"></div>
+          </fieldset>
+          <div class="step__body time-layout" id="time-layout">
+            <div id="calendar"></div>
+            <div>
+              <h3 class="slots-title" id="slots-title">Ledige tider</h3>
+              <div class="step__body" id="slots-body" role="radiogroup" aria-labelledby="slots-title"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step" data-step="details" aria-labelledby="t-details" hidden>
+          <h2 class="step__title" id="t-details" tabindex="-1">Dine oplysninger</h2>
+          <p class="step__intro">Salonen bruger oplysningerne til at håndtere din booking.</p>
+          <form class="step__body" id="details-form" novalidate>
+            <div class="field">
+              <label class="label" for="f-name">Navn</label>
+              <input class="input" id="f-name" name="full_name" autocomplete="name" maxlength="100" required aria-describedby="e-name">
+              <p class="error" id="e-name"></p>
+            </div>
+            <div class="field">
+              <label class="label" for="f-email">E-mail</label>
+              <input class="input" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-describedby="h-email e-email">
+              <p class="hint" id="h-email">Fx navn@eksempel.dk</p>
+              <p class="error" id="e-email"></p>
+            </div>
+            <div class="field">
+              <label class="label" for="f-phone">Telefon</label>
+              <input class="input" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required aria-describedby="h-phone e-phone">
+              <p class="hint" id="h-phone">Fx 12 34 56 78</p>
+              <p class="error" id="e-phone"></p>
+            </div>
+            <div class="field">
+              <label class="label" for="f-notes">Bemærkning <span class="optional">(valgfri)</span></label>
+              <textarea class="textarea" id="f-notes" name="notes" maxlength="500" aria-describedby="h-notes e-notes"></textarea>
+              <p class="counter" id="h-notes">0 af 500 tegn</p>
+              <p class="error" id="e-notes"></p>
+            </div>
+            <div class="honey" aria-hidden="true">
+              <label for="f-website">Lad dette felt være tomt</label>
+              <input id="f-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+          </form>
+        </section>
+
+        <section class="step" data-step="review" aria-labelledby="t-review" hidden>
+          <h2 class="step__title" id="t-review" tabindex="-1">Gennemse og send</h2>
+          <p class="step__intro">Tjek, at det hele er rigtigt, før du sender bookingen.</p>
+          <div class="step__body" id="review-body"></div>
+          <div class="step__error" id="review-error" hidden></div>
+        </section>
+
+        <section class="step" data-step="done" id="receipt" hidden></section>
+
+        <div class="actions" id="actions">
+          <button class="btn btn--ghost btn--back" id="back" type="button" hidden>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span class="btn__label">Tilbage</span>
+          </button>
+          <div class="actions__summary" id="mobile-summary" aria-hidden="true"></div>
+          <button class="btn btn--primary" id="next" type="button" disabled>Fortsæt</button>
+        </div>
+      </div>
+
+      <aside class="card summary" id="summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">Din booking</h2>
+        <dl id="summary-list"></dl>
+      </aside>
+    </div>
+  </div>
+</main>
+</body>
+</html>

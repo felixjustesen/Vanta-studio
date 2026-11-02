@@ -208,6 +208,9 @@ img,svg,video{display:block}
 .card .play{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .card .play iframe{position:absolute;left:0;top:0;width:1280px;height:800px;border:0;transform-origin:0 0;transform:scale(var(--fs,.17));opacity:0;transition:opacity .6s}
 .card .play iframe.on{opacity:1}
+.card .full{position:absolute;right:2.2%;bottom:3.5%;display:flex;align-items:center;gap:.5em;padding:.6em 1.1em;border-radius:999px;background:var(--cyan);color:#0b1220;font-size:clamp(10px,1.1vw,15px);font-weight:600;letter-spacing:.02em;box-shadow:0 8px 24px -8px rgba(0,0,0,.6);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;pointer-events:none}
+.card.open .full{opacity:1;transform:none;transition-delay:.5s}
+.card.open:hover .full{background:#67e8f9}
 
 .hud{position:absolute;inset:auto 0 0;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:0 var(--px) var(--py);color:var(--mist);opacity:0;pointer-events:none}
 .hud.on{pointer-events:auto}
@@ -698,6 +701,7 @@ img,svg,video{display:block}
 (function () {
   // ---------- De ni koncepter – udfyld efterhånden som de bliver færdige ----------
   // "skift": en knap i konceptet, der trykkes på med jævne mellemrum, mens kortet er åbent (fx dag/nat)
+  // "fuld": et nyt tryk på det åbne kort åbner hele siden i en ny fane
   var KONCEPTER = [
     { nr: "01", navn: "Arkitekt", kunde: "HALD & VANG", billede: "billeder/koncepter/01-arkitekt.jpg", link: "/koncepter/01-arkitekt" },
     { nr: "02", navn: "Tandlæge", kunde: "Smilværket", billede: "billeder/koncepter/02-tandlaege.jpg", link: "/koncepter/02-tandlaege" },
@@ -706,7 +710,7 @@ img,svg,video{display:block}
     { nr: "05", navn: "Solceller", kunde: "SOLHVERV", billede: "billeder/koncepter/05-solhverv.jpg", link: "/koncepter/05-solhverv", skift: ".toggle-btn:not(.active)" },
     { nr: "06", navn: "Coaching", kunde: "KLARSYN", billede: "billeder/koncepter/06-klarsyn.jpg", link: "/koncepter/06-klarsyn" },
     { nr: "07", navn: "Kosttilskud", kunde: "TERRAELIX", billede: "billeder/koncepter/07-terraelix.jpg", link: "/koncepter/07-terraelix" },
-    { nr: "08", navn: "Barber", kunde: "SKARP", billede: "billeder/koncepter/08-skarp.jpg", link: "/koncepter/08-skarp" },
+    { nr: "08", navn: "Barber", kunde: "SKARP", billede: "billeder/koncepter/08-skarp.jpg", link: "/koncepter/08-skarp", fuld: true },
     { nr: "09", navn: "Blomster", kunde: "KRONBLAD", billede: "billeder/koncepter/09-kronblad.jpg", link: "/koncepter/09-kronblad" }
   ];
 
@@ -757,7 +761,8 @@ img,svg,video{display:block}
       el.className = "live";
       el.setAttribute("aria-pressed", "false");
       el.setAttribute("aria-label", "Koncept " + k.nr + ": " + k.navn + " – " + k.kunde + ". Vis i bevægelse");
-      el.innerHTML = '<img src="' + k.billede + '" alt="" draggable="false"><span class="tag"><b>' + k.nr + "</b>" + k.navn + "</span>";
+      el.innerHTML = '<img src="' + k.billede + '" alt="" draggable="false"><span class="tag"><b>' + k.nr + "</b>" + k.navn + "</span>" +
+        (k.fuld ? '<span class="full" aria-hidden="true">Se hele siden <span>↗</span></span>' : "");
     } else {
       el = document.createElement("div");
       el.className = "soon";
@@ -909,6 +914,7 @@ img,svg,video{display:block}
     active = c;
     c.el.classList.add("open");
     c.el.setAttribute("aria-pressed", "true");
+    if (c.k.fuld) c.el.setAttribute("aria-label", "Se hele siden: " + c.k.kunde + " (åbner i en ny fane)");
     if (!c.play) {
       c.play = document.createElement("div");
       c.play.className = "play";
@@ -942,6 +948,7 @@ img,svg,video{display:block}
     active = null;
     c.el.classList.remove("open");
     c.el.setAttribute("aria-pressed", "false");
+    if (c.k.fuld) c.el.setAttribute("aria-label", "Koncept " + c.k.nr + ": " + c.k.navn + " – " + c.k.kunde + ". Vis i bevægelse");
     clearInterval(c.timer);
     var play = c.play;
     if (!play) return;
@@ -957,7 +964,8 @@ img,svg,video{display:block}
     var el = e.target.closest(".card.live");
     var c = el && cards.filter(function (x) { return x.el === el; })[0];
     if (!c) return close();
-    if (active === c) close(); else open(c);
+    if (active === c && c.k.fuld) window.open(c.k.link, "_blank", "noopener");
+    else if (active === c) close(); else open(c);
   });
   window.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && active) close();
