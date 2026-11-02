@@ -1,6 +1,6 @@
 // Kald til Supabase (PostgREST) med den publicerbare nøgle.
 // Indloggede kald sender desuden brugerens adgangstoken.
-import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "../config.js";
+import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, OFFLINE } from "../config.js";
 
 export class ApiError extends Error {
   constructor(message, { status = 0, code = "", hint = "", details = null } = {}) {
@@ -52,6 +52,13 @@ export function isNotSetUp(error) {
 }
 
 export async function request(path, { method = "GET", body, token, prefer, signal } = {}) {
+  if (OFFLINE) {
+    // Prototype uden database: faste demodata (lib/demo-data.js); intet sendes
+    const { demoSelect, demoRpc } = await import("./demo-data.js");
+    const data = path.startsWith("/rest/v1/rpc/") ? demoRpc(path.slice(13), body) : demoSelect(path);
+    if (data == null) throw new ApiError("Dette er en prototype. Funktionen findes ikke her.", { status: 404, code: "PGRST202" });
+    return data;
+  }
   const headers = { apikey: SUPABASE_PUBLISHABLE_KEY, Accept: "application/json" };
   if (body !== undefined) headers["Content-Type"] = "application/json";
   if (token) headers.Authorization = `Bearer ${token}`;

@@ -13,32 +13,6 @@
       ]
     },
     {
-      "source": "/koncepter/10-frisoer-booking/admin",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'none'"
-        }
-      ]
-    },
-    {
-      "source": "/koncepter/08-skarp/admin",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'none'"
-        }
-      ]
-    },
-    {
       "source": "/assets/fonts/(.*)",
       "headers": [
         {

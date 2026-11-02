@@ -10,3 +10,6 @@ export const BASE = "/koncepter/10-frisoer-booking";
 // Demo: hele bookingforløbet kan prøves, men der sendes ingen booking.
 // Sæt til true, hvis siden kun skal vises frem.
 export const DEMO_ONLY = false;
+
+// true = prototype uden database (faste demodata i lib/demo-data.js).
+export const OFFLINE = false;
