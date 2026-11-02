@@ -1,11 +1,13 @@
-// Testserver til browser.test.py (kun lokalt – rører ikke Supabase):
+// Testserver til browser-testene (kun lokalt – rører ikke Supabase):
 //  :8790  statiske filer som på Vercel (cleanUrls), config.js peger på :8791
 //  :8791  mini-Supabase: PostgREST-delmængde + Auth (password/refresh/logout) mod PGlite
+//  :8793  falsk Vanta Platform (platform-mock.mjs); https://platform.test peger hertil
 import http from "node:http";
 import { readFileSync, existsSync, statSync } from "node:fs";
 import { join, extname } from "node:path";
 import { createHmac, randomUUID } from "node:crypto";
 import { pathToFileURL } from "node:url";
+import { startMockPlatform, tick, TEST_PLATFORM } from "./platform-mock.mjs";
 
 // PGlite (Postgres i WebAssembly) lånes fra vanta-platform; kan overskrives med PGLITE=<sti>.
 const PGLITE = process.env.PGLITE
@@ -35,12 +37,14 @@ const USERS = {
   "ny@test.dk": { id: "dddddddd-0000-4000-8000-000000000004", password: "Hemmelig-000" }, // får login i testen
 };
 
-// migrate: "0" = som databasen var før, "2" = kun migration 2, ellers 2 + 6 (flere frisører)
+// migrate: "0" = som databasen var før, "2" = kun migration 2, "10" = 2 + 6 + forbindelsen
+// til Vanta Platform, ellers 2 + 6 (flere frisører)
 async function resetDb({ migrate = "6", demo = "" } = {}) {
   if (db) await db.close();
   db = await PGlite.create({ extensions: { btree_gist } });
   await db.exec("set timezone = 'UTC'");
   await db.exec(readFileSync(DBTEST + "supabase-stub.sql", "utf8"));
+  await db.exec(readFileSync(DBTEST + "platform-stub.sql", "utf8")); // pg_net, pg_cron og Vault
   await db.exec(readFileSync(DBTEST + "original.sql", "utf8"));
   for (const [email, u] of Object.entries(USERS)) await db.query("insert into auth.users (id, email) values ($1, $2)", [u.id, email]);
   if (migrate !== "0") {
@@ -52,7 +56,13 @@ async function resetDb({ migrate = "6", demo = "" } = {}) {
     await db.query("insert into public.staff_users (user_id, staff_id) select $1, id from public.staff where name = 'Mikkel'", [USERS["frisoer@test.dk"].id]);
     if (demo === "skarp") await db.exec(readFileSync(`${DB_DIR}/9-demo-skarp.sql`, "utf8"));
   }
+  if (migrate === "10") await db.exec(readFileSync(`${DB_DIR}/10-forbindelse-til-platform.sql`, "utf8"));
+  platform.state.mode = "ok";
+  platform.state.requests.length = 0;
+  platform.state.idempotency.clear();
 }
+
+const platform = await startMockPlatform({ port: 8793 });
 
 // ---------- JWT (HS256) ----------
 const b64 = (obj) => Buffer.from(JSON.stringify(obj)).toString("base64url");
@@ -255,6 +265,15 @@ http.createServer(async (req, res) => {
     if (url.pathname === "/__test/ttl") { tokenTtl = Number(url.searchParams.get("s")); return send(res, 200, { ok: true }); }
     if (url.pathname === "/__test/sql") { const out = await db.exec(body.sql); return send(res, 200, out.at(-1)?.rows ?? []); }
     if (url.pathname === "/__test/log") return send(res, 200, log.splice(0));
+    // Ét "minut" for forbindelsen: jobbet sender, pg_net leverer, jobbet læser svarene
+    if (url.pathname === "/__test/platform-tick") return send(res, 200, await tick(db, { map: (u) => u.replace(TEST_PLATFORM, platform.url), timeoutCap: 2000 }));
+    if (url.pathname === "/__test/platform") {
+      if (url.searchParams.get("mode")) platform.state.mode = url.searchParams.get("mode");
+      return send(res, 200, platform.state.requests.map((r) => ({
+        status: r.status, replayed: r.replayed, authorization: r.headers.authorization, source: r.headers["x-vanta-source"],
+        key: r.headers["idempotency-key"], item: r.body?.items?.[0] ?? null,
+      })));
+    }
     if (url.pathname.startsWith("/rest/v1/")) return await handleRest(req, res, url, body);
     if (url.pathname.startsWith("/auth/v1/")) return await handleAuth(req, res, url, body);
     send(res, 404, { message: "not found" });

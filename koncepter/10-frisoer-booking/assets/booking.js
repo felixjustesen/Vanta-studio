@@ -28,6 +28,7 @@ const state = {
   notReady: false,
   submitting: false,
   booking: null,
+  shared: false, // sand, når bookinger sendes til salonens kundesystem (Vanta Platform)
 };
 
 let calendar = null;
@@ -67,6 +68,8 @@ async function init() {
   state.services = services;
   applySalon(salon, services);
   if (DEMO_ONLY) markDemoOnly();
+  // Findes funktionen ikke (forbindelsen er ikke installeret), deles intet.
+  else rpc("platform_link_enabled").then((shared) => { state.shared = shared === true; }).catch(() => {});
   renderServices();
 
   history.replaceState({ step: "service" }, "");
@@ -572,7 +575,9 @@ function renderReview() {
     ]),
     h("p", { class: "fine", text: DEMO_ONLY
       ? "Dette er en demo. Der bliver ikke sendt nogen booking, og dine oplysninger gemmes ikke."
-      : "Bookingen er ikke endelig, før salonen har bekræftet den. Dine oplysninger bruges kun til at håndtere bookingen." }),
+      : state.shared
+        ? "Bookingen er ikke endelig, før salonen har bekræftet den. Dine oplysninger bruges til at håndtere bookingen og gemmes i salonens kundesystem."
+        : "Bookingen er ikke endelig, før salonen har bekræftet den. Dine oplysninger bruges kun til at håndtere bookingen." }),
   );
 }
 

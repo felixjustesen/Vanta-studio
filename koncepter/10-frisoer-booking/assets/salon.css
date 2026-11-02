@@ -586,3 +586,10 @@ p+p{margin-top:.9em}
 .fieldset > .field,.fieldset > .check{margin-top:18px}
 .fieldset > .field:first-child{margin-top:0}
 .fieldset > .grid-2{margin-top:6px}
+
+/* Integrationer (Vanta Platform) */
+.check__text{display:grid;gap:2px}
+.fieldset > .notice,.fieldset > .details,.fieldset > .muted + .notice{margin-top:18px}
+.notice__list{display:grid;gap:4px;margin:8px 0 0;padding-left:18px}
+.integration-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.fieldset > legend + .check{margin-top:0}

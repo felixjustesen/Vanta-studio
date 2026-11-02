@@ -25,6 +25,10 @@ const MESSAGES = {
   too_busy: "Der kommer mange bookinger lige nu. Prøv igen om et par minutter.",
   login_not_found: "Der findes ingen bekræftet bruger med den e-mail. Opret brugeren i Supabase under Authentication → Users, og sæt flueben i Auto Confirm User.",
   staff_not_found: "Frisøren findes ikke længere. Genindlæs siden.",
+  invalid_platform_url: "Skriv platformens adresse, fx https://app.vantastudio.dk.",
+  invalid_api_key: "API-nøglen skal starte med vk_live_. Kopiér hele nøglen fra Vanta Platform.",
+  platform_incomplete: "Udfyld platformens adresse og API-nøgle, før forbindelsen slås til.",
+  platform_disabled: "Slå forbindelsen til, før bookingerne kan sendes.",
 };
 
 // Fejl, hvor databasens egen tekst er den mest præcise (fx med frisørens navn)

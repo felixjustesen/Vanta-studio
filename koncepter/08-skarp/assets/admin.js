@@ -1,5 +1,5 @@
 // Administration: bookinger, dagsplan, frisører, fravær, behandlinger, åbningstider,
-// lukkedage og indstillinger.
+// lukkedage, indstillinger og integrationer (Vanta Platform).
 // Adgang kræver login (Supabase Auth). Administratorer (admin_users) ser og ændrer alt;
 // en frisør med login (staff_users) ser kun sine egne bookinger og kan ændre deres
 // status. Databasen afviser alt andet, uanset hvad browseren gør.
@@ -26,6 +26,7 @@ const ALL_TABS = [
   ["aabningstider", "Åbningstider", "admin"],
   ["lukkedage", "Lukkedage", "admin"],
   ["indstillinger", "Indstillinger", "admin"],
+  ["integrationer", "Integrationer", "admin"], // kun når 10-forbindelse-til-platform.sql er kørt
 ];
 let TABS = [];
 
@@ -45,6 +46,7 @@ const state = {
   tab: "bookinger",
   filter: { period: "upcoming", status: "all", staff: "all", q: "" },
   planDate: today,
+  platform: null, // svaret fra get_platform_link; null = forbindelsen er ikke installeret
 };
 
 const isAdmin = () => state.role === "admin";
@@ -220,12 +222,15 @@ function showMessage(title, text, retry = false) {
 
 // ---------------------------------------------------------------------
 async function showDashboard() {
-  const [salon, services, hours, staff, links] = await Promise.all([
+  const [salon, services, hours, staff, links, platform] = await Promise.all([
     call((token) => select("salon_settings", "select=*&order=created_at.asc&limit=1", { token })),
     call((token) => select("services", "select=*&order=name.asc", { token })),
     call((token) => select("business_hours", "select=*&order=weekday.asc,start_time.asc", { token })),
     call((token) => select("staff", "select=*&order=sort_order.asc,name.asc", { token })),
     call((token) => select("staff_services", "select=staff_id,service_id", { token })),
+    isAdmin()
+      ? call((token) => rpc("get_platform_link", {}, { token })).catch((error) => (error instanceof SessionEnded ? Promise.reject(error) : null))
+      : null,
   ]);
   state.salon = salon?.[0] ?? null;
   state.services = (services || []).sort(byName);
@@ -233,7 +238,8 @@ async function showDashboard() {
   state.staff = staff || [];
   state.staffHours = null;
   setStaffServices(links || []);
-  TABS = ALL_TABS.filter(([, , who]) => who === "alle" || isAdmin());
+  state.platform = platform;
+  TABS = ALL_TABS.filter(([id, , who]) => who === "alle" || (isAdmin() && (id !== "integrationer" || state.platform)));
   const name = salonName(state.salon);
   document.title = `Administration – ${name}`;
 
@@ -302,6 +308,7 @@ function renderTab() {
     aabningstider: renderHours,
     lukkedage: renderBlocked,
     indstillinger: renderSettings,
+    integrationer: renderIntegrations,
   };
   renderers[state.tab]().catch(report);
 }
@@ -1714,6 +1721,146 @@ async function renderSettings() {
   });
 
   fill($("#panel"), panelHead("Indstillinger", "Saloninformationen vises på hjemmesiden. Bookingreglerne gælder for nye bookinger."), form);
+}
+
+// ---------------------------------------------------------------------
+// Integrationer: forbindelsen til Vanta Platform (kun ejere).
+// API-nøglen sendes kun, når den gemmes; databasen giver den aldrig tilbage.
+async function renderIntegrations() {
+  const panel = $("#panel");
+  fill(panel, panelHead("Integrationer"), loading());
+  try {
+    state.platform = await call((token) => rpc("get_platform_link", {}, { token }));
+  } catch (error) {
+    if (error instanceof SessionEnded) return;
+    return fill(panel, panelHead("Integrationer"), errorNotice(error.message));
+  }
+  if (state.tab === "integrationer") drawIntegrations(state.platform);
+}
+
+const PLATFORM_URL = /^https:\/\/[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(:\d{1,5})?\/?$/;
+const PLATFORM_KEY = /^vk_live_[A-Za-z0-9_-]{20,200}$/;
+
+function drawIntegrations(link) {
+  const configured = !!(link.api_url || link.has_key);
+  const status = link.enabled && link.last_error
+    ? h("div", { class: "notice notice--error" }, icon("alert"), h("span", { text: link.last_error }))
+    : link.enabled
+      ? h("div", { class: "notice notice--ok" }, icon("checkCircle"), h("span", { text: "Forbundet. Nye bookinger og ændringer sendes automatisk – normalt inden for et par minutter." }))
+      : h("div", { class: "notice" }, icon("info"), h("span", { text: configured
+        ? "Forbindelsen er slået fra. Der sendes ingen bookinger."
+        : "Ikke forbundet. Bookingsystemet virker fuldt ud uden Vanta Platform." }));
+
+  const field = (id, label, control, hint) => {
+    control.id = id;
+    control.setAttribute("aria-describedby", `${id}-hint`);
+    return h("div", { class: "field" }, h("label", { class: "label", for: id, text: label }), control, h("p", { class: "hint", id: `${id}-hint`, text: hint }));
+  };
+  const check = (input, label, hint) => h("label", { class: "check" }, input,
+    h("span", { class: "check__text" }, h("span", { text: label }), h("span", { class: "hint", text: hint })));
+
+  const url = h("input", { class: "input", type: "url", inputmode: "url", autocomplete: "off", spellcheck: "false", maxlength: "200", placeholder: "https://app.vantastudio.dk", value: link.api_url || "" });
+  const key = h("input", { class: "input", type: "password", autocomplete: "off", spellcheck: "false", maxlength: "300", placeholder: link.has_key ? `${link.key_prefix}… (gemt)` : "vk_live_…" });
+  const enabled = h("input", { type: "checkbox", checked: !!link.enabled });
+  const auto = h("input", { type: "checkbox", checked: !!link.auto_complete });
+  const error = h("div", { role: "alert" });
+  const save = h("button", { class: "btn btn--primary", type: "submit", text: "Gem" });
+
+  const row = (label, value) => h("div", null, h("dt", { text: label }), h("dd", { text: value }));
+  const facts = configured ? h("dl", { class: "details" },
+    row("Sidst sendt", link.last_success_at ? timestamp(link.last_success_at) : "Endnu ikke"),
+    row("Venter på at blive sendt", String(link.queued)),
+    row("Sendt", String(link.synced)),
+    link.failed ? row("Kunne ikke sendes", String(link.failed)) : null,
+  ) : null;
+  const failures = link.failures?.length ? h("div", { class: "notice notice--warn" }, icon("alert"),
+    h("div", null,
+      h("p", { text: `${link.failed === 1 ? "Én booking" : `${link.failed} bookinger`} kunne ikke sendes. De sendes igen, når bookingen ændres, eller når du sender alle bookinger igen.` }),
+      h("ul", { class: "notice__list" }, link.failures.map((f) => h("li", {
+        text: `${f.full_name} · ${capitalize(dateShort(f.appointment_date))} kl. ${clock(f.start_time)} · bookingnr. ${f.reference}: ${f.last_error}`,
+      }))),
+    )) : null;
+
+  const refresh = h("button", { class: "btn btn--ghost btn--sm", type: "button", text: "Opdatér status", onclick: () => renderIntegrations() });
+  const resend = link.enabled ? h("button", { class: "btn btn--ghost btn--sm", type: "button", text: "Send alle bookinger igen" }) : null;
+  resend?.addEventListener("click", async () => {
+    const ok = await confirmDialog({
+      title: "Send alle bookinger igen?",
+      text: "Alle bookinger – også tidligere og aflyste – sendes til Vanta Platform igen. Det giver ingen dubletter.",
+      confirm: "Send igen",
+    });
+    if (!ok) return;
+    resend.disabled = true;
+    try {
+      state.platform = await call((token) => rpc("resend_platform_sync", {}, { token }));
+      toast("Alle bookinger sendes igen inden for et par minutter.");
+      drawIntegrations(state.platform);
+    } catch (err) {
+      report(err);
+      resend.disabled = false;
+    }
+  });
+
+  const form = h("form", { class: "settings", novalidate: true },
+    h("fieldset", { class: "fieldset" },
+      h("legend", { text: "Vanta Platform" }),
+      h("p", { class: "muted", text: "Send bookinger automatisk til Vanta Platform, så kunderne og deres besøg kommer med i kundeoverblikket og genbookinger." }),
+      status,
+      field("pl-url", "Platformens adresse", url, "Adressen, du logger ind på Vanta Platform med."),
+      field("pl-key", "API-nøgle", key, link.has_key
+        ? `Gemt nøgle: ${link.key_prefix}… Udfyld kun feltet, hvis du vil skifte nøglen.`
+        : "Opret nøglen i Vanta Platform under Integrationer → Vanta Booking. Den gemmes krypteret og kan ikke vises igen."),
+      check(enabled, "Send bookinger til Vanta Platform",
+        "Navn, e-mail, telefon, behandling, frisør, tid, pris og status. Kundens bemærkning sendes ikke. Bookingsiden fortæller kunden, at oplysningerne gemmes i salonens kundesystem – nævn det også i salonens privatlivspolitik."),
+      facts,
+      failures,
+      configured ? h("div", { class: "integration-actions" }, refresh, resend) : null,
+    ),
+    h("fieldset", { class: "fieldset" },
+      h("legend", { text: "Gennemførte besøg" }),
+      check(auto, "Markér bekræftede bookinger som gennemført, når tiden er gået",
+        "Tjekkes hvert minut. Afventende og aflyste bookinger røres ikke. Vanta Platform bruger gennemførte besøg til genbookinger."),
+    ),
+    error,
+    h("div", null, save),
+  );
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    error.replaceChildren();
+    const values = {
+      p_enabled: enabled.checked,
+      p_api_url: url.value.trim() || null,
+      p_api_key: key.value.trim() || null,
+      p_auto_complete: auto.checked,
+    };
+    const problems = [];
+    if (values.p_api_url && !PLATFORM_URL.test(values.p_api_url)) problems.push([url, "Skriv platformens adresse, fx https://app.vantastudio.dk."]);
+    if (values.p_api_key && !PLATFORM_KEY.test(values.p_api_key)) problems.push([key, "API-nøglen skal starte med vk_live_. Kopiér hele nøglen fra Vanta Platform."]);
+    if (values.p_enabled && !values.p_api_url && !problems.length) problems.push([url, "Udfyld platformens adresse, før forbindelsen slås til."]);
+    if (values.p_enabled && !values.p_api_key && !link.has_key && !problems.length) problems.push([key, "Indsæt API-nøglen, før forbindelsen slås til."]);
+    $$("[aria-invalid]", form).forEach((el) => el.removeAttribute("aria-invalid"));
+    if (problems.length) {
+      problems.forEach(([control]) => control.setAttribute("aria-invalid", "true"));
+      fill(error, h("div", { class: "notice notice--error" }, icon("alert"), h("div", null, problems.map(([, text]) => h("p", { text })))));
+      return problems[0][0].focus();
+    }
+
+    save.disabled = true;
+    try {
+      const next = await call((token) => rpc("save_platform_link", values, { token }));
+      toast(next.enabled && !link.enabled
+        ? "Forbindelsen er slået til. Alle bookinger sendes inden for et par minutter."
+        : "Integrationen er gemt.");
+      state.platform = next;
+      drawIntegrations(next);
+    } catch (err) {
+      report(err);
+      save.disabled = false;
+    }
+  });
+
+  fill($("#panel"), panelHead("Integrationer", "Forbind bookingsystemet med salonens andre systemer. Bookingsystemet virker fuldt ud uden."), form);
 }
 
 boot();
