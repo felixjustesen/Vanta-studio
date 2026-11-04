@@ -1204,7 +1204,7 @@ for fname, path in (("index.html", "/"), ("metode.html", "/metode"), ("kontakt.h
 
 # OG-tags og strukturerede data i de håndskrevne sider (mellem <!-- vm:seo --> … <!-- /vm:seo -->)
 HAND = {
-    "index.html": ("/", "Vanta Studio – Design og teknologi der skaber vækst",
+    "index.html": ("/", "Vanta Studio – hjemmesider, AI, automatisering og integrationer",
                    "Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.",
                    [{"@type": "WebSite", "@id": SITE + "/#site", "url": SITE + "/", "name": BRAND, "inLanguage": "da", "publisher": {"@id": SITE + "/#org"}}]),
     "metode.html": ("/metode", "Metode – fra analyse til løsning | Vanta Studio",

@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vanta Studio – Design og teknologi der skaber vækst</title>
+<title>Vanta Studio – hjemmesider, AI, automatisering og integrationer</title>
 <meta name="description" content="Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.">
 <link rel="canonical" href="https://www.vantastudio.dk/">
 <!-- vm:seo -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="da_DK">
 <meta property="og:site_name" content="Vanta Studio">
-<meta property="og:title" content="Vanta Studio – Design og teknologi der skaber vækst">
+<meta property="og:title" content="Vanta Studio – hjemmesider, AI, automatisering og integrationer">
 <meta property="og:description" content="Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.">
 <meta property="og:url" content="https://www.vantastudio.dk/">
 <meta property="og:image" content="https://www.vantastudio.dk/assets/og-vanta.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vanta Studio – Design og teknologi der skaber vækst">
+<meta name="twitter:title" content="Vanta Studio – hjemmesider, AI, automatisering og integrationer">
 <meta name="twitter:description" content="Vanta Studio udvikler digitale værktøjer og skræddersyede løsninger, der styrker virksomheder. Vi skaber også eksklusive hjemmesider med fokus på design og funktionalitet.">
 <script type="application/ld+json">
 {
@@ -173,15 +173,14 @@ img,svg,video{display:block}
 @media (min-width:1024px){.info{gap:56px}}
 
 /* ---------- Koncepter: "Den visuelle standard." + big bang ---------- */
-.univers{position:relative;height:560vh;background:linear-gradient(var(--navy),var(--slate) 70vh)}
+.univers{position:relative;height:420vh;background:#000}
 .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.nebula{position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(124,58,237,.38),rgba(124,58,237,.12) 45%,rgba(15,23,42,0) 75%);opacity:0;pointer-events:none}
+.nebula{display:none;position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(124,58,237,.38),rgba(124,58,237,.12) 45%,rgba(15,23,42,0) 75%);opacity:0;pointer-events:none}
 .stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
 .q{position:absolute;inset:0;display:grid;place-items:center;padding:0 var(--px);pointer-events:none}
 .q h2{margin:0;font-size:clamp(44px,8.4vw,136px);text-align:center;color:var(--mist);background:linear-gradient(180deg,var(--mist) 30%,var(--lilac));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;will-change:transform,opacity,filter}
-.core{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:radial-gradient(#fff,var(--mist) 30%,var(--cyan) 55%,rgba(124,58,237,0) 72%);box-shadow:0 0 24px 6px rgba(34,211,238,.55),0 0 80px 24px rgba(124,58,237,.45);opacity:0;pointer-events:none}
-.flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(237,233,254,.95),rgba(34,211,238,.35) 18%,rgba(124,58,237,.18) 38%,rgba(15,23,42,0) 62%);opacity:0;pointer-events:none}
+.portal{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
 .space{position:absolute;inset:0;perspective:1400px;cursor:grab;touch-action:pan-y;pointer-events:none;-webkit-user-select:none;user-select:none}
 .space.ready{pointer-events:auto}
@@ -192,14 +191,6 @@ img,svg,video{display:block}
 .card .tag{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:baseline;gap:8px;padding:18px 10px 8px;background:linear-gradient(rgba(15,23,42,0),rgba(15,23,42,.85));color:var(--mist);font-size:clamp(8px,.75vw,11px);letter-spacing:.14em;text-transform:uppercase;transition:opacity .3s}
 .card .tag b{color:var(--cyan);font-weight:500}
 .card > *{transition:opacity .35s}
-.space .sphere .card.back > *{opacity:0}
-/* Morf: koncept-kortene folder sig ud af kuglen og bliver til værktøjskortene */
-.morph-bg{position:absolute;inset:0;background:var(--violet);opacity:0;pointer-events:none}
-.morph-head{position:absolute;opacity:0;pointer-events:none;color:#fff;text-align:center}
-.card > :not(.mface){opacity:var(--old,1)}
-.sphere.morphing .card > *{transition:none}
-.mface{--shade:0;position:absolute;left:0;top:0;display:flex;flex-direction:column;background:var(--slate);color:var(--mist);overflow:hidden;transform-origin:0 0;opacity:0;pointer-events:none}
-.mface::after{content:"";position:absolute;inset:0;background:#120a2e;opacity:var(--shade);pointer-events:none}
 .card.soon{display:grid;place-items:center;background:radial-gradient(120% 90% at 30% 20%,rgba(124,58,237,.55),rgba(15,23,42,.95) 70%),var(--slate)}
 .card.soon .nr{font-family:"Fraunces",serif;font-weight:100;font-variation-settings:"opsz" 144;font-size:calc(var(--cw,220px) * .3);line-height:1;color:var(--mist);opacity:.9}
 .card.live{padding:0;border:0;font:inherit;color:inherit;cursor:pointer;transition:box-shadow .3s}
@@ -216,7 +207,6 @@ img,svg,video{display:block}
 .hud.on{pointer-events:auto}
 .hud-intro{display:grid;gap:14px;max-width:400px}
 .hud-intro header{display:flex;align-items:center;gap:16px}
-.hud-intro img{width:52px;height:52px;border-radius:12px;border:1px solid rgba(237,233,254,.2);object-fit:cover}
 .hud-intro h3{margin:0;font-family:"Fraunces",serif;font-weight:200;font-variation-settings:"opsz" 72;font-size:28px;letter-spacing:-.01em}
 .hud-intro p{margin:0;font-size:14px;line-height:1.6;color:rgba(237,233,254,.72)}
 .hint{position:absolute;left:50%;bottom:var(--py);display:flex;align-items:center;gap:14px;transform:translateX(-50%);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(237,233,254,.6);white-space:nowrap}
@@ -224,15 +214,12 @@ img,svg,video{display:block}
 @media (max-width:767px){
   .hud{flex-direction:column;align-items:flex-start;gap:12px;padding-bottom:calc(var(--py) + 30px)}
   .hud-intro p{font-size:13px;line-height:1.5}
-  .hud-intro img{width:40px;height:40px}
   .hud-intro h3{font-size:22px}
 }
 
 /* ---------- CTA: galoperende ASCII-hest, der opløses i pixels ---------- */
 .cta-sec{position:relative;z-index:2;height:190vh;pointer-events:none}
 .cta-sec .cta-body{pointer-events:auto}
-/* Blød overgang fra den violette kortsektion ovenover */
-.cta-sec::before{content:"";position:absolute;left:0;right:0;top:-35vh;height:35vh;background:linear-gradient(rgba(15,23,42,0),var(--slate));pointer-events:none}
 .horse-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .ascii{position:absolute;inset:0;width:100%;height:100%}
 .cta-body{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:22px;max-width:1000px;padding:clamp(96px,14vh,150px) var(--px) 0;will-change:transform,opacity}
@@ -242,93 +229,55 @@ img,svg,video{display:block}
 .cta-body p{max-width:460px;margin:0;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:rgba(237,233,254,.8);text-shadow:0 1px 18px rgba(15,23,42,.95)}
 .credit{position:absolute;right:var(--px);bottom:var(--py);z-index:2;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,233,254,.45)}
 
-/* ---------- Ydelser: kortbunke på violet ---------- */
-.offers{position:relative;z-index:1;background:var(--violet);color:#fff}
-/* Blød overgang fra den mørke koncept-sektion ovenover */
-/* Kortbunken ligger klar under koncept-sektionens sidste skærm og overtager, når morfen er færdig */
-.offers{margin-top:-100vh;margin-top:-100svh}
-.offers:not(.live){visibility:hidden}
-.univers.calm + .offers{margin-top:0;visibility:visible}
-.offers-run{height:520vh}
-.offers-stage{position:sticky;top:0;display:flex;flex-direction:column;align-items:center;height:100vh;height:100svh;padding:clamp(28px,5vh,56px) var(--px) clamp(20px,4vh,40px);overflow:hidden;text-align:center}
-.offers-head{display:grid;justify-items:center;gap:6px}
-.offers-head .eyebrow{margin:0;font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--mist)}
-/* Introteksten: en kort statement i serif og en dæmpet linje under.
-   På brede skærme rykker bunken til højre, og teksten står i sin egen kolonne til venstre */
-.offers-intro{position:relative;z-index:300;align-self:flex-start;max-width:26em;margin:clamp(36px,6vh,64px) 0 0;text-align:left}
-.offers-intro::before{content:"";display:block;width:40px;height:1px;margin-bottom:clamp(14px,2vh,22px);background:linear-gradient(90deg,var(--cyan),var(--lilac))}
-.oi-lede{margin:0;font-family:"Fraunces",serif;font-weight:200;font-variation-settings:"opsz" 144;font-size:clamp(21px,2.3vw,40px);line-height:1.08;letter-spacing:-.025em;color:#fff;text-wrap:balance}
-.oi-detail{max-width:30em;margin:clamp(10px,1.6vh,18px) 0 0;font-size:clamp(13px,1vw,15px);line-height:1.6;color:rgba(255,255,255,.72);text-wrap:pretty}
-.offers-intro::before,.oi-lede,.oi-detail{opacity:0;transform:translateY(14px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
-.offers.live .offers-intro::before,.offers.live .oi-lede,.offers.live .oi-detail{opacity:1;transform:none}
-.offers.live .offers-intro::before{transition-delay:.25s}
-.offers.live .oi-lede{transition-delay:.35s}
-.offers.live .oi-detail{transition-delay:.55s}
-@media (min-width:1180px){
-  .offers-stage{--shift:clamp(90px,9vw,200px)}
-  .deck,.offers-head{translate:var(--shift) 0}
-  .offers-intro{position:absolute;left:var(--px);top:50%;max-width:min(400px,calc(50% + var(--shift) - 420px - var(--px)));margin:0;translate:0 -50%}
+/* ---------- Plakat: VANTA med en lilje, der skifter under musen ---------- */
+.flora{--orb-reveal:cubic-bezier(.16,1,.3,1);--orb-soft:cubic-bezier(.25,.8,.28,1);--run:running;position:relative;height:100vh;height:100svh;overflow:hidden;background:#161616;color:#fff}
+.flora-stage{position:absolute;inset:0;contain:strict;isolation:isolate}
+.flora-word{position:absolute;top:11.565421svh;left:0;z-index:1;width:100%;margin:0;padding-left:.045em;text-align:center;font-family:"Fraunces","Times New Roman",Times,serif;font-weight:400;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;font-size:min(27.8125vw,55svh);line-height:1;letter-spacing:.045em;white-space:nowrap}
+.flora-word__mask,.flora-word__inner{display:block}
+.flora-word__pink{background:linear-gradient(180deg,#ffc5dc,#fd86db);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.flora-flower{position:absolute;top:14.749065svh;left:49.121328vw;z-index:2;height:106.109034svh;transform:translateX(-50%);pointer-events:none}
+.flora-flower__sizer{width:auto;height:100%;visibility:hidden}
+.flora-flower__layer{position:absolute;inset:0}
+.flora-flower__layer > *{position:absolute;inset:0;width:100%;height:100%}
+.flora-flower__layer img{object-fit:cover}
+/* Sporet tegnes på canvas; imens skjules det almindelige billede */
+.flora-flower canvas,.flora-flower__layer--top img,.flora-flower.trail .flora-flower__layer--bg img{visibility:hidden}
+.flora-flower.trail canvas{visibility:visible}
+.flora-text{position:absolute;right:3.177083vw;bottom:4.361371svh;z-index:3;width:min(380px,26vw);color:#f7f7f7;text-shadow:0 1px 18px rgba(22,22,22,.85)}
+.flora-text h3{margin:0 0 .6em;font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(24px,2.2vw,34px);line-height:1.05;letter-spacing:-.02em;color:#fff}
+.flora-text p{margin:0 0 .9em;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
+/* Overskriften står til venstre for liljen, afsnittet med knappen til højre */
+.flora-text--left{right:auto;left:3.177083vw;width:min(370px,25.5vw)}
+.flora-text--right{width:min(340px,24vw)}
+.flora-pill{display:inline-flex;align-items:center;height:44px;margin-top:.4em;padding:0 1.4em;border-radius:999px;background:#fff;color:#161616;font-size:14px;letter-spacing:.02em;text-shadow:none;transition:background-color .2s}
+.flora-pill:hover{background:#ffe3ef}
+/* Indgang: spilles én gang, første gang plakaten er inde på skærmen (JS sætter .wait og .play) */
+.flora.wait{--run:paused}
+.flora.wait.play{--run:running}
+.flora.wait .flora-word__mask{overflow:hidden;padding:0 .1em .1em;margin:0 -.1em -.1em}
+.flora.wait .flora-word__inner{animation:flora-word 1150ms var(--orb-reveal) 300ms both;animation-play-state:var(--run)}
+.flora.wait .flora-flower{animation:flora-subject 1150ms var(--orb-reveal) 660ms both;animation-play-state:var(--run)}
+.flora.wait .flora-text{animation:flora-corner 720ms var(--orb-soft) 980ms both;animation-play-state:var(--run)}
+@keyframes flora-word{from{transform:translateY(118%)}to{transform:none}}
+@keyframes flora-subject{from{opacity:0;transform:translateX(-50%) translateY(3.4svh)}to{opacity:1;transform:translateX(-50%)}}
+@keyframes flora-corner{from{opacity:0;transform:translateY(.7em)}to{opacity:1;transform:none}}
+@media (max-width:900px),(max-aspect-ratio:4/5){
+  .flora.wait .flora-word__inner{animation-delay:200ms}
+  .flora.wait .flora-flower{animation-delay:520ms}
 }
-.offers-count{margin:0;font-size:13px;color:rgba(255,255,255,.75)}
-.offers-count b{font-weight:400;color:#fff}
-.offers-dots{display:flex;gap:6px;margin-top:6px}
-.offers-dots i{width:18px;height:2px;border-radius:2px;background:rgba(255,255,255,.3);transition:background-color .4s,width .4s var(--ease)}
-.offers-dots i.on{width:32px;background:#fff}
-.mono{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
-.offers-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px}
-.offers-actions .cta{animation:none;opacity:1;transform:none;color:#fff}
-.offers-actions a.more{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.85)}
-.offers-actions a.more:hover{color:#fff}
-
-.deck{position:relative;flex:1;width:100%;min-height:0;text-align:left}
-.ocard{--shade:0;position:absolute;left:50%;top:50%;display:flex;flex-direction:column;width:min(440px,84vw);height:min(560px,calc(100% - 24px));border-radius:22px;background:var(--slate);color:var(--mist);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 80px -30px rgba(20,8,60,.75);overflow:hidden;transform-origin:50% 100%;transform:translate(-50%,-50%);will-change:transform,opacity}
-.ocard::after{content:"";position:absolute;inset:0;background:#120a2e;opacity:var(--shade);pointer-events:none}
-.oc-top{display:flex;align-items:center;gap:6px;padding:14px 18px;border-bottom:1px solid rgba(237,233,254,.08);font-size:11px;color:rgba(237,233,254,.55)}
-.oc-top i{width:7px;height:7px;border-radius:50%;background:rgba(237,233,254,.18)}
-.oc-top b{margin-left:10px;font-weight:400}
-.oc-visual{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:0;padding:22px;background:radial-gradient(120% 90% at 80% 0%,rgba(124,58,237,.35),rgba(15,23,42,0) 60%)}
-.oc-text{padding:18px 22px 22px;border-top:1px solid rgba(237,233,254,.08)}
-.oc-text h3{margin:0 0 8px;font-family:"Fraunces",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(22px,2vw,28px);line-height:1.1;letter-spacing:-.02em}
-.oc-text p{margin:0;font-size:15px;line-height:1.55;color:rgba(237,233,254,.72)}
-
-/* Små grænseflader i kortene */
-.oc-visual.shot{padding:0}
-.oc-visual.shot img{width:100%;height:100%;object-fit:cover;object-position:left top}
-.bubble{max-width:82%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.45}
-.bubble.in{align-self:flex-start;border-bottom-left-radius:4px;background:rgba(237,233,254,.08)}
-.bubble.out{align-self:flex-end;border-bottom-right-radius:4px;background:linear-gradient(135deg,var(--violet),#5b21b6);color:#fff}
-.stamp{align-self:center;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
-.notif{display:flex;gap:12px;padding:14px;border-radius:16px;background:rgba(237,233,254,.06);box-shadow:inset 0 0 0 1px rgba(237,233,254,.1);font-size:13px;line-height:1.45}
-.notif .ico{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;font-size:12px;font-weight:600}
-.notif small{display:block;margin-bottom:2px;font-size:11px;color:rgba(237,233,254,.55)}
-.pill-btn{align-self:flex-start;margin-left:48px;padding:7px 14px;border-radius:999px;background:var(--mist);color:var(--slate);font-size:12px;font-weight:600}
-.date{display:flex;align-items:center;gap:14px}
-.date .day{display:grid;place-items:center;width:58px;height:62px;border-radius:14px;background:rgba(34,211,238,.1);box-shadow:inset 0 0 0 1px rgba(34,211,238,.3);text-align:center;line-height:1.1}
-.date .day small{font-size:10px;letter-spacing:.14em;color:var(--cyan)}
-.date .day b{font-size:22px;font-weight:500}
-.date p{margin:0;font-size:13px;color:rgba(237,233,254,.7)}
-.rows{display:grid;gap:8px}
-.row-i{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:12px;background:rgba(237,233,254,.05);font-size:13px}
-.row-i small{display:block;font-size:11px;color:rgba(237,233,254,.5)}
-.tag-s{flex:none;padding:4px 10px;border-radius:999px;font-size:11px;background:rgba(34,211,238,.12);color:var(--cyan)}
-.tag-s.v{background:rgba(167,139,250,.16);color:var(--lilac)}
-.flow{display:grid;justify-items:center;gap:6px}
-.node{width:100%;padding:12px 14px;border-radius:12px;background:rgba(237,233,254,.06);box-shadow:inset 0 0 0 1px rgba(237,233,254,.1);font-size:13px}
-.node small{display:block;font-size:11px;color:rgba(237,233,254,.5)}
-.node.done{box-shadow:inset 0 0 0 1px rgba(34,211,238,.45);background:rgba(34,211,238,.08)}
-.arrow{width:1px;height:16px;background:linear-gradient(var(--lilac),var(--cyan))}
-.search{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:999px;background:rgba(237,233,254,.08);font-size:13px}
-.result{padding:4px 4px 0;font-size:12px;line-height:1.45;color:rgba(237,233,254,.6)}
-.result b{display:block;font-size:14px;font-weight:500;color:var(--lilac)}
-.ai-box{padding:14px;border-radius:14px;background:linear-gradient(135deg,rgba(34,211,238,.12),rgba(124,58,237,.18));box-shadow:inset 0 0 0 1px rgba(167,139,250,.3);font-size:12.5px;line-height:1.5}
-.ai-box small{display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
-.hub{position:relative;height:100%;min-height:200px}
-.hub svg{position:absolute;inset:0;width:100%;height:100%}
-.hub span{position:absolute;transform:translate(-50%,-50%);padding:8px 12px;border-radius:999px;background:rgba(237,233,254,.08);box-shadow:inset 0 0 0 1px rgba(237,233,254,.14);font-size:12px;white-space:nowrap}
-.hub span.hub-core{padding:12px 18px;background:linear-gradient(135deg,var(--violet),#5b21b6);box-shadow:0 0 40px -6px rgba(124,58,237,.9);font-weight:600}
-
-@media (max-width:639px){
-  .offers-actions a.more{display:none}
+/* Smalle og kvadratiske skærme: liljen fylder for meget til tekst ved siden af, så teksten står under plakaten */
+@media (max-width:1100px),(max-aspect-ratio:7/5){
+  .flora{height:auto}
+  .flora-stage{position:relative;height:100vh;height:100svh}
+  .flora-text{position:static;width:auto;max-width:34rem;padding:0 var(--px) 12svh}
+  .flora-text--left{padding-bottom:0}
+  .flora.wait .flora-text{animation:none}
+}
+/* Højformat: ord og lilje rykker lidt ned, så plakaten ikke bliver tung foroven */
+@media (max-aspect-ratio:4/5){
+  .flora-word{top:18svh;font-size:min(27.5vw,18svh)}
+  .flora-flower{top:calc(18svh + min(27.5vw,18svh) * .4);left:50%;height:min(55svh,110vw)}
+  .flora-stage{height:calc(18svh + min(27.5vw,18svh) * .4 + min(55svh,110vw) + 6svh)}
 }
 
 /* ---------- Afsluttende CTA: video der styres af musen + skrivemaskine ---------- */
@@ -425,7 +374,7 @@ img,svg,video{display:block}
     <div class="spacer"></div>
 
     <main>
-      <h1 class="sr-only">Design og teknologi der sparer omkostninger, øger omsætningen og sparer tid</h1>
+      <h1 class="sr-only">Hjemmesider, AI, automatisering, synlighed og integrationer</h1>
       <div class="type serif" aria-hidden="true">
         <p class="small" data-stagger="0.035">Design og teknologi der</p>
         <div class="rotator">
@@ -440,7 +389,7 @@ img,svg,video{display:block}
           <div class="info">
             <div>
               <h2>Mit håndværk</h2>
-              <p>Design, teknologi og digitale løsninger, der gør en forskel for din virksomhed.</p>
+              <p>Hjemmesider. Booking- og CRM-systemer. En AI-chatagent trænet på din hjemmeside.</p>
             </div>
             <div>
               <h2>Min tilgang</h2>
@@ -453,19 +402,44 @@ img,svg,video{display:block}
   </div>
 </div>
 
+<section class="flora" id="flora" aria-labelledby="flora-titel">
+  <div class="flora-stage">
+    <h2 class="flora-word" id="flora-titel" aria-label="Vanta">
+      <span class="flora-word__mask">
+        <span class="flora-word__inner" aria-hidden="true"><span class="flora-word__white">VA</span><span class="flora-word__pink">NTA</span></span>
+      </span>
+    </h2>
+    <div class="flora-flower">
+      <img class="flora-flower__sizer" src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260808_192942_e1086505-d7da-433b-a59b-8220f4e6c808.png&amp;w=1280&amp;q=85" width="1280" height="1451" alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <div class="flora-flower__layer flora-flower__layer--bg">
+        <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260808_192942_e1086505-d7da-433b-a59b-8220f4e6c808.png&amp;w=1280&amp;q=85" width="1280" height="1451" alt="Pixel-art-lilje i pink og violet" loading="lazy" decoding="async">
+        <canvas aria-hidden="true"></canvas>
+      </div>
+      <div class="flora-flower__layer flora-flower__layer--top" aria-hidden="true">
+        <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260808_151324_bf318a5f-5525-4fc7-aab5-e9a341018828.png&amp;w=1280&amp;q=85" width="1280" height="1440" alt="" loading="lazy" decoding="async">
+        <canvas></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="flora-text flora-text--left">
+    <h3>Flere kunder.<br>Færre manuelle opgaver.</h3>
+    <p>Vi hjælper virksomheder med at blive fundet, få flere henvendelser og skabe overblik i hverdagen. Fra synlighed på Google og chatbots, der griber kundernes spørgsmål, til CRM og booking, der samler trådene.</p>
+  </div>
+  <div class="flora-text flora-text--right">
+    <p>Vi tager udgangspunkt i din virksomhed og forbinder de løsninger, der giver mening for dig. Så vejen fra første henvendelse til næste aftale bliver lettere.</p>
+    <a class="flora-pill" href="/om-vanta">Læs mere om Vanta</a>
+  </div>
+</section>
+
 <section class="univers" id="koncepter" aria-labelledby="univers-titel">
   <div class="sticky">
     <div class="nebula" aria-hidden="true"></div>
     <canvas class="stars" aria-hidden="true"></canvas>
     <div class="q"><h2 class="serif" id="univers-titel">Den visuelle standard.</h2></div>
-    <div class="core" aria-hidden="true"></div>
-    <div class="flash" aria-hidden="true"></div>
-    <div class="morph-bg" aria-hidden="true"></div>
     <div class="space"><div class="sphere" role="group" aria-label="Koncepter"></div></div>
     <div class="hud">
       <div class="hud-intro">
         <header>
-          <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260717_095034_599c0e43-e5a1-48c0-b169-f1267d71a58c.png&amp;w=1280&amp;q=85" alt="">
           <h3>Ni koncepter</h3>
         </header>
         <p>Sektionen er et preview af den visuelle standard, du kan forvente fra Vanta Studio. Hvert koncept er en levende skitse – fra tegnestue til tandklinik. Drej kuglen, og tryk på et koncept for at se det i bevægelse.</p>
@@ -475,134 +449,6 @@ img,svg,video{display:block}
   </div>
 </section>
 
-<section class="offers" id="ydelser" aria-labelledby="ydelser-titel">
-  <div class="offers-run">
-    <div class="offers-stage">
-      <div class="offers-head">
-        <h2 class="sr-only" id="ydelser-titel">Det kan jeg bygge</h2>
-        <p class="offers-count mono" aria-live="polite"><b>01</b> / 08</p>
-        <div class="offers-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      </div>
-
-      <div class="deck">
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>01 — Hjemmesider</b></div>
-          <div class="oc-visual shot"><img src="billeder/koncepter/01-arkitekt.jpg" alt="Udsnit af et hjemmesidekoncept fra Vanta Studio"></div>
-          <div class="oc-text">
-            <h3>Hjemmesider, der skaber kunder</h3>
-            <p>Hjemmesider, der vækker opmærksomhed og gør besøgende til kunder.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>02 — AI-chatagent</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <span class="stamp mono">Besvaret kl. 23.47</span>
-            <div class="bubble in">Hej! Har I en ledig tid på fredag?</div>
-            <div class="bubble out">Ja – fredag kl. 14.30 er ledig. Skal jeg reservere den til dig?</div>
-            <div class="bubble in">Ja tak!</div>
-          </div>
-          <div class="oc-text">
-            <h3>En chatagent, der svarer døgnet rundt</h3>
-            <p>Svarer jeres kunder med det samme – også efter lukketid.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>03 — Genbooking</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <div class="notif"><span class="ico">SN</span><div><small>Salon Nord · nu</small>Hej Mette – det er 6 uger siden din sidste klipning. Skal vi finde en ny tid?</div></div>
-            <span class="pill-btn">Book igen</span>
-          </div>
-          <div class="oc-text">
-            <h3>Automatisk genbooking</h3>
-            <p>Minder tidligere kunder om at booke, når det er tid igen.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>04 — Påmindelser</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <div class="date"><div class="day"><div><small>TIR</small><br><b>14</b></div></div><p>Tandrens<br>kl. 10.00 – 10.45</p></div>
-            <div class="notif"><span class="ico">SMS</span><div><small>I morgen · påmindelse</small>Du har en tid i morgen kl. 10.00. Svar NEJ, hvis du ikke kan komme.</div></div>
-          </div>
-          <div class="oc-text">
-            <h3>Automatiske påmindelser</h3>
-            <p>Færre udeblivelser med beskeder før hver aftale.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>05 — Kundeopfølgning</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <div class="rows">
-              <div class="row-i"><div>Jonas B.<small>Sidste besøg: 12 uger siden</small></div><span class="tag-s">Booket igen</span></div>
-              <div class="row-i"><div>Mette K.<small>Sidste besøg: 9 uger siden</small></div><span class="tag-s v">Opfølgning sendt</span></div>
-              <div class="row-i"><div>Sara L.<small>Sidste besøg: 7 uger siden</small></div><span class="tag-s v">Planlagt</span></div>
-            </div>
-          </div>
-          <div class="oc-text">
-            <h3>Kundeopfølgning og fastholdelse</h3>
-            <p>Holder kontakten, så flere kunder kommer igen.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>06 — Automatisering</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <div class="flow">
-              <div class="node">Ny henvendelse<small>"Kan I give et tilbud på en ny hjemmeside?"</small></div>
-              <span class="arrow"></span>
-              <div class="node">Sorteret som tilbud<small>Sendt videre til den rette medarbejder</small></div>
-              <span class="arrow"></span>
-              <div class="node done">Svarudkast klar<small>Klar til godkendelse</small></div>
-            </div>
-          </div>
-          <div class="oc-text">
-            <h3>Automatisering af arbejdsgange</h3>
-            <p>Gentagne opgaver klares automatisk, så I får tid til det vigtige.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>07 — Synlighed</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <div class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>tandlæge på nørrebro</div>
-            <div class="result"><b>Smilværket – Tandklinik på Nørrebro</b>Moderne tandpleje med online booking …</div>
-            <div class="ai-box"><small>✦ AI-svar</small>Et godt bud på en tandlæge på Nørrebro er Smilværket, der har gode anmeldelser og online booking.</div>
-          </div>
-          <div class="oc-text">
-            <h3>Synlighed på Google og i AI-søgning</h3>
-            <p>Bliv fundet på Google – og anbefalet af ChatGPT og andre AI-assistenter.</p>
-          </div>
-        </article>
-
-        <article class="ocard">
-          <div class="oc-top mono"><i></i><i></i><i></i><b>08 — Integrationer</b></div>
-          <div class="oc-visual" aria-hidden="true">
-            <div class="hub">
-              <svg viewBox="0 0 100 100" preserveAspectRatio="none"><g stroke="rgba(167,139,250,.45)" stroke-width=".4" stroke-dasharray="1.5 1.5" fill="none"><path d="M50 50 22 22M50 50 78 22M50 50 22 78M50 50 78 78"/></g></svg>
-              <span style="left:22%;top:22%">Booking</span>
-              <span style="left:78%;top:22%">Kundedata</span>
-              <span style="left:22%;top:78%">Mail &amp; SMS</span>
-              <span style="left:78%;top:78%">Kalender</span>
-              <span class="hub-core" style="left:50%;top:50%">Vanta</span>
-            </div>
-          </div>
-          <div class="oc-text">
-            <h3>Integrationer</h3>
-            <p>Nye funktioner koblet på de systemer, I allerede bruger.</p>
-          </div>
-        </article>
-      </div>
-      <div class="offers-intro">
-        <p class="oi-lede">Et udvalg af de digitale løsninger, vi udvikler for virksomheder.</p>
-        <p class="oi-detail">Hver med sit formål – at spare tid, reducere omkostninger eller skabe mere omsætning.</p>
-      </div>
-    </div>
-  </div>
-
-</section>
 
 <section class="cta-sec" id="vision" aria-labelledby="cta-titel">
   <div class="horse-stage">
@@ -717,33 +563,17 @@ img,svg,video{display:block}
   var section = document.getElementById("koncepter");
   var sticky = section.querySelector(".sticky");
   var title = section.querySelector(".q h2");
-  var core = section.querySelector(".core");
-  var flash = section.querySelector(".flash");
   var nebula = section.querySelector(".nebula");
   var space = section.querySelector(".space");
   var sphere = section.querySelector(".sphere");
   var hud = section.querySelector(".hud");
   var canvas = section.querySelector(".stars");
   var ctx = canvas.getContext("2d");
-  var morphBg = section.querySelector(".morph-bg");
-  var offers = document.getElementById("ydelser");
-  var offStage = offers.querySelector(".offers-stage");
-  var offDeck = offers.querySelector(".deck");
-  var offCards = Array.prototype.slice.call(offers.querySelectorAll(".ocard"));
-  // Overskriften fra kortbunken kopieres ind, så den toner frem under morfen
-  var morphHead = offers.querySelector(".offers-head").cloneNode(true);
-  morphHead.classList.add("morph-head");
-  morphHead.setAttribute("aria-hidden", "true");
-  morphHead.querySelector(".offers-count b").textContent = "01";
-  morphHead.querySelector(".offers-dots i").classList.add("on");
-  sticky.appendChild(morphHead);
   var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (calm) section.classList.add("calm");
 
   var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
   var range = function (v, a, b) { return clamp((v - a) / (b - a), 0, 1); };
-  var outCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
-  var outExpo = function (t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); };
 
   // ---------- Kort fordelt jævnt på en kugle (Fibonacci-gitter) ----------
   var GOLDEN = Math.PI * (3 - Math.sqrt(5));
@@ -769,14 +599,6 @@ img,svg,video{display:block}
       el.innerHTML = '<span class="nr">' + k.nr + '</span><span class="tag"><b>' + k.nr + "</b>Kommer snart</span>";
     }
     el.classList.add("card");
-    var face = null;
-    if (offCards[i]) {
-      face = document.createElement("div");
-      face.className = "mface";
-      face.setAttribute("aria-hidden", "true");
-      face.innerHTML = offCards[i].innerHTML;
-      el.appendChild(face);
-    }
     sphere.appendChild(el);
     return {
       el: el,
@@ -789,14 +611,14 @@ img,svg,video{display:block}
       // Kortets normal (retning ud fra kuglen) i CSS-koordinater
       n: [Math.cos(lat) * Math.sin(lon), -Math.sin(lat), Math.cos(lat) * Math.cos(lon)],
       back: false,
-      face: face
+      flip: false
     };
   });
 
   // ---------- Stjernestøv fra big bang ----------
   var COLORS = ["34,211,238", "167,139,250", "237,233,254", "124,58,237"];
   var dust = [];
-  for (var i = 0; i < 260; i++) {
+  for (var i = 0; i < 170; i++) {
     var u = Math.random() * 2 - 1;
     var t = Math.random() * Math.PI * 2;
     var s = Math.sqrt(1 - u * u);
@@ -811,56 +633,20 @@ img,svg,video{display:block}
 
   // ---------- Mål ----------
   var W = 0, H = 0, R = 200, DPR = 1, PERSP = 1400, CW = 220;
-  var deckW = 400, deckH = 520, targets = [];
 
-  // Hvor hvert værktøjskort ligger i bunken, når den overtager (første skærm, kort 01 forrest)
-  function measureDeck() {
-    var st = offStage.getBoundingClientRect();
-    var dr = offDeck.getBoundingClientRect();
-    var hr = offers.querySelector(".offers-head").getBoundingClientRect();
-    morphHead.style.left = (hr.left - st.left) + "px";
-    morphHead.style.top = (hr.top - st.top) + "px";
-    morphHead.style.width = hr.width + "px";
-    deckW = offCards[0].offsetWidth;
-    deckH = offCards[0].offsetHeight;
-    var cx0 = dr.left - st.left + dr.width / 2;
-    var cy0 = dr.top - st.top + dr.height / 2;
-    targets = [];
-    for (var i = 0; i < KONCEPTER.length; i++) {
-      if (i >= offCards.length) {
-        // Det niende koncept har intet værktøjskort; det svæver væk
-        targets.push({ dx: W * 0.32, dy: -H * 0.75, rot: 18, s: 0.6, op: 0, shade: 0 });
-        continue;
-      }
-      var side = i % 2 ? 1 : -1;
-      var s = 1 - i * 0.04;
-      var th = side * i * 5 * Math.PI / 180;
-      // Bunken drejer om kortets bundmidte; omregnet til drejning om midten
-      var ex = s * Math.sin(th) * deckH / 2;
-      var ey = deckH / 2 - s * Math.cos(th) * deckH / 2;
-      targets.push({
-        dx: cx0 + side * i * 0.07 * deckW + ex - W / 2,
-        dy: cy0 + i * 0.02 * deckH + ey - H / 2,
-        rot: side * i * 5,
-        s: s,
-        op: i < 3 ? 1 : clamp(4 - i, 0, 1),
-        shade: Math.min(0.55, i * 0.18)
-      });
-    }
-  }
   function measure() {
     W = sticky.clientWidth;
     H = sticky.clientHeight;
     var cw = W < 640 ? W * 0.4 : clamp(W * 0.19, 150, 300);
     CW = cw;
-    measureDeck();
-    R = W < 640 ? W * 0.42 : Math.min(W, H) * 0.3 + cw * 0.3;
+    R =W < 640 ? W * 0.42 : Math.min(W, H) * 0.3 + cw * 0.3;
     sphere.style.setProperty("--cw", cw.toFixed(1) + "px");
     sphere.style.setProperty("--fs", (cw / 1280).toFixed(4));
     DPR = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(W * DPR);
     canvas.height = Math.round(H * DPR);
     lastE = -1;
+    layoutPortal();
   }
 
   // Rotation – samme rækkefølge som CSS "rotateX(pitch) rotateY(yaw)"
@@ -972,20 +758,165 @@ img,svg,video{display:block}
   });
   sphere.addEventListener("dragstart", function (e) { e.preventDefault(); });
 
+  // ---------- Portal: kameraet zoomer gennem åbningen i "d"-et i "standard" og ind i universet ----------
+  // Overskriften tegnes på et canvas, der zoomes på vektorniveau, så den forbliver skarp.
+  // Åbningen i bogstavet findes ud fra selve glyfen og skæres ud af det sorte forhæng.
+  var TEXT = title.textContent;
+  var portal = document.createElement("canvas");
+  portal.className = "portal";
+  portal.setAttribute("aria-hidden", "true");
+  sticky.insertBefore(portal, hud);
+  var pctx = portal.getContext("2d");
+  var hole = document.createElement("canvas");
+  var PT = null, portalDone = false, fontReady = false;
+  var smooth = function (t) { return t * t * t * (t * (t * 6 - 15) + 10); };
+  function textFont(fs) { return "100 " + fs.toFixed(2) + 'px Fraunces, "Times New Roman", serif'; }
+
+  function layoutPortal() {
+    if (calm || !fontReady || !W) return;
+    portal.width = Math.round(W * DPR);
+    portal.height = Math.round(H * DPR);
+    var fs = clamp(W * 0.084, 44, 136);
+    var ls = (-0.02 * fs).toFixed(2) + "px";
+    var pad = W < 640 ? 16 : W < 768 ? 24 : 40;
+    pctx.setTransform(1, 0, 0, 1, 0, 0);
+    pctx.font = textFont(fs);
+    pctx.letterSpacing = ls;
+    // Ombryd som overskriften
+    var rows = [], cur = "";
+    TEXT.split(" ").forEach(function (w) {
+      var t = cur ? cur + " " + w : w;
+      if (cur && pctx.measureText(t).width > W - pad * 2) { rows.push(cur); cur = w; } else cur = t;
+    });
+    rows.push(cur);
+    var m = pctx.measureText(TEXT);
+    var asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent, lh = fs * 0.95;
+    var lines = rows.map(function (t, i) {
+      return { t: t, x: (W - pctx.measureText(t).width) / 2, y: H / 2 + (i - (rows.length - 1) / 2) * lh + (asc - desc) / 2 };
+    });
+    // "standard." står altid i sidste linje; målet er dets første "d"
+    var L = lines[lines.length - 1];
+    var gx = L.x + pctx.measureText(L.t.slice(0, L.t.indexOf("standard") + 4)).width, gy = L.y;
+
+    // Bogstavet tegnes stort, og åbningen er den største lukkede baggrundsflade i det
+    var k = Math.max(4, 900 / fs), ox = fs * 0.2, oy = fs * 1.1;
+    var mw = Math.ceil(fs * k), mh = Math.ceil(fs * 1.5 * k), n = mw * mh;
+    hole.width = mw;
+    hole.height = mh;
+    var h = hole.getContext("2d", { willReadFrequently: true });
+    h.setTransform(k, 0, 0, k, 0, 0);
+    h.font = textFont(fs);
+    h.letterSpacing = ls;
+    h.fillText("d", ox, oy);
+    var px = h.getImageData(0, 0, mw, mh).data;
+    var lab = new Int32Array(n), queue = new Int32Array(n);
+    for (var i = 0; i < n; i++) if (px[i * 4 + 3] >= 128) lab[i] = -1;
+    function fill(start, id) {
+      var head = 0, tail = 0, cnt = 0, sx = 0, sy = 0;
+      lab[start] = id;
+      queue[tail++] = start;
+      while (head < tail) {
+        var q = queue[head++], x = q % mw, y = (q - x) / mw;
+        cnt++; sx += x; sy += y;
+        if (x > 0 && !lab[q - 1]) { lab[q - 1] = id; queue[tail++] = q - 1; }
+        if (x < mw - 1 && !lab[q + 1]) { lab[q + 1] = id; queue[tail++] = q + 1; }
+        if (y > 0 && !lab[q - mw]) { lab[q - mw] = id; queue[tail++] = q - mw; }
+        if (y < mh - 1 && !lab[q + mw]) { lab[q + mw] = id; queue[tail++] = q + mw; }
+      }
+      return { cnt: cnt, x: sx / cnt, y: sy / cnt };
+    }
+    for (var x = 0; x < mw; x++) { if (!lab[x]) fill(x, -1); if (!lab[n - mw + x]) fill(n - mw + x, -1); }
+    for (var y = 0; y < mh; y++) { if (!lab[y * mw]) fill(y * mw, -1); if (!lab[y * mw + mw - 1]) fill(y * mw + mw - 1, -1); }
+    var best = 0, bestInfo = null, id = 0;
+    for (i = 0; i < n; i++) {
+      if (lab[i]) continue;
+      var info = fill(i, ++id);
+      if (!bestInfo || info.cnt > bestInfo.cnt) { best = id; bestInfo = info; }
+    }
+    if (!bestInfo) { PT = null; portal.style.visibility = "hidden"; title.style.opacity = ""; return; }
+
+    // Hullet gøres 3 px større ind under stregen, så kanten skjules af bogstavet
+    var grow = new Uint8Array(n);
+    for (i = 0; i < n; i++) if (lab[i] === best) grow[i] = 1;
+    for (var pass = 0; pass < 3; pass++) {
+      var next = grow.slice();
+      for (i = 0; i < n; i++) {
+        if (grow[i]) continue;
+        var xx = i % mw;
+        if ((xx > 0 && grow[i - 1]) || (xx < mw - 1 && grow[i + 1]) || (i >= mw && grow[i - mw]) || (i < n - mw && grow[i + mw])) next[i] = 1;
+      }
+      grow = next;
+    }
+    var img = h.createImageData(mw, mh);
+    for (i = 0; i < n; i++) if (grow[i]) img.data[i * 4 + 3] = 255;
+    h.putImageData(img, 0, 0);
+
+    // Fokus i åbningens midte; zoomen er færdig, når åbningen dækker hele skærmen
+    var F = { x: gx - ox + bestInfo.x / k, y: gy - oy + bestInfo.y / k };
+    function covered(z) {
+      for (var a = 0; a <= 8; a++) for (var b = 0; b <= 8; b++) {
+        if (a > 0 && a < 8 && b > 0 && b < 8) continue;
+        var u = Math.round((F.x + (W * a / 8 - W / 2) / z - gx + ox) * k);
+        var v = Math.round((F.y + (H * b / 8 - H / 2) / z - gy + oy) * k);
+        if (u < 0 || v < 0 || u >= mw || v >= mh || lab[v * mw + u] !== best) return false;
+      }
+      return true;
+    }
+    var lo = 1, hi = 20000;
+    for (i = 0; i < 40; i++) { var mid = Math.sqrt(lo * hi); if (covered(mid)) hi = mid; else lo = mid; }
+
+    var grad = pctx.createLinearGradient(0, lines[0].y - asc, 0, L.y + desc);
+    grad.addColorStop(0.3, "#ede9fe");
+    grad.addColorStop(1, "#a78bfa");
+    PT = { fs: fs, ls: ls, lines: lines, gx: gx, gy: gy, ox: ox, oy: oy, k: k, mw: mw, mh: mh, F: F, zFull: hi, grad: grad };
+    portalDone = false;
+    portal.style.visibility = "";
+    title.style.opacity = "0";
+    drawPortal(progress());
+  }
+
+  // Tegner forhænget for scrollposition p og returnerer, hvor universets midte skal ligge
+  function drawPortal(p) {
+    if (!PT) return [0, 0];
+    var s = smooth(range(p, 0.03, 0.56));
+    var z = Math.pow(PT.zFull * 1.15, s);
+    var kk = smooth(range(s, 0, 0.6));
+    var cx = PT.F.x + (W / 2 - PT.F.x) * kk, cy = PT.F.y + (H / 2 - PT.F.y) * kk;
+    var done = z >= PT.zFull;
+    if (done !== portalDone) {
+      portalDone = done;
+      portal.style.visibility = done ? "hidden" : "";
+    }
+    if (!done) {
+      pctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      pctx.globalCompositeOperation = "source-over";
+      pctx.fillStyle = "#000";
+      pctx.fillRect(0, 0, W, H);
+      var a = DPR * z;
+      pctx.setTransform(a, 0, 0, a, DPR * (cx - PT.F.x * z), DPR * (cy - PT.F.y * z));
+      pctx.globalCompositeOperation = "destination-out";
+      pctx.drawImage(hole, PT.gx - PT.ox, PT.gy - PT.oy, PT.mw / PT.k, PT.mh / PT.k);
+      pctx.globalCompositeOperation = "source-over";
+      pctx.font = textFont(PT.fs);
+      pctx.letterSpacing = PT.ls;
+      pctx.fillStyle = PT.grad;
+      PT.lines.forEach(function (L) { pctx.fillText(L.t, L.x, L.y); });
+    }
+    return [cx - W / 2, cy - H / 2];
+  }
+  if (!calm) {
+    title.style.opacity = "0";
+    document.fonts.load(textFont(100)).then(function () { fontReady = true; layoutPortal(); });
+  }
+
   // ---------- Hovedløkke ----------
   var lastE = -1, prev = performance.now(), running = false;
 
-  // De første 320vh: spørgsmål, big bang og kugle. De sidste 140vh: morf til kortbunken.
-  var MORPH = 140 / 460;
-  var morphK = 0, morphing = false;
+  // 320vh scroll: zoom gennem overskriften og ind i kuglen
   function progress() {
-    if (calm) { morphK = 0; return 1; }
+    if (calm) return 1;
     var rect = section.getBoundingClientRect();
-    var span = rect.height - H;
-    var px = -rect.top;
-    var split = span * (1 - MORPH);
-    morphK = clamp((px - split) / (span - split), 0, 1);
-    return clamp(px / split, 0, 1);
+    return clamp(-rect.top / (rect.height - H), 0, 1);
   }
   function wrapAngle(a) {
     var t = Math.PI * 2;
@@ -997,61 +928,27 @@ img,svg,video{display:block}
     var dt = Math.min(64, now - prev);
     prev = now;
     var p = progress();
-    var k = morphK;
-    var E = k * k * (3 - 2 * k);
-    var kr = range(k, 0, 0.55);
-    var Er = kr * kr * (3 - 2 * kr);   // 3D-drejningerne er rettet helt ud ved 55 %
-    var calmUi = 1 - range(k, 0, 0.25);
 
-    // 1) Spørgsmålet trækker sig sammen til et lysende punkt
-    var a = range(p, 0.02, 0.28);
-    var bang = range(p, 0.27, 0.36);
-    var e = calm ? 1 : outCubic(range(p, 0.3, 0.6));
-    var eDust = calm ? 1 : outExpo(range(p, 0.29, 0.62));
-    var ui = calm ? 1 : range(p, 0.58, 0.68);
+    // 1) Kameraet zoomer gennem bogstavets åbning; universet ligger bag den
+    var off = calm ? [0, 0] : drawPortal(p);
+    space.style.translate = off[0].toFixed(1) + "px " + off[1].toFixed(1) + "px";
+    // 2) Kortene ses samlet langt inde og glider ud i kuglen, mens vi passerer bogstavet
+    var vis = calm ? 1 : range(p, 0.02, 0.12);
+    var e = calm ? 1 : smooth(range(p, 0.1, 0.6));
+    var ui = calm ? 1 : range(p, 0.62, 0.72);
+    hud.style.opacity = ui.toFixed(3);
+    hud.classList.toggle("on", ui > 0.6);
+    space.classList.toggle("ready", e > 0.97);
 
-    if (!calm) {
-      title.style.transform = "scale(" + (1 - 0.86 * outCubic(a)).toFixed(4) + ")";
-      title.style.opacity = (1 - Math.pow(a, 1.4)).toFixed(3);
-      title.style.filter = "blur(" + (a * a * 6).toFixed(2) + "px)";
-      title.style.letterSpacing = (-0.02 + a * 0.12).toFixed(3) + "em";
-      var coreIn = range(a, 0.35, 1);
-      core.style.opacity = (coreIn * (1 - bang)).toFixed(3);
-      core.style.transform = "scale(" + (0.4 + coreIn * 0.8 + bang * 6).toFixed(3) + ")";
-      // 2) Big bang: et kort lysglimt
-      flash.style.opacity = (Math.sin(Math.PI * bang) * 0.95).toFixed(3);
-      flash.style.transform = "scale(" + (0.6 + bang * 1.4).toFixed(3) + ")";
-    }
-    nebula.style.opacity = (e * 0.9 * (1 - E)).toFixed(3);
-    hud.style.opacity = (ui * calmUi).toFixed(3);
-    hud.classList.toggle("on", ui > 0.6 && k === 0);
-    space.classList.toggle("ready", e > 0.97 && k === 0);
-    canvas.style.opacity = (1 - range(k, 0, 0.5)).toFixed(3);
-    morphBg.style.opacity = range(k, 0.1, 0.75).toFixed(3);
-    morphHead.style.opacity = range(k, 0.6, 1).toFixed(3);
-    offers.classList.toggle("live", offers.getBoundingClientRect().top <= 1);
-    var nowMorph = k > 0;
-    if (nowMorph && active) close();
-    if (nowMorph !== morphing) {
-      morphing = nowMorph;
-      sphere.classList.toggle("morphing", morphing);
-      if (!morphing) {
-        cards.forEach(function (c) {
-          c.el.style.width = c.el.style.height = c.el.style.margin = c.el.style.borderRadius = "";
-          c.el.style.removeProperty("--old");
-        });
-      }
-    }
-
-    // 3) Kortene flyver ud og lægger sig på kuglen – og folder sig ud til kortbunken under morfen
-    var sc0 = 0.15 + 0.85 * e;
+    // 3) Kortene flyver ud og lægger sig på kuglen
+    var sc0 = 0.35 + 0.65 * e;
     // Det åbne kort rykker frem og vokser til en fast skærmbredde
     var ease = Math.min(1, dt * 0.008);
     var base = CW * PERSP / (PERSP - R);
     var big = Math.min(W * 0.88, H * 0.72 / 0.625, base * 1.65);
     var F = 0;
-    cards.forEach(function (c, i) {
-      c.f = morphing ? 0 : c.f + ((c === active ? 1 : 0) - c.f) * ease;
+    cards.forEach(function (c) {
+      c.f += ((c === active ? 1 : 0) - c.f) * ease;
       if (c.f < 0.001) c.f = 0;
       F = Math.max(F, c.f);
       // Det åbne kort lægges ud i sin store størrelse og skaleres ned, så siden tegnes skarpt
@@ -1066,36 +963,13 @@ img,svg,video{display:block}
           c.el.style.setProperty("--fs", (CW * g / 1280).toFixed(4));
         }
       }
-      if (!morphing) {
-        var f = c.f * c.f * (3 - 2 * c.f);
-        var lift = R * 0.4 * f;
-        var grow = (base + (big - base) * f) / (CW * PERSP / (PERSP - R - lift));
-        c.el.style.transform = "rotateY(" + c.lon.toFixed(4) + "rad) rotateX(" + c.lat.toFixed(4) + "rad) translateZ(" + (R * e + lift).toFixed(1) + "px) scale(" + (sc0 * grow / g).toFixed(4) + ")";
-        return;
-      }
-      var tg = targets[i];
-      var w = CW + (deckW - CW) * E;
-      var h = CW * 0.625 + (deckH - CW * 0.625) * E;
-      c.el.style.width = w.toFixed(1) + "px";
-      c.el.style.height = h.toFixed(1) + "px";
-      c.el.style.margin = (-h / 2).toFixed(1) + "px 0 0 " + (-w / 2).toFixed(1) + "px";
-      c.el.style.borderRadius = (6 + 16 * E).toFixed(1) + "px";
-      c.el.style.transform = "translate3d(" + (tg.dx * E).toFixed(1) + "px," + (tg.dy * E).toFixed(1) + "px," + ((9 - i) * (0.6 + 44 * E * (1 - E))).toFixed(2) + "px) rotateZ(" + (tg.rot * E).toFixed(2) + "deg) rotateY(" + (c.lon * (1 - Er)).toFixed(4) + "rad) rotateX(" + (c.lat * (1 - Er)).toFixed(4) + "rad) translateZ(" + (R * e * (1 - Er)).toFixed(1) + "px) scale(" + (sc0 + (tg.s - sc0) * E).toFixed(3) + ")";
-      c.el.style.setProperty("--old", (1 - range(k, 0.15, 0.55)).toFixed(3));
-      if (c.face) {
-        c.face.style.width = deckW + "px";
-        c.face.style.height = deckH + "px";
-        c.face.style.transform = "scale(" + (w / deckW).toFixed(4) + ")";
-        c.face.style.opacity = range(k, 0.35, 0.8).toFixed(3);
-        c.face.style.setProperty("--shade", (tg.shade * E).toFixed(3));
-      }
+      var f = c.f * c.f * (3 - 2 * c.f);
+      var lift = R * 0.4 * f;
+      var grow = (base + (big - base) * f) / (CW * PERSP / (PERSP - R - lift));
+      c.el.style.transform = "rotateY(" + c.lon.toFixed(4) + "rad) rotateX(" + c.lat.toFixed(4) + "rad) translateZ(" + (R * e + lift).toFixed(1) + "px) scale(" + (sc0 * grow / g).toFixed(4) + ")" + (c.flip ? " rotateY(180deg)" : "");
     });
 
-    // Under morfen står kuglen stille og drejer sig på plads
-    if (morphing) {
-      yaw = wrapAngle(yaw);
-      vyaw = vpitch = 0;
-    } else if (active && !dragging) {
+    if (active && !dragging) {
       // Kuglen drejer det valgte kort lige ind foran beskueren
       var turn = Math.min(1, dt * 0.006);
       yaw += wrapAngle(-active.lon - yaw) * turn;
@@ -1108,34 +982,24 @@ img,svg,video{display:block}
       pitch = clamp(pitch + vpitch * dt, -1.1, 1.1);
       pitch += (-0.12 - pitch) * Math.min(1, dt * 0.0006);
     }
-    var spin = calm ? 0 : (1 - e) * 2.6; // ekstra snurren under eksplosionen
-    sphere.style.transform = "rotateX(" + (pitch * (1 - Er)).toFixed(4) + "rad) rotateY(" + ((yaw + spin) * (1 - Er)).toFixed(4) + "rad)";
+    var spin = calm ? 0 : (1 - e) * 1.4; // roligt drej, mens kortene folder sig ud
+    sphere.style.transform = "translateZ(" + (-(1 - e) * 900).toFixed(1) + "px) rotateX(" + pitch.toFixed(4) + "rad) rotateY(" + (yaw + spin).toFixed(4) + "rad)";
 
     // Kort på bagsiden dæmpes
     var yawSave = yaw;
     yaw += spin;
-    var yw = (yaw + spin) * (1 - Er), pt = pitch * (1 - Er);
-    var cyw = Math.cos(yw), syw = Math.sin(yw), cpt = Math.cos(pt), spt = Math.sin(pt);
-    cards.forEach(function (c, i) {
-      var z;
-      if (morphing) {
-        // Kortets normal med de delvist udrettede vinkler
-        var lo = c.lon * (1 - Er), la = c.lat * (1 - Er);
-        var nx = Math.cos(la) * Math.sin(lo), ny = -Math.sin(la), nz = Math.cos(la) * Math.cos(lo);
-        var rz = -nx * syw + nz * cyw;
-        z = ny * spt + rz * cpt;
-      } else {
-        z = rotate(c.n)[2];
-      }
+    cards.forEach(function (c) {
+      var z = rotate(c.n)[2];
       var depth = (z + 1) / 2;
-      var op0 = e * (0.18 + 0.82 * Math.pow(depth, 1.3));
-      var br0 = 0.35 + 0.65 * depth;
-      var tg = targets[i];
+      var op0 = vis * (0.45 + 0.55 * Math.pow(depth, 1.3));
+      var br0 = 0.5 + 0.5 * depth;
+      // Kort på bagsiden vendes, så forsiden stadig ses (vendingen sker, mens kortet står på højkant)
+      c.flip = z < 0;
       // De andre kort træder i baggrunden, mens et koncept spiller
       op0 = op0 + (1 - op0) * c.f - op0 * 0.55 * (F - c.f);
       br0 = br0 + (1 - br0) * c.f;
-      c.el.style.opacity = (op0 + (tg.op - op0) * (i >= offCards.length ? range(k, 0, 0.5) : E)).toFixed(3);
-      c.el.style.filter = c.f > 0.999 ? "none" : "brightness(" + (br0 + (1 - br0) * E).toFixed(3) + ")";
+      c.el.style.opacity = op0.toFixed(3);
+      c.el.style.filter = c.f > 0.999 ? "none" : "brightness(" + br0.toFixed(3) + ")";
       var back = z < -0.05;
       if (back !== c.back) {
         c.back = back;
@@ -1147,18 +1011,18 @@ img,svg,video{display:block}
     // Stjernestøvet
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     ctx.clearRect(0, 0, W, H);
-    if (eDust > 0.001) {
+    if (vis > 0.001) {
       ctx.globalCompositeOperation = "lighter";
-      var cx = W / 2, cy = H / 2;
+      var cx = W / 2 + off[0], cy = H / 2 + off[1];
       for (var i = 0; i < dust.length; i++) {
         var d = dust[i];
-        var dist = R * d.k * eDust;
+        var dist = R * d.k;
         var v = rotate([d.d[0] * dist, d.d[1] * dist, d.d[2] * dist]);
         var sc = PERSP / (PERSP - v[2]);
         if (sc <= 0) continue;
         var depthD = clamp((v[2] / (R * d.k) + 1) / 2, 0, 1);
         var twinkle = 0.75 + 0.25 * Math.sin(now * 0.002 + d.tw);
-        var alpha = (0.2 + 0.8 * depthD) * twinkle * Math.min(1, eDust * 3);
+        var alpha = (0.2 + 0.8 * depthD) * twinkle * vis;
         ctx.fillStyle = "rgba(" + d.c + "," + alpha.toFixed(3) + ")";
         ctx.beginPath();
         ctx.arc(cx + v[0] * sc, cy + v[1] * sc, d.size * sc, 0, Math.PI * 2);
@@ -1186,6 +1050,143 @@ img,svg,video{display:block}
 
   measure();
   window.addEventListener("resize", measure);
+})();
+</script>
+
+<script>
+(function () {
+  // ---------- Plakat: indgang én gang + morf-spor, der bytter liljerne under musen ----------
+  var sec = document.getElementById("flora");
+  var stage = sec.querySelector(".flora-stage");
+  var flower = sec.querySelector(".flora-flower");
+  var frontImg = flower.querySelector(".flora-flower__layer--bg img");
+  var revealImg = flower.querySelector(".flora-flower__layer--top img");
+  var cvF = flower.querySelector(".flora-flower__layer--bg canvas");
+  var cvT = flower.querySelector(".flora-flower__layer--top canvas");
+  var ctxF = cvF.getContext("2d");
+  var ctxT = cvT.getContext("2d");
+
+  // Indgangen venter, til plakaten er godt inde på skærmen, og spilles kun én gang
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    sec.classList.add("wait");
+    var finish = function () { sec.classList.remove("wait", "play"); };
+    new IntersectionObserver(function (entries, io) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      sec.classList.add("play");
+      flower.addEventListener("animationend", finish, { once: true });
+      setTimeout(finish, 6000);
+    }, { threshold: 0.6 }).observe(stage);
+  }
+
+  // Sporet: organiske klatter langs musens vej skærer den forreste lilje væk
+  // og maler den bagerste frem i samme form. Begge tegnes direkte på canvas.
+  var MAX_POINTS = 60, HEAD_R = 140, NOISE_AMP = 44, BLOB_PTS = 24, FADE = 0.92, SAMPLE_DIST = 8;
+  var trail = [], headR = 0, hovering = false, mx = 0, my = 0, time = 0;
+  var W = 0, H = 0, DPR = 1, raf = 0;
+
+  function size() {
+    W = flower.offsetWidth;
+    H = flower.offsetHeight;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    cvF.width = cvT.width = Math.round(W * DPR);
+    cvF.height = cvT.height = Math.round(H * DPR);
+  }
+  function ready(img) { return img.complete && img.naturalWidth > 0; }
+  // Tegnes som object-fit: cover
+  function cover(ctx, img) {
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var s = Math.max(W / iw, H / ih);
+    var sw = W / s, sh = H / s;
+    ctx.drawImage(img, (iw - sw) / 2, (ih - sh) / 2, sw, sh, 0, 0, W, H);
+  }
+  // 24 punkter med bølgende støj, lukket med bløde kurver gennem midtpunkterne
+  function blob(cx, cy, r, seed) {
+    var pts = [];
+    for (var i = 0; i < BLOB_PTS; i++) {
+      var a = i / BLOB_PTS * Math.PI * 2;
+      var n1 = Math.sin(a * 3 + time * 1.4 + seed) * 0.45;
+      var n2 = Math.sin(a * 5 - time * 0.9 + seed * 2.3) * 0.3;
+      var n3 = Math.cos(a * 2 + time * 1.8 + seed * 0.7) * 0.25;
+      var rr = r + (n1 + n2 + n3) * NOISE_AMP * (r / HEAD_R);
+      pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]);
+    }
+    var path = new Path2D(), last = pts[BLOB_PTS - 1];
+    path.moveTo((last[0] + pts[0][0]) / 2, (last[1] + pts[0][1]) / 2);
+    for (var j = 0; j < BLOB_PTS; j++) {
+      var p = pts[j], q = pts[(j + 1) % BLOB_PTS];
+      path.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2);
+    }
+    path.closePath();
+    return path;
+  }
+
+  function frame() {
+    raf = 0;
+    var target = hovering ? HEAD_R : 0;
+    headR += (target - headR) * (hovering ? 0.14 : 0.04);
+    if (hovering && headR > 5) {
+      var last = trail[trail.length - 1];
+      if (!last || Math.hypot(mx - last.x, my - last.y) > SAMPLE_DIST) {
+        trail.push({ x: mx, y: my, r: headR, alpha: 1, seed: Math.random() * 100 });
+        if (trail.length > MAX_POINTS) trail.shift();
+      }
+    }
+
+    var live = trail.length > 0 && ready(frontImg);
+    if (live) {
+      ctxF.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctxT.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctxF.globalCompositeOperation = ctxT.globalCompositeOperation = "source-over";
+      ctxF.clearRect(0, 0, W, H);
+      ctxT.clearRect(0, 0, W, H);
+      cover(ctxF, frontImg);
+      ctxF.globalCompositeOperation = "destination-out";
+      for (var i = 0; i < trail.length; i++) {
+        var pt = trail[i];
+        if (pt.r < 2) continue;
+        var path = blob(pt.x, pt.y, pt.r, pt.seed);
+        ctxF.globalAlpha = ctxT.globalAlpha = pt.alpha;
+        ctxF.fill(path);
+        ctxT.fill(path);
+      }
+      ctxF.globalAlpha = ctxT.globalAlpha = 1;
+      ctxT.globalCompositeOperation = "source-in";
+      if (ready(revealImg)) cover(ctxT, revealImg);
+      else ctxT.clearRect(0, 0, W, H);
+    }
+    flower.classList.toggle("trail", live);
+
+    for (var j = trail.length - 1; j >= 0; j--) {
+      trail[j].alpha *= FADE;
+      trail[j].r *= 0.995;
+      if (trail[j].alpha < 0.01) trail.splice(j, 1);
+    }
+    time += 0.016;
+    // Løkken sover, når sporet er væk og hovedet har fundet sin størrelse
+    if (trail.length || Math.abs(target - headR) > 0.5) raf = requestAnimationFrame(frame);
+    else if (!hovering) headR = 0;
+  }
+  function wake() { if (!raf) raf = requestAnimationFrame(frame); }
+
+  function point(e) {
+    if (e.pointerType !== "mouse") return;
+    var r = flower.getBoundingClientRect();
+    if (!r.width) return;
+    mx = (e.clientX - r.left) * W / r.width;
+    my = (e.clientY - r.top) * H / r.height;
+    hovering = true;
+    wake();
+  }
+  sec.addEventListener("pointerenter", point);
+  sec.addEventListener("pointermove", point);
+  sec.addEventListener("pointerleave", function (e) {
+    if (e.pointerType !== "mouse") return;
+    hovering = false;
+    wake();
+  });
+
+  new ResizeObserver(size).observe(flower);
 })();
 </script>
 
@@ -1401,7 +1402,7 @@ img,svg,video{display:block}
     body.style.transform = "translate(" + (-q * Math.min(160, W * 0.11)).toFixed(1) + "px," + (-q * 70).toFixed(1) + "px)";
   }
 
-  // Kortbunken læser bølgens position, så de to sektioner bevæger sig som én
+  // Kontaktsektionen læser bølgens position, så de to sektioner bevæger sig som én
   window.vantaWave = function () { return front(progress()); };
 
   function progress() {
@@ -1431,78 +1432,6 @@ img,svg,video{display:block}
   draw(0, 0);
   window.addEventListener("resize", function () { layout(); draw((performance.now() - start) / 1000, progress()); });
 
-  // ---------- Ydelser: kortbunken skifter, mens man scroller ----------
-  var off = document.getElementById("ydelser");
-  var run = off.querySelector(".offers-run");
-  var cards = Array.prototype.slice.call(off.querySelectorAll(".ocard"));
-  var dots = Array.prototype.slice.call(off.querySelectorAll(".offers-dots i"));
-  var count = off.querySelector(".offers-count b");
-  var head = off.querySelector(".offers-head");
-  var n = cards.length;
-  var lastActive = -1, queued = false;
-
-  function updateDeck() {
-    queued = false;
-    var rect = run.getBoundingClientRect();
-    // Bunken bliver synlig i det øjeblik, den overtager fra morfen
-    off.classList.toggle("live", rect.top <= 1);
-    var span = rect.height - window.innerHeight;
-    var raw = clamp(-rect.top / span, 0, 1) * (n - 1);
-    // Bunken glider ind og vifter ud, mens sektionen kommer op på skærmen
-    var enter = clamp(1 - rect.top / (window.innerHeight * 0.85), 0, 1);
-    enter = 1 - Math.pow(1 - enter, 3);
-    var base = Math.min(n - 2, Math.floor(raw));
-    var f = clamp((raw - base - 0.25) / 0.5, 0, 1);
-    var a = base + f * f * (3 - 2 * f);
-    // Når bunken slipper, glider det sidste kort op og toner ud
-    var exit = clamp((window.innerHeight - rect.bottom) / (window.innerHeight * 0.4), 0, 1);
-    head.style.opacity = (1 - exit * 1.6).toFixed(3);
-    cards.forEach(function (card, i) {
-      var r = i - a;
-      var tf, op, z, shade;
-      if (r < 0) {
-        // Kortet foran flyver op og ud
-        var t = Math.min(1, -r);
-        tf = "translate(-50%,-50%) translate(" + (-40 * t).toFixed(2) + "%," + (-130 * t).toFixed(2) + "%) rotate(" + (-16 * t).toFixed(2) + "deg)";
-        op = clamp(1 - t * 2.2, 0, 1);
-        z = 200;
-        shade = 0;
-      } else {
-        // Kortene bagved ligger vifteformet
-        var side = i % 2 ? 1 : -1;
-        var spread = r * enter;
-        var lag = 1 - enter;
-        tf = "translate(-50%,-50%) translate(" + (side * spread * 7).toFixed(2) + "%," + (spread * 2 + lag * 30).toFixed(2) + "%) rotate(" + (side * spread * 5).toFixed(2) + "deg) scale(" + (1 - r * 0.04 - lag * 0.12).toFixed(3) + ")";
-        op = r < 3 ? 1 : clamp(4 - r, 0, 1);
-        z = 100 - Math.round(r * 10);
-        shade = Math.min(0.55, r * 0.18);
-      }
-      if (exit > 0 && i === n - 1) {
-        tf += " translateY(" + (-exit * 30).toFixed(2) + "%) scale(" + (1 - exit * 0.1).toFixed(3) + ")";
-        op *= 1 - exit;
-      }
-      card.style.transform = tf;
-      card.style.opacity = op.toFixed(3);
-      card.style.zIndex = z;
-      card.style.setProperty("--shade", shade.toFixed(3));
-      card.setAttribute("aria-hidden", Math.round(a) === i ? "false" : "true");
-    });
-    var active = Math.round(a);
-    if (active !== lastActive) {
-      lastActive = active;
-      dots.forEach(function (d, i) { d.classList.toggle("on", i === active); });
-      count.textContent = String(active + 1).padStart(2, "0");
-    }
-  }
-  function queue() {
-    if (!queued) {
-      queued = true;
-      requestAnimationFrame(updateDeck);
-    }
-  }
-  window.addEventListener("scroll", queue, { passive: true });
-  window.addEventListener("resize", queue);
-  updateDeck();
 
 })();
 </script>
