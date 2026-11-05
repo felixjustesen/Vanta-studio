@@ -95,7 +95,16 @@ img,svg,video{display:block}
 .page{position:relative;width:100%;height:100vh;height:100svh;overflow:hidden}
 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .shade{position:absolute;left:0;right:0;bottom:0;height:33.333%;background:linear-gradient(to top,rgba(3,3,24,.8),rgba(3,3,24,0));pointer-events:none}
-.content{position:relative;z-index:10;display:flex;flex-direction:column;height:100%;padding:var(--py) var(--px)}
+/* Farvet lys over videoen: blåt (#3155FF) oppe til højre, orange (#FF853B) nede til venstre.
+   ::after farver gardinet (color), ::before giver et svagt skær (screen). Slet de to regler for at fjerne farverne. */
+.page::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:color;background:radial-gradient(70% 80% at 80% 15%,rgba(49,85,255,.95),rgba(49,85,255,0) 70%),radial-gradient(60% 60% at 10% 95%,rgba(255,133,59,.85),rgba(255,133,59,0) 70%)}
+.page::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:screen;background:radial-gradient(60% 70% at 80% 15%,rgba(49,85,255,.22),rgba(49,85,255,0) 70%),radial-gradient(50% 50% at 10% 95%,rgba(255,133,59,.14),rgba(255,133,59,0) 70%)}
+.content{position:relative;z-index:10;display:flex;flex-direction:column;height:100%;padding:var(--py) var(--hx)}
+/* Herofladens egne mål: sidemargin og afstanden mellem overskrift og tekstblokke */
+.page{--hx:20px;--hgap:32px}
+@media (min-width:640px){.page{--hx:28px;--hgap:40px}}
+@media (min-width:768px){.page{--hx:40px;--hgap:48px}}
+@media (min-width:1024px){.page{--hx:48px;--hgap:56px}}
 .spacer{flex:1}
 
 /* ---------- Navigation ---------- */
@@ -104,6 +113,7 @@ img,svg,video{display:block}
 
 .cta-link{display:flex;align-items:center;gap:6px;transition:color .3s}
 .cta-link:hover{color:rgba(255,255,255,.8)}
+.cta-link svg{color:#FF853B}
 
 
 
@@ -114,16 +124,16 @@ img,svg,video{display:block}
 
 /* Hele overskriften står i venstre side. Den store linje skifter mellem tre budskaber.
    Fontstørrelsen er sat efter det længste ord, "OMKOSTNINGER" (ca. 7em bredt). */
-.type{--big:min(12.4vw,64px);display:flex;flex-direction:column;align-items:flex-start;max-width:100%;margin-bottom:20px}
+.type{--big:min(12.4vw,64px);display:flex;flex-direction:column;align-items:flex-start;max-width:100%}
 .type p{margin:0;font-weight:inherit;text-shadow:0 2px 24px rgba(3,3,24,.45),0 0 2px rgba(3,3,24,.25)}
-.small{margin:0 0 .5em;font-size:calc(var(--big) * .38);line-height:1.05}
-.rotator{display:grid;font-size:var(--big);line-height:.92;text-transform:uppercase}
+.small{margin:0 0 14px;font-size:calc(var(--big) * .38);line-height:1.05}
+.rotator{display:grid;font-size:var(--big);line-height:.9;text-transform:uppercase}
 .msg{grid-area:1/1;display:flex;flex-direction:column;opacity:0;transform:translateY(.16em);transition:opacity .9s var(--ease),transform .9s var(--ease);pointer-events:none}
 .msg > span{display:block;white-space:nowrap}
 .msg.on{opacity:1;transform:none}
 .msg.out{opacity:0;transform:translateY(-.12em);transition-duration:.7s}
-@media (min-width:640px){.type{--big:min(11vw,84px);margin-bottom:24px}}
-@media (min-width:768px){.type{--big:min(8.4vw,96px);margin-bottom:32px}}
+@media (min-width:640px){.type{--big:min(11vw,84px)}}
+@media (min-width:768px){.type{--big:min(8.4vw,96px)}.small{margin-bottom:20px}}
 @media (min-width:1024px){.type{--big:min(6.3vw,7.2vh + 40px,118px)}}
 
 /* Bogstaverne toner frem ét ad gangen */
@@ -131,48 +141,32 @@ img,svg,video{display:block}
 @keyframes charIn{to{opacity:1;transform:none}}
 
 /* ---------- Bundlinje ---------- */
-.foot{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:16px;padding-top:16px}
-.left{display:flex;align-items:flex-start;gap:16px}
-.mark{flex:none;width:48px;height:48px;border:1px solid rgba(255,255,255,.2);border-radius:16px;overflow:hidden;opacity:0;transform:scale(.8);animation:pop .6s var(--ease) .6s forwards}
-.mark img{width:100%;height:100%;object-fit:cover}
-.info{display:none;align-items:flex-start;gap:24px}
-.info div,.cta{opacity:0;transform:translateY(16px);animation:rise .6s var(--ease) forwards}
+/* To tekstblokke: under hinanden på mobil, to kolonner på ca. 400 px med 64 px imellem, når der er plads. */
+.foot{padding-top:var(--hgap)}
+.info{display:grid;gap:24px}
+.info div{display:grid;align-content:start;gap:12px;opacity:0;transform:translateY(16px);animation:rise .6s var(--ease) forwards}
 .info div:nth-child(1){animation-delay:.8s}
 .info div:nth-child(2){animation-delay:1s}
-.info h2{margin:0 0 4px;font-size:10px;font-weight:400;letter-spacing:.15em;text-transform:uppercase}
-.info p{max-width:220px;margin:0;font-size:9px;line-height:1.625;letter-spacing:.025em;text-transform:uppercase;color:rgba(255,255,255,.8)}
-
-.left{min-width:0}
-.cta{flex:none;display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;animation-delay:1.2s;transition:background-color .3s}
-.cta:hover{background-color:rgba(255,255,255,.05)}
-.cta svg{transition:transform .3s}
-.cta:hover svg{transform:translate(2px,-2px)}
+.info h2{margin:0;font-size:10px;font-weight:400;letter-spacing:.15em;text-transform:uppercase}
+.info p{max-width:36ch;margin:0;font-size:10px;line-height:1.5;letter-spacing:normal;text-transform:uppercase;color:rgba(255,255,255,.8)}
+@media (min-width:640px){
+  .info{grid-template-columns:repeat(2,minmax(0,400px));column-gap:40px}
+  .info h2{font-size:11px}
+  .info p{max-width:none}
+}
+@media (min-width:768px){
+  .info{column-gap:64px}
+  .info div{gap:14px}
+  .info h2{font-size:13px}
+  .info p{font-size:11px}
+}
 
 /* Flydende glas-knap */
 .liquid-glass{position:relative;overflow:hidden;background:rgba(255,255,255,.01);background-blend-mode:luminosity;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1)}
 .liquid-glass::before{content:"";position:absolute;inset:0;padding:1.4px;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.45) 0%,rgba(255,255,255,.15) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.15) 80%,rgba(255,255,255,.45) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 
-@media (min-width:640px){
-  .foot{flex-direction:row;align-items:center;gap:24px;padding-top:20px}
-  .left{gap:20px}
-  .mark{width:64px;height:64px}
-  .info{display:flex}
-  .info h2{margin-bottom:6px;font-size:11px}
-  .info p{font-size:10px}
-  .cta{gap:12px;padding:12px 24px;font-size:10px}
-}
-@media (min-width:768px){
-  .foot{padding-top:24px}
-  .left{gap:32px}
-  .mark{width:80px;height:80px}
-  .info{gap:32px}
-  .info h2{font-size:13px}
-  .info p{max-width:260px;font-size:11px}
-  .cta{padding:16px 32px;font-size:12px}
-}
-@media (min-width:1024px){.info{gap:56px}}
 
-/* ---------- Koncepter: "Den visuelle standard." + big bang ---------- */
+/* ---------- Koncepter: "Den Visuelle Standard." + big bang ---------- */
 .univers{position:relative;height:420vh;background:#000}
 .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .nebula{display:none;position:absolute;inset:-20%;background:radial-gradient(closest-side,rgba(124,58,237,.38),rgba(124,58,237,.12) 45%,rgba(15,23,42,0) 75%);opacity:0;pointer-events:none}
@@ -223,62 +217,38 @@ img,svg,video{display:block}
 .horse-stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .ascii{position:absolute;inset:0;width:100%;height:100%}
 .cta-body{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:22px;max-width:1000px;padding:clamp(96px,14vh,150px) var(--px) 0;will-change:transform,opacity}
-.cta-body h2{margin:0;font-size:clamp(44px,7vw,116px);font-weight:400;line-height:.95;letter-spacing:-.035em;color:var(--mist);text-shadow:0 2px 40px rgba(15,23,42,.9)}
+.cta-body h2{margin:0;font-size:clamp(44px,7vw,116px);font-weight:400;line-height:.95;letter-spacing:-.035em;color:var(--mist);text-shadow:0 2px 40px rgba(0,0,0,.9)}
 .cta-body h2 .s{font-family:"Fraunces",serif;font-weight:300;font-variation-settings:"opsz" 144;letter-spacing:-.04em}
-.cta-body h2 .n{display:block;font-family:"Inter",sans-serif;background:linear-gradient(100deg,var(--cyan),var(--lilac) 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.cta-body p{max-width:460px;margin:0;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:rgba(237,233,254,.8);text-shadow:0 1px 18px rgba(15,23,42,.95)}
+.cta-body h2 .n{display:block;font-family:"Inter",sans-serif;color:#FF853B}
+.cta-body p{max-width:460px;margin:0;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:rgba(237,233,254,.8);text-shadow:0 1px 18px rgba(0,0,0,.95)}
 .credit{position:absolute;right:var(--px);bottom:var(--py);z-index:2;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,233,254,.45)}
 
-/* ---------- Plakat: VANTA med en lilje, der skifter under musen ---------- */
-.flora{--orb-reveal:cubic-bezier(.16,1,.3,1);--orb-soft:cubic-bezier(.25,.8,.28,1);--run:running;position:relative;height:100vh;height:100svh;overflow:hidden;background:#161616;color:#fff}
-.flora-stage{position:absolute;inset:0;contain:strict;isolation:isolate}
-.flora-word{position:absolute;top:11.565421svh;left:0;z-index:1;width:100%;margin:0;padding-left:.045em;text-align:center;font-family:"Fraunces","Times New Roman",Times,serif;font-weight:400;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;font-size:min(27.8125vw,55svh);line-height:1;letter-spacing:.045em;white-space:nowrap}
-.flora-word__mask,.flora-word__inner{display:block}
-.flora-word__pink{background:linear-gradient(180deg,#ffc5dc,#fd86db);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.flora-flower{position:absolute;top:14.749065svh;left:49.121328vw;z-index:2;height:106.109034svh;transform:translateX(-50%);pointer-events:none}
-.flora-flower__sizer{width:auto;height:100%;visibility:hidden}
-.flora-flower__layer{position:absolute;inset:0}
-.flora-flower__layer > *{position:absolute;inset:0;width:100%;height:100%}
-.flora-flower__layer img{object-fit:cover}
-/* Sporet tegnes på canvas; imens skjules det almindelige billede */
-.flora-flower canvas,.flora-flower__layer--top img,.flora-flower.trail .flora-flower__layer--bg img{visibility:hidden}
-.flora-flower.trail canvas{visibility:visible}
-.flora-text{position:absolute;right:3.177083vw;bottom:4.361371svh;z-index:3;width:min(380px,26vw);color:#f7f7f7;text-shadow:0 1px 18px rgba(22,22,22,.85)}
-.flora-text h3{margin:0 0 .6em;font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(24px,2.2vw,34px);line-height:1.05;letter-spacing:-.02em;color:#fff}
-.flora-text p{margin:0 0 .9em;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
-/* Overskriften står til venstre for liljen, afsnittet med knappen til højre */
-.flora-text--left{right:auto;left:3.177083vw;width:min(370px,25.5vw)}
-.flora-text--right{width:min(340px,24vw)}
-.flora-pill{display:inline-flex;align-items:center;height:44px;margin-top:.4em;padding:0 1.4em;border-radius:999px;background:#fff;color:#161616;font-size:14px;letter-spacing:.02em;text-shadow:none;transition:background-color .2s}
-.flora-pill:hover{background:#ffe3ef}
-/* Indgang: spilles én gang, første gang plakaten er inde på skærmen (JS sætter .wait og .play) */
-.flora.wait{--run:paused}
-.flora.wait.play{--run:running}
-.flora.wait .flora-word__mask{overflow:hidden;padding:0 .1em .1em;margin:0 -.1em -.1em}
-.flora.wait .flora-word__inner{animation:flora-word 1150ms var(--orb-reveal) 300ms both;animation-play-state:var(--run)}
-.flora.wait .flora-flower{animation:flora-subject 1150ms var(--orb-reveal) 660ms both;animation-play-state:var(--run)}
-.flora.wait .flora-text{animation:flora-corner 720ms var(--orb-soft) 980ms both;animation-play-state:var(--run)}
-@keyframes flora-word{from{transform:translateY(118%)}to{transform:none}}
-@keyframes flora-subject{from{opacity:0;transform:translateX(-50%) translateY(3.4svh)}to{opacity:1;transform:translateX(-50%)}}
-@keyframes flora-corner{from{opacity:0;transform:translateY(.7em)}to{opacity:1;transform:none}}
-@media (max-width:900px),(max-aspect-ratio:4/5){
-  .flora.wait .flora-word__inner{animation-delay:200ms}
-  .flora.wait .flora-flower{animation-delay:520ms}
+/* ---------- Formørkelse: en sort skive med en glødende kant og teksten i bunden ---------- */
+.eclipse{position:relative;height:100vh;height:100svh;overflow:hidden;background:#000;color:#fff}
+/* Skivens top står 2/3 nede, og radius er halvdelen af sektionens højde. Kanten er en tynd
+   hvidgul streg med orange glød udenfor og en svag glød lige indenfor. */
+.eclipse-ring{position:absolute;top:66.3%;left:50%;height:100.4%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#000;
+  box-shadow:0 0 0 1.5px #fff2c8,0 0 0 4px #ffb04a,0 0 6px 6px rgba(255,140,40,1),0 0 16px 14px rgba(255,110,20,.85),0 0 34px 26px rgba(230,85,10,.6),0 0 70px 44px rgba(190,60,0,.38),0 0 160px 80px rgba(150,40,0,.2),
+    inset 0 0 0 1.5px #ffcf7a,inset 0 0 8px 4px rgba(255,170,70,.85),inset 0 0 30px 10px rgba(220,90,20,.45),inset 0 0 80px 20px rgba(140,45,0,.25);
+  animation:eclipse-glow 5s ease-in-out infinite alternate}
+@keyframes eclipse-glow{to{filter:brightness(1.18)}}
+/* Mørk bund, så teksten kan læses, hvor kanten løber bag den */
+.eclipse::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0));pointer-events:none}
+.eclipse-text{position:absolute;bottom:4.361371svh;z-index:1;color:#f7f7f7;text-shadow:0 1px 18px rgba(0,0,0,.85)}
+.eclipse-text h2{margin:0 0 .6em;font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(24px,2.2vw,34px);line-height:1.05;letter-spacing:-.02em;color:#fff}
+.eclipse-text p{margin:0 0 .9em;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
+/* Overskriften står nederst til venstre, afsnittet med knappen nederst til højre */
+.eclipse-text--left{left:3.177083vw;width:min(370px,25.5vw)}
+.eclipse-text--right{right:3.177083vw;width:min(340px,24vw)}
+.eclipse-pill{display:inline-flex;align-items:center;height:44px;margin-top:.4em;padding:0 1.4em;border-radius:999px;background:#fff;color:#161616;font-size:14px;letter-spacing:.02em;text-shadow:none;transition:background-color .2s}
+.eclipse-pill:hover{background:#ffe6d6}
+/* Små skærme og højformat: tekstblokkene står under hinanden i bunden */
+@media (max-width:760px),(max-aspect-ratio:1/1){
+  .eclipse{display:flex;flex-direction:column;justify-content:flex-end;gap:12px;padding:0 var(--px) 8svh}
+  .eclipse-text{position:relative;left:auto;right:auto;bottom:auto;width:auto;max-width:34rem}
 }
-/* Smalle og kvadratiske skærme: liljen fylder for meget til tekst ved siden af, så teksten står under plakaten */
-@media (max-width:1100px),(max-aspect-ratio:7/5){
-  .flora{height:auto}
-  .flora-stage{position:relative;height:100vh;height:100svh}
-  .flora-text{position:static;width:auto;max-width:34rem;padding:0 var(--px) 12svh}
-  .flora-text--left{padding-bottom:0}
-  .flora.wait .flora-text{animation:none}
-}
-/* Højformat: ord og lilje rykker lidt ned, så plakaten ikke bliver tung foroven */
-@media (max-aspect-ratio:4/5){
-  .flora-word{top:18svh;font-size:min(27.5vw,18svh)}
-  .flora-flower{top:calc(18svh + min(27.5vw,18svh) * .4);left:50%;height:min(55svh,110vw)}
-  .flora-stage{height:calc(18svh + min(27.5vw,18svh) * .4 + min(55svh,110vw) + 6svh)}
-}
+/* Højformat: skiven rykkes op, så kanten står over teksten */
+@media (max-aspect-ratio:1/1){.eclipse-ring{top:44.3%}}
 
 /* ---------- Afsluttende CTA: video der styres af musen + skrivemaskine ---------- */
 .hej-run{position:relative;z-index:1;height:190vh;margin-top:-190vh}
@@ -342,7 +312,7 @@ img,svg,video{display:block}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .char,.mark,.info div,.cta{opacity:1;transform:none}
+  .char,.info div{opacity:1;transform:none}
 }
 .vm-float-brand{position:fixed;top:14px;left:max(16px,calc(var(--px) - 2px));z-index:90;display:flex;align-items:baseline;gap:.28em;height:48px;color:#fff;font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 144;font-size:clamp(22px,2vw,27px);letter-spacing:-.025em;line-height:48px;text-decoration:none;text-shadow:0 1px 18px rgba(3,3,24,.55),0 0 2px rgba(3,3,24,.35);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s}
 .vm-float-brand em{font-style:italic;font-weight:200}
@@ -356,8 +326,11 @@ img,svg,video{display:block}
 </head>
 <body>
 <div class="page">
+  <!-- Herovideo: data-hero="ny" viser Mux-videoen, data-hero="gammel" den tidligere video. -->
   <video class="bg" autoplay loop muted playsinline preload="auto" aria-hidden="true"
-    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260717_084049_407d831b-67ef-4e76-9330-45386e0a9915.mp4"></video>
+    data-hero="ny"
+    data-ny="https://stream.mux.com/s8pMcOvMQXc4GD6AX4e1o01xFogFxipmuKltNfSYza0200.m3u8"
+    data-gammel="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260717_084049_407d831b-67ef-4e76-9330-45386e0a9915.mp4"></video>
   <div class="shade" aria-hidden="true"></div>
 
   <div class="content">
@@ -402,32 +375,15 @@ img,svg,video{display:block}
   </div>
 </div>
 
-<section class="flora" id="flora" aria-labelledby="flora-titel">
-  <div class="flora-stage">
-    <h2 class="flora-word" id="flora-titel" aria-label="Vanta">
-      <span class="flora-word__mask">
-        <span class="flora-word__inner" aria-hidden="true"><span class="flora-word__white">VA</span><span class="flora-word__pink">NTA</span></span>
-      </span>
-    </h2>
-    <div class="flora-flower">
-      <img class="flora-flower__sizer" src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260808_192942_e1086505-d7da-433b-a59b-8220f4e6c808.png&amp;w=1280&amp;q=85" width="1280" height="1451" alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <div class="flora-flower__layer flora-flower__layer--bg">
-        <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260808_192942_e1086505-d7da-433b-a59b-8220f4e6c808.png&amp;w=1280&amp;q=85" width="1280" height="1451" alt="Pixel-art-lilje i pink og violet" loading="lazy" decoding="async">
-        <canvas aria-hidden="true"></canvas>
-      </div>
-      <div class="flora-flower__layer flora-flower__layer--top" aria-hidden="true">
-        <img src="https://images.higgs.ai/?default=1&amp;output=webp&amp;url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260808_151324_bf318a5f-5525-4fc7-aab5-e9a341018828.png&amp;w=1280&amp;q=85" width="1280" height="1440" alt="" loading="lazy" decoding="async">
-        <canvas></canvas>
-      </div>
-    </div>
-  </div>
-  <div class="flora-text flora-text--left">
-    <h3>Flere kunder.<br>Færre manuelle opgaver.</h3>
+<section class="eclipse" id="flere-kunder" aria-labelledby="flere-kunder-titel">
+  <div class="eclipse-ring" aria-hidden="true"></div>
+  <div class="eclipse-text eclipse-text--left">
+    <h2 id="flere-kunder-titel">Flere kunder.<br>Færre manuelle opgaver.</h2>
     <p>Vi hjælper virksomheder med at blive fundet, få flere henvendelser og skabe overblik i hverdagen. Fra synlighed på Google og chatbots, der griber kundernes spørgsmål, til CRM og booking, der samler trådene.</p>
   </div>
-  <div class="flora-text flora-text--right">
+  <div class="eclipse-text eclipse-text--right">
     <p>Vi tager udgangspunkt i din virksomhed og forbinder de løsninger, der giver mening for dig. Så vejen fra første henvendelse til næste aftale bliver lettere.</p>
-    <a class="flora-pill" href="/om-vanta">Læs mere om Vanta</a>
+    <a class="eclipse-pill" href="/om-vanta">Læs mere om Vanta</a>
   </div>
 </section>
 
@@ -435,7 +391,7 @@ img,svg,video{display:block}
   <div class="sticky">
     <div class="nebula" aria-hidden="true"></div>
     <canvas class="stars" aria-hidden="true"></canvas>
-    <div class="q"><h2 class="serif" id="univers-titel">Den visuelle standard.</h2></div>
+    <div class="q"><h2 class="serif" id="univers-titel">Den Visuelle Standard.</h2></div>
     <div class="space"><div class="sphere" role="group" aria-label="Koncepter"></div></div>
     <div class="hud">
       <div class="hud-intro">
@@ -504,6 +460,31 @@ img,svg,video{display:block}
   </a></div>
 </footer>
 
+<script>
+// ---------- Herovideo: vælges med data-hero på <video class="bg"> ----------
+(function () {
+  var video = document.querySelector("video.bg");
+  var gammel = video.dataset.gammel;
+  var src = video.dataset[video.dataset.hero] || gammel;
+  function play(url) { video.src = url; video.play().catch(function () {}); }
+  if (!/\.m3u8(\?|$)/.test(src)) return play(src);
+  // HLS-video afspilles med hls.js. Kan browseren ikke bruge den, prøves browserens egen
+  // afspiller (iPhone), og ellers vises den gamle video.
+  var native = video.canPlayType("application/vnd.apple.mpegurl") ? src : gammel;
+  var s = document.createElement("script");
+  s.src = "https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js";
+  s.onload = function () {
+    if (!window.Hls || !Hls.isSupported()) return play(native);
+    var hls = new Hls({ capLevelToPlayerSize: true });
+    hls.on(Hls.Events.ERROR, function (e, data) { if (data.fatal) { hls.destroy(); play(gammel); } });
+    hls.loadSource(src);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function () { video.play().catch(function () {}); });
+  };
+  s.onerror = function () { play(native); };
+  document.head.appendChild(s);
+})();
+</script>
 <script>
 (function () {
   // Del overskrifterne op i bogstaver, så de kan tone frem ét ad gangen
@@ -758,9 +739,11 @@ img,svg,video{display:block}
   });
   sphere.addEventListener("dragstart", function (e) { e.preventDefault(); });
 
-  // ---------- Portal: kameraet zoomer gennem åbningen i "d"-et i "standard" og ind i universet ----------
+  // ---------- Portal: V'et for Vanta glider ind på midten, og kameraet zoomer gennem et vindue i det ----------
+  // Mens man scroller, glider V'et i "Visuelle" ind på midten, og resten af overskriften toner ud
+  // samtidig. Rummet mellem V'ets ben er et vindue ind til koncepterne: det toner ind, mens kameraet
+  // begynder at zoome, og zoomen er færdig, når vinduet dækker hele skærmen.
   // Overskriften tegnes på et canvas, der zoomes på vektorniveau, så den forbliver skarp.
-  // Åbningen i bogstavet findes ud fra selve glyfen og skæres ud af det sorte forhæng.
   var TEXT = title.textContent;
   var portal = document.createElement("canvas");
   portal.className = "portal";
@@ -794,20 +777,25 @@ img,svg,video{display:block}
     var lines = rows.map(function (t, i) {
       return { t: t, x: (W - pctx.measureText(t).width) / 2, y: H / 2 + (i - (rows.length - 1) / 2) * lh + (asc - desc) / 2 };
     });
-    // "standard." står altid i sidste linje; målet er dets første "d"
-    var L = lines[lines.length - 1];
-    var gx = L.x + pctx.measureText(L.t.slice(0, L.t.indexOf("standard") + 4)).width, gy = L.y;
+    // V'et tegnes for sig; resten af dets linje tegnes som teksten før og efter det
+    var L = lines.filter(function (l) { return l.t.indexOf("V") >= 0; })[0];
+    if (!L) { PT = null; portal.style.visibility = "hidden"; title.style.opacity = ""; return; }
+    var vi = L.t.indexOf("V");
+    var gx = L.x + pctx.measureText(L.t.slice(0, vi)).width, gy = L.y;
+    var vm = pctx.measureText("V"), capH = vm.actualBoundingBoxAscent;
 
-    // Bogstavet tegnes stort, og åbningen er den største lukkede baggrundsflade i det
+    // Vinduet: V'et tegnes stort med en vandret streg hen over toppen af benene, så rummet mellem
+    // dem bliver en lukket trekant. Trekanten findes som den største lukkede baggrundsflade.
     var k = Math.max(4, 900 / fs), ox = fs * 0.2, oy = fs * 1.1;
-    var mw = Math.ceil(fs * k), mh = Math.ceil(fs * 1.5 * k), n = mw * mh;
+    var mw = Math.ceil(fs * 1.2 * k), mh = Math.ceil(fs * 1.5 * k), n = mw * mh;
     hole.width = mw;
     hole.height = mh;
     var h = hole.getContext("2d", { willReadFrequently: true });
     h.setTransform(k, 0, 0, k, 0, 0);
     h.font = textFont(fs);
     h.letterSpacing = ls;
-    h.fillText("d", ox, oy);
+    h.fillText("V", ox, oy);
+    h.fillRect(ox - vm.actualBoundingBoxLeft, oy - capH, vm.actualBoundingBoxLeft + vm.actualBoundingBoxRight, Math.max(1.5, fs * 0.012));
     var px = h.getImageData(0, 0, mw, mh).data;
     var lab = new Int32Array(n), queue = new Int32Array(n);
     for (var i = 0; i < n; i++) if (px[i * 4 + 3] >= 128) lab[i] = -1;
@@ -835,7 +823,7 @@ img,svg,video{display:block}
     }
     if (!bestInfo) { PT = null; portal.style.visibility = "hidden"; title.style.opacity = ""; return; }
 
-    // Hullet gøres 3 px større ind under stregen, så kanten skjules af bogstavet
+    // Vinduet gøres 3 px større ind under stregen, så kanten skjules af bogstavet
     var grow = new Uint8Array(n);
     for (i = 0; i < n; i++) if (lab[i] === best) grow[i] = 1;
     for (var pass = 0; pass < 3; pass++) {
@@ -851,7 +839,7 @@ img,svg,video{display:block}
     for (i = 0; i < n; i++) if (grow[i]) img.data[i * 4 + 3] = 255;
     h.putImageData(img, 0, 0);
 
-    // Fokus i åbningens midte; zoomen er færdig, når åbningen dækker hele skærmen
+    // Zoomen sigter mod vinduets midte og er færdig, når vinduet dækker hele skærmen
     var F = { x: gx - ox + bestInfo.x / k, y: gy - oy + bestInfo.y / k };
     function covered(z) {
       for (var a = 0; a <= 8; a++) for (var b = 0; b <= 8; b++) {
@@ -865,23 +853,32 @@ img,svg,video{display:block}
     var lo = 1, hi = 20000;
     for (i = 0; i < 40; i++) { var mid = Math.sqrt(lo * hi); if (covered(mid)) hi = mid; else lo = mid; }
 
-    var grad = pctx.createLinearGradient(0, lines[0].y - asc, 0, L.y + desc);
+    var grad = pctx.createLinearGradient(0, lines[0].y - asc, 0, lines[lines.length - 1].y + desc);
     grad.addColorStop(0.3, "#ede9fe");
     grad.addColorStop(1, "#a78bfa");
-    PT = { fs: fs, ls: ls, lines: lines, gx: gx, gy: gy, ox: ox, oy: oy, k: k, mw: mw, mh: mh, F: F, zFull: hi, grad: grad };
+    PT = {
+      fs: fs, ls: ls, lines: lines, L: L, pre: L.t.slice(0, vi), post: L.t.slice(vi + 1),
+      postX: L.x + pctx.measureText(L.t.slice(0, vi + 1)).width, gx: gx, gy: gy,
+      Vc: { x: gx + vm.width / 2, y: gy - capH / 2 }, F: F, ox: ox, oy: oy, k: k, mw: mw, mh: mh, zFull: hi, grad: grad
+    };
     portalDone = false;
     portal.style.visibility = "";
     title.style.opacity = "0";
     drawPortal(progress());
   }
 
-  // Tegner forhænget for scrollposition p og returnerer, hvor universets midte skal ligge
+  // Tegner forhænget for scrollposition p og returnerer, hvor universets midte skal ligge.
+  // 0,03–0,20: V'et glider ind på midten, og resten toner ud samtidig. 0,14–0,32: vinduet toner ind.
+  // 0,20–0,56: kameraet zoomer gennem vinduet, til det dækker skærmen.
   function drawPortal(p) {
     if (!PT) return [0, 0];
-    var s = smooth(range(p, 0.03, 0.56));
-    var z = Math.pow(PT.zFull * 1.15, s);
-    var kk = smooth(range(s, 0, 0.6));
-    var cx = PT.F.x + (W / 2 - PT.F.x) * kk, cy = PT.F.y + (H / 2 - PT.F.y) * kk;
+    var a = smooth(range(p, 0.03, 0.2));
+    var s = smooth(range(p, 0.2, 0.56));
+    var z = (1 + 0.35 * a) * Math.pow(PT.zFull * 1.15 / 1.35, s);
+    // Kameraet følger V'ets midte ind på skærmens midte og glider så over på vinduets midte
+    var kk = smooth(range(s, 0, 0.5));
+    var tx = PT.Vc.x + (PT.F.x - PT.Vc.x) * kk, ty = PT.Vc.y + (PT.F.y - PT.Vc.y) * kk;
+    var sx = PT.Vc.x + (W / 2 - PT.Vc.x) * a, sy = PT.Vc.y + (H / 2 - PT.Vc.y) * a;
     var done = z >= PT.zFull;
     if (done !== portalDone) {
       portalDone = done;
@@ -890,19 +887,33 @@ img,svg,video{display:block}
     if (!done) {
       pctx.setTransform(DPR, 0, 0, DPR, 0, 0);
       pctx.globalCompositeOperation = "source-over";
+      pctx.globalAlpha = 1;
       pctx.fillStyle = "#000";
       pctx.fillRect(0, 0, W, H);
-      var a = DPR * z;
-      pctx.setTransform(a, 0, 0, a, DPR * (cx - PT.F.x * z), DPR * (cy - PT.F.y * z));
-      pctx.globalCompositeOperation = "destination-out";
-      pctx.drawImage(hole, PT.gx - PT.ox, PT.gy - PT.oy, PT.mw / PT.k, PT.mh / PT.k);
-      pctx.globalCompositeOperation = "source-over";
+      var sc = DPR * z;
+      pctx.setTransform(sc, 0, 0, sc, DPR * (sx - tx * z), DPR * (sy - ty * z));
+      var win = smooth(range(p, 0.14, 0.32));
+      if (win > 0) {
+        pctx.globalCompositeOperation = "destination-out";
+        pctx.globalAlpha = win;
+        pctx.drawImage(hole, PT.gx - PT.ox, PT.gy - PT.oy, PT.mw / PT.k, PT.mh / PT.k);
+        pctx.globalCompositeOperation = "source-over";
+      }
       pctx.font = textFont(PT.fs);
       pctx.letterSpacing = PT.ls;
       pctx.fillStyle = PT.grad;
-      PT.lines.forEach(function (L) { pctx.fillText(L.t, L.x, L.y); });
+      if (a < 0.998) {
+        pctx.globalAlpha = 1 - a;
+        PT.lines.forEach(function (L) {
+          if (L !== PT.L) { pctx.fillText(L.t, L.x, L.y); return; }
+          if (PT.pre) pctx.fillText(PT.pre, L.x, L.y);
+          if (PT.post) pctx.fillText(PT.post, PT.postX, L.y);
+        });
+      }
+      pctx.globalAlpha = 1;
+      pctx.fillText("V", PT.gx, PT.gy);
     }
-    return [cx - W / 2, cy - H / 2];
+    return [sx + (PT.F.x - tx) * z - W / 2, sy + (PT.F.y - ty) * z - H / 2];
   }
   if (!calm) {
     title.style.opacity = "0";
@@ -929,7 +940,7 @@ img,svg,video{display:block}
     prev = now;
     var p = progress();
 
-    // 1) Kameraet zoomer gennem bogstavets åbning; universet ligger bag den
+    // 1) Kameraet zoomer gennem vinduet i V'et; universet ligger bag det
     var off = calm ? [0, 0] : drawPortal(p);
     space.style.translate = off[0].toFixed(1) + "px " + off[1].toFixed(1) + "px";
     // 2) Kortene ses samlet langt inde og glider ud i kuglen, mens vi passerer bogstavet
@@ -1053,143 +1064,6 @@ img,svg,video{display:block}
 })();
 </script>
 
-<script>
-(function () {
-  // ---------- Plakat: indgang én gang + morf-spor, der bytter liljerne under musen ----------
-  var sec = document.getElementById("flora");
-  var stage = sec.querySelector(".flora-stage");
-  var flower = sec.querySelector(".flora-flower");
-  var frontImg = flower.querySelector(".flora-flower__layer--bg img");
-  var revealImg = flower.querySelector(".flora-flower__layer--top img");
-  var cvF = flower.querySelector(".flora-flower__layer--bg canvas");
-  var cvT = flower.querySelector(".flora-flower__layer--top canvas");
-  var ctxF = cvF.getContext("2d");
-  var ctxT = cvT.getContext("2d");
-
-  // Indgangen venter, til plakaten er godt inde på skærmen, og spilles kun én gang
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    sec.classList.add("wait");
-    var finish = function () { sec.classList.remove("wait", "play"); };
-    new IntersectionObserver(function (entries, io) {
-      if (!entries[0].isIntersecting) return;
-      io.disconnect();
-      sec.classList.add("play");
-      flower.addEventListener("animationend", finish, { once: true });
-      setTimeout(finish, 6000);
-    }, { threshold: 0.6 }).observe(stage);
-  }
-
-  // Sporet: organiske klatter langs musens vej skærer den forreste lilje væk
-  // og maler den bagerste frem i samme form. Begge tegnes direkte på canvas.
-  var MAX_POINTS = 60, HEAD_R = 140, NOISE_AMP = 44, BLOB_PTS = 24, FADE = 0.92, SAMPLE_DIST = 8;
-  var trail = [], headR = 0, hovering = false, mx = 0, my = 0, time = 0;
-  var W = 0, H = 0, DPR = 1, raf = 0;
-
-  function size() {
-    W = flower.offsetWidth;
-    H = flower.offsetHeight;
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
-    cvF.width = cvT.width = Math.round(W * DPR);
-    cvF.height = cvT.height = Math.round(H * DPR);
-  }
-  function ready(img) { return img.complete && img.naturalWidth > 0; }
-  // Tegnes som object-fit: cover
-  function cover(ctx, img) {
-    var iw = img.naturalWidth, ih = img.naturalHeight;
-    var s = Math.max(W / iw, H / ih);
-    var sw = W / s, sh = H / s;
-    ctx.drawImage(img, (iw - sw) / 2, (ih - sh) / 2, sw, sh, 0, 0, W, H);
-  }
-  // 24 punkter med bølgende støj, lukket med bløde kurver gennem midtpunkterne
-  function blob(cx, cy, r, seed) {
-    var pts = [];
-    for (var i = 0; i < BLOB_PTS; i++) {
-      var a = i / BLOB_PTS * Math.PI * 2;
-      var n1 = Math.sin(a * 3 + time * 1.4 + seed) * 0.45;
-      var n2 = Math.sin(a * 5 - time * 0.9 + seed * 2.3) * 0.3;
-      var n3 = Math.cos(a * 2 + time * 1.8 + seed * 0.7) * 0.25;
-      var rr = r + (n1 + n2 + n3) * NOISE_AMP * (r / HEAD_R);
-      pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]);
-    }
-    var path = new Path2D(), last = pts[BLOB_PTS - 1];
-    path.moveTo((last[0] + pts[0][0]) / 2, (last[1] + pts[0][1]) / 2);
-    for (var j = 0; j < BLOB_PTS; j++) {
-      var p = pts[j], q = pts[(j + 1) % BLOB_PTS];
-      path.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2);
-    }
-    path.closePath();
-    return path;
-  }
-
-  function frame() {
-    raf = 0;
-    var target = hovering ? HEAD_R : 0;
-    headR += (target - headR) * (hovering ? 0.14 : 0.04);
-    if (hovering && headR > 5) {
-      var last = trail[trail.length - 1];
-      if (!last || Math.hypot(mx - last.x, my - last.y) > SAMPLE_DIST) {
-        trail.push({ x: mx, y: my, r: headR, alpha: 1, seed: Math.random() * 100 });
-        if (trail.length > MAX_POINTS) trail.shift();
-      }
-    }
-
-    var live = trail.length > 0 && ready(frontImg);
-    if (live) {
-      ctxF.setTransform(DPR, 0, 0, DPR, 0, 0);
-      ctxT.setTransform(DPR, 0, 0, DPR, 0, 0);
-      ctxF.globalCompositeOperation = ctxT.globalCompositeOperation = "source-over";
-      ctxF.clearRect(0, 0, W, H);
-      ctxT.clearRect(0, 0, W, H);
-      cover(ctxF, frontImg);
-      ctxF.globalCompositeOperation = "destination-out";
-      for (var i = 0; i < trail.length; i++) {
-        var pt = trail[i];
-        if (pt.r < 2) continue;
-        var path = blob(pt.x, pt.y, pt.r, pt.seed);
-        ctxF.globalAlpha = ctxT.globalAlpha = pt.alpha;
-        ctxF.fill(path);
-        ctxT.fill(path);
-      }
-      ctxF.globalAlpha = ctxT.globalAlpha = 1;
-      ctxT.globalCompositeOperation = "source-in";
-      if (ready(revealImg)) cover(ctxT, revealImg);
-      else ctxT.clearRect(0, 0, W, H);
-    }
-    flower.classList.toggle("trail", live);
-
-    for (var j = trail.length - 1; j >= 0; j--) {
-      trail[j].alpha *= FADE;
-      trail[j].r *= 0.995;
-      if (trail[j].alpha < 0.01) trail.splice(j, 1);
-    }
-    time += 0.016;
-    // Løkken sover, når sporet er væk og hovedet har fundet sin størrelse
-    if (trail.length || Math.abs(target - headR) > 0.5) raf = requestAnimationFrame(frame);
-    else if (!hovering) headR = 0;
-  }
-  function wake() { if (!raf) raf = requestAnimationFrame(frame); }
-
-  function point(e) {
-    if (e.pointerType !== "mouse") return;
-    var r = flower.getBoundingClientRect();
-    if (!r.width) return;
-    mx = (e.clientX - r.left) * W / r.width;
-    my = (e.clientY - r.top) * H / r.height;
-    hovering = true;
-    wake();
-  }
-  sec.addEventListener("pointerenter", point);
-  sec.addEventListener("pointermove", point);
-  sec.addEventListener("pointerleave", function (e) {
-    if (e.pointerType !== "mouse") return;
-    hovering = false;
-    wake();
-  });
-
-  new ResizeObserver(size).observe(flower);
-})();
-</script>
-
 <script src="assets/hest.js"></script>
 <script>
 (function () {
@@ -1213,7 +1087,7 @@ img,svg,video{display:block}
   var RAMP = "·:-+=*ASTNV";
   var BG_CHARS = "VANTASTUDIO·:";
   var FPS = 4;             // billeder pr. sekund – lavt tal = rolig slowmotion
-  var VIOLET = "#7c3aed", LILAC = "#a78bfa", SLATE = "#0F172A";
+  var VIOLET = "#7c3aed", LILAC = "#a78bfa", BG = "#000";
 
   var W = 0, H = 0, DPR = 1, cw = 8, ch = 13, font = "";
   var bg = document.createElement("canvas");
@@ -1310,7 +1184,7 @@ img,svg,video{display:block}
 
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = SLATE;
+    ctx.fillStyle = BG;
     ctx.fillRect(0, 0, W, H);
     ctx.drawImage(bg, shiftX * 0.35, shiftY * 0.35, W, H);
 
@@ -1386,7 +1260,7 @@ img,svg,video{display:block}
         ctx.globalAlpha = 1;
         if (behind < 0.05 && bl[3] < 0.45) {
           // Ujævn kant: enkelte mørke blokke bliver hængende lidt
-          ctx.fillStyle = SLATE;
+          ctx.fillStyle = BG;
           ctx.fillRect(bl[0], bl[1], bs + 0.5, bs + 0.5);
         } else {
           ctx.clearRect(bl[0], bl[1], bs + 0.5, bs + 0.5);
