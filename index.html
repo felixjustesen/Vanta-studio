@@ -223,32 +223,43 @@ img,svg,video{display:block}
 .cta-body p{max-width:460px;margin:0;font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:rgba(237,233,254,.8);text-shadow:0 1px 18px rgba(0,0,0,.95)}
 .credit{position:absolute;right:var(--px);bottom:var(--py);z-index:2;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,233,254,.45)}
 
-/* ---------- Formørkelse: en sort skive med en glødende kant og teksten i bunden ---------- */
-.eclipse{position:relative;height:100vh;height:100svh;overflow:hidden;background:#000;color:#fff}
-/* Skivens top står 2/3 nede, og radius er halvdelen af sektionens højde. Kanten er en tynd
-   hvidgul streg med orange glød udenfor og en svag glød lige indenfor. */
-.eclipse-ring{position:absolute;top:66.3%;left:50%;height:100.4%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#000;
-  box-shadow:0 0 0 1.5px #fff2c8,0 0 0 4px #ffb04a,0 0 6px 6px rgba(255,140,40,1),0 0 16px 14px rgba(255,110,20,.85),0 0 34px 26px rgba(230,85,10,.6),0 0 70px 44px rgba(190,60,0,.38),0 0 160px 80px rgba(150,40,0,.2),
-    inset 0 0 0 1.5px #ffcf7a,inset 0 0 8px 4px rgba(255,170,70,.85),inset 0 0 30px 10px rgba(220,90,20,.45),inset 0 0 80px 20px rgba(140,45,0,.25);
+/* ---------- Formørkelse: Vanta-logoet tegnet i lys og de fire discipliner i én kolonne ---------- */
+/* Kolonnen står i bunden. Er den højere end skærmen, vokser sektionen i stedet for at skære
+   teksten af, og toppadding holder den fri af stregen. */
+.eclipse{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:100vh;min-height:100svh;overflow:hidden;padding:max(150px,18svh) 3.177083vw 4.361371svh;background:#000;color:#fff}
+/* Skiven er lige så høj som sektionen, så teksten står inde i den, også når sektionen vokser.
+   Toppen står lige under "Vanta Studio" i hjørnet, så stregen krydser under navnet, når
+   sektionen fylder skærmen, og glider ind bag det, når man scroller videre. Som i logoet ligger
+   lyset på kanten oppe til venstre, og resten af kanten er en svag streg. Lyset er skygger
+   forskudt mod nederst til højre, så stregen er tykkest oppe til venstre og løber ud i spidser.
+   Den negative spredning holder gløden væk fra den mørke side. 1em er 1/900 af skærmens
+   højde, så lyset vokser med skærmen. */
+.eclipse-ring{position:absolute;top:76px;left:calc(var(--px) + 115px);height:100.4%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:#000;
+  font-size:.1116vh;font-size:.1116svh;
+  box-shadow:0 0 0 1px rgba(255,214,170,.2),-5em -5em 12em -2em rgba(255,150,50,.95),-14em -14em 34em -6em rgba(255,110,20,.65),-34em -34em 80em -16em rgba(230,85,10,.42),-70em -70em 180em -40em rgba(170,50,0,.28),
+    inset 9em 9em 0 #fff6dc,inset 15em 15em 8em #ffb04a,inset 26em 26em 30em -4em rgba(255,140,40,.65),inset 48em 48em 70em -10em rgba(220,90,20,.32),inset 90em 90em 130em -20em rgba(140,45,0,.24);
   animation:eclipse-glow 5s ease-in-out infinite alternate}
 @keyframes eclipse-glow{to{filter:brightness(1.18)}}
 /* Mørk bund, så teksten kan læses, hvor kanten løber bag den */
 .eclipse::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0));pointer-events:none}
-.eclipse-text{position:absolute;bottom:4.361371svh;z-index:1;color:#f7f7f7;text-shadow:0 1px 18px rgba(0,0,0,.85)}
-.eclipse-text h2{margin:0 0 .6em;font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(24px,2.2vw,34px);line-height:1.05;letter-spacing:-.02em;color:#fff}
-.eclipse-text p{margin:0 0 .9em;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
-/* Overskriften står nederst til venstre, afsnittet med knappen nederst til højre */
-.eclipse-text--left{left:3.177083vw;width:min(370px,25.5vw)}
-.eclipse-text--right{right:3.177083vw;width:min(340px,24vw)}
-.eclipse-pill{display:inline-flex;align-items:center;height:44px;margin-top:.4em;padding:0 1.4em;border-radius:999px;background:#fff;color:#161616;font-size:14px;letter-spacing:.02em;text-shadow:none;transition:background-color .2s}
+.eclipse-text{position:relative;z-index:1;width:min(960px,100%);color:#f7f7f7;text-shadow:0 1px 18px rgba(0,0,0,.85)}
+.eclipse-text h2{margin:0 0 clamp(28px,4.5svh,44px);font-family:"Fraunces","Times New Roman",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(24px,2.2vw,34px);line-height:1.05;letter-spacing:-.02em;color:#fff}
+.eclipse-text p{margin:0;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
+/* De fire områder er åbne felter med en tynd linje over, mellem og under dem. Hvert felt har
+   linjen over sig og det sidste også linjen under, så linjerne toner frem sammen med felterne.
+   Titel og beskrivelse står tættere sammen end felterne, så de tydeligt hører sammen. */
+.eclipse-areas{margin:0 0 clamp(32px,4.5svh,44px);padding:0;list-style:none}
+.eclipse-areas li{display:grid;gap:10px;padding:30px 0;border-top:1px solid rgba(255,255,255,.2)}
+.eclipse-areas li:last-child{border-bottom:1px solid rgba(255,255,255,.2)}
+.eclipse-areas h3{margin:0;font-size:clamp(15px,1.15vw,17px);font-weight:500;line-height:1.3;letter-spacing:-.005em;color:#fff}
+.eclipse-pill{display:inline-flex;align-items:center;height:44px;padding:0 1.4em;border-radius:999px;background:#fff;color:#161616;font-size:14px;letter-spacing:.02em;text-shadow:none;transition:background-color .2s}
 .eclipse-pill:hover{background:#ffe6d6}
-/* Små skærme og højformat: tekstblokkene står under hinanden i bunden */
+/* Små skærme og højformat: stregen går i hele bredden, så teksten starter længere nede, og skiven rykkes lidt til højre */
 @media (max-width:760px),(max-aspect-ratio:1/1){
-  .eclipse{display:flex;flex-direction:column;justify-content:flex-end;gap:12px;padding:0 var(--px) 8svh}
-  .eclipse-text{position:relative;left:auto;right:auto;bottom:auto;width:auto;max-width:34rem}
+  .eclipse{padding:180px var(--px) 8svh}
+  .eclipse-ring{left:calc(var(--px) + 170px)}
 }
-/* Højformat: skiven rykkes op, så kanten står over teksten */
-@media (max-aspect-ratio:1/1){.eclipse-ring{top:44.3%}}
+@media (max-width:760px){.eclipse-areas li{padding:22px 0}}
 
 /* ---------- Afsluttende CTA: video der styres af musen + skrivemaskine ---------- */
 .hej-run{position:relative;z-index:1;height:190vh;margin-top:-190vh}
@@ -377,12 +388,14 @@ img,svg,video{display:block}
 
 <section class="eclipse" id="flere-kunder" aria-labelledby="flere-kunder-titel">
   <div class="eclipse-ring" aria-hidden="true"></div>
-  <div class="eclipse-text eclipse-text--left">
-    <h2 id="flere-kunder-titel">Flere kunder.<br>Færre manuelle opgaver.</h2>
-    <p>Vi hjælper virksomheder med at blive fundet, få flere henvendelser og skabe overblik i hverdagen. Fra synlighed på Google og chatbots, der griber kundernes spørgsmål, til CRM og booking, der samler trådene.</p>
-  </div>
-  <div class="eclipse-text eclipse-text--right">
-    <p>Vi tager udgangspunkt i din virksomhed og forbinder de løsninger, der giver mening for dig. Så vejen fra første henvendelse til næste aftale bliver lettere.</p>
+  <div class="eclipse-text">
+    <h2 id="flere-kunder-titel">Fire&nbsp;discipliner. Ét&nbsp;studie.</h2>
+    <ul class="eclipse-areas">
+      <li><h3>Webdesign</h3><p>Hjemmesider med fokus på design, oplevelse og henvendelser.</p></li>
+      <li><h3>Synlighed</h3><p>SEO, AEO og GEO, der gør din virksomhed synlig i søgemaskiner og AI-svar.</p></li>
+      <li><h3>AI &amp; automatisering</h3><p>Chatbots og workflows, der sparer tid i hverdagen.</p></li>
+      <li><h3>Digitale systemer</h3><p>CRM, booking og løsninger, der samler virksomheden.</p></li>
+    </ul>
     <a class="eclipse-pill" href="/om-vanta">Læs mere om Vanta</a>
   </div>
 </section>
@@ -521,6 +534,53 @@ img,svg,video{display:block}
     // Første skift venter, til bogstaverne er tonet frem
     setTimeout(function () { setInterval(next, 3500); }, 1800);
   })();
+})();
+</script>
+
+<script>
+// Formørkelsen: indholdet toner frem, mens man scroller ned til sektionen. Hvert element starter
+// usynligt og toner frem, mens det glider op gennem den nederste fjerdedel af skærmen. Derfor
+// kommer overskriften først, så Webdesign og til sidst Digitale systemer og knappen. Alt er
+// fremme, når sektionen fylder skærmen, eller når dens bund når skærmens bund, hvis den er højere.
+(function () {
+  var section = document.getElementById("flere-kunder");
+  if (!section || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var items = [section.querySelector(".eclipse-text h2")]
+    .concat([].slice.call(section.querySelectorAll(".eclipse-areas li")), [section.querySelector(".eclipse-pill")]);
+  var clamp = function (v, a, b) { return Math.min(b, Math.max(a, v)); };
+  var queued = false;
+
+  // Elementets top i sektionen, uden den forskydning scriptet selv giver det
+  function offset(el) {
+    var y = 0;
+    for (; el && el !== section; el = el.offsetParent) y += el.offsetTop;
+    return y;
+  }
+  function update() {
+    queued = false;
+    var ih = window.innerHeight;
+    var top = section.getBoundingClientRect().top;
+    // Sektionens top, når alt skal være fremme
+    var end = Math.min(0, ih - section.offsetHeight);
+    items.forEach(function (el) {
+      var y = offset(el);
+      // Fremme, når elementet er nået 3/4 op ad skærmen, men senest når sektionen er på plads.
+      // Fadet varer mindst 80 px scroll, så knappen nederst ikke springer frem.
+      var done = Math.max(ih * 0.75, y + end);
+      var from = Math.max(ih * 0.98, done + 80);
+      var k = clamp((from - (top + y)) / (from - done), 0, 1);
+      k = k * k * (3 - 2 * k);
+      el.style.opacity = k;
+      el.style.transform = k < 1 ? "translateY(" + ((1 - k) * 40).toFixed(1) + "px)" : "";
+      el.style.filter = k < 1 ? "blur(" + ((1 - k) * 6).toFixed(2) + "px)" : "";
+    });
+  }
+  function onScroll() {
+    if (!queued) { queued = true; requestAnimationFrame(update); }
+  }
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
 })();
 </script>
 
