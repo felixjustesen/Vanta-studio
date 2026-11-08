@@ -32,23 +32,52 @@
  "@context": "https://schema.org",
  "@graph": [
   {
-   "@type": "ProfessionalService",
+   "@type": [
+    "Organization",
+    "ProfessionalService"
+   ],
    "@id": "https://www.vantastudio.dk/#org",
    "name": "Vanta Studio",
    "url": "https://www.vantastudio.dk/",
    "email": "kontakt@vantastudio.dk",
    "image": "https://www.vantastudio.dk/assets/og-vanta.jpg",
    "logo": "https://www.vantastudio.dk/icon-512.png",
-   "description": "Digitalt bureau, der udvikler hjemmesider, AI-løsninger og automatiseringer til virksomheder.",
+   "description": "Dansk digitalt bureau, der udvikler hjemmesider, AI-løsninger og automatiseringer til virksomheder.",
+   "disambiguatingDescription": "Selvstændigt dansk digitalt bureau, grundlagt og drevet af Felix Nylander Justesen. Vanta Studio arbejder med webdesign, synlighed i Google og AI-søgning (SEO, AEO og GEO), AI og automatisering samt digitale systemer som CRM og booking.",
    "founder": {
     "@type": "Person",
-    "name": "Felix Nylander Justesen"
+    "@id": "https://www.vantastudio.dk/om-vanta#felix",
+    "name": "Felix Nylander Justesen",
+    "jobTitle": "Grundlægger",
+    "url": "https://www.vantastudio.dk/om-vanta"
+   },
+   "sameAs": [
+    "https://x.com/VantastudioDK"
+   ],
+   "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "email": "kontakt@vantastudio.dk",
+    "url": "https://www.vantastudio.dk/kontakt",
+    "availableLanguage": "da"
    },
    "areaServed": {
     "@type": "Country",
     "name": "Danmark"
    },
-   "knowsLanguage": "da"
+   "knowsLanguage": "da",
+   "knowsAbout": [
+    "Webdesign",
+    "Hjemmesider",
+    "SEO",
+    "Answer Engine Optimization (AEO)",
+    "Generative Engine Optimization (GEO)",
+    "AI-chatbots",
+    "Automatisering",
+    "CRM",
+    "Bookingsystemer",
+    "Systemintegrationer"
+   ]
   },
   {
    "@type": "BreadcrumbList",
@@ -84,7 +113,9 @@
    "mainEntityOfPage": "https://www.vantastudio.dk/indsigter/hvad-kan-automatiseres",
    "author": {
     "@type": "Person",
-    "name": "Felix Nylander Justesen"
+    "@id": "https://www.vantastudio.dk/om-vanta#felix",
+    "name": "Felix Nylander Justesen",
+    "url": "https://www.vantastudio.dk/om-vanta"
    },
    "publisher": {
     "@id": "https://www.vantastudio.dk/#org"
@@ -141,7 +172,7 @@
 </main>
 <footer class="sp-foot"><div class="wrap">
   <div class="foot-grid">
-    <div><p class="foot-brand">Vanta Studio</p><p style="margin:0 0 18px"><a href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a></p><nav class="socials" aria-label="Sociale medier"><a href="#" aria-label="Vanta Studio på X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.48 21H2.4l7.17-8.19L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45Z"/></svg></a><a href="#" aria-label="Vanta Studio på Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></nav></div>
+    <div><p class="foot-brand">Vanta Studio</p><p style="margin:0 0 18px"><a href="mailto:kontakt@vantastudio.dk">kontakt@vantastudio.dk</a></p><nav class="socials" aria-label="Sociale medier"><a href="https://x.com/VantastudioDK" rel="me" aria-label="Vanta Studio på X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.48 21H2.4l7.17-8.19L2 3h6.33l4.37 5.77L17.75 3Zm-1.08 16.18h1.7L7.4 4.73H5.58l11.09 14.45Z"/></svg></a></nav></div>
     <div><h2>Ydelser</h2><ul><li><a href="/ydelser/hjemmesider">Hjemmesider</a></li><li><a href="/ydelser/ai-automatisering">AI & automatisering</a></li><li><a href="/ydelser/seo-aeo-geo">SEO, AEO & GEO</a></li><li><a href="/ydelser/integrationer">Digitale integrationer</a></li></ul></div>
     <div><h2>Løsninger</h2><ul><li><a href="/loesninger/ai-chatbot">AI-chatbot</a></li><li><a href="/loesninger/automatisk-genbooking">Automatisk genbooking</a></li><li><a href="/loesninger/bookingpaamindelser">Bookingpåmindelser</a></li><li><a href="/loesninger/kundeopfoelgning">Kundeopfølgning</a></li></ul></div>
     <div><h2>Vanta</h2><ul><li><a href="/metode">Metode</a></li><li><a href="/om-vanta">Om Vanta</a></li><li><a href="/faq">FAQ</a></li><li><a href="/indsigter">Indsigter</a></li><li><a href="/kontakt">Kontakt</a></li></ul></div>
