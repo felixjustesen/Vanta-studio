@@ -65,6 +65,9 @@
 .prose li::marker{color:var(--cyan)}
 .prose strong{color:#fff;font-weight:600}
 .prose a{color:var(--cyan)}
+.prose pre{max-width:100%;margin:16px 0 0;padding:18px 20px;overflow-x:auto;border-radius:14px;background:rgba(237,233,254,.04);box-shadow:inset 0 0 0 1px var(--line);font-size:14px;line-height:1.6}
+.prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;color:#fff}
+.prose pre code{font-size:inherit;color:var(--mist-80)}
 .note{margin-top:28px!important;padding:18px 22px;border-radius:14px;background:rgba(34,211,238,.06);box-shadow:inset 0 0 0 1px rgba(34,211,238,.22);font-size:15px!important}
 
 /* Kort */
@@ -127,6 +130,7 @@ a.post:hover h2,a.post:hover h3{color:var(--cyan)}
 .planned{max-width:880px;margin:48px 0 0;padding:0;list-style:none}
 .planned li{padding:14px 0;border-top:1px solid var(--line);color:var(--mist-60)}
 .art-meta{margin:22px 0 0;font-size:13px;color:var(--mist-60)}
+.art-meta a{text-decoration:underline;text-decoration-color:rgba(237,233,254,.3);text-underline-offset:3px}
 
 /* Afsluttende kontaktfelt */
 .ending{padding:clamp(80px,12vw,160px) 0;border-top:1px solid var(--line);text-align:center}

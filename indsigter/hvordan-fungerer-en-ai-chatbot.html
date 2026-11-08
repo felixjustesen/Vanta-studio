@@ -107,7 +107,7 @@
    "headline": "Hvordan fungerer en AI-chatbot til virksomheder?",
    "description": "Sådan fungerer en AI-chatbot på en virksomheds hjemmeside: hvad den kan svare på, hvor den får sin viden fra, hvad den ikke bør gøre, og hvordan man kommer i gang.",
    "datePublished": "2026-10-25",
-   "dateModified": "2026-10-25",
+   "dateModified": "2026-11-08",
    "inLanguage": "da",
    "image": "https://www.vantastudio.dk/assets/og-vanta.jpg",
    "mainEntityOfPage": "https://www.vantastudio.dk/indsigter/hvordan-fungerer-en-ai-chatbot",
@@ -120,6 +120,43 @@
    "publisher": {
     "@id": "https://www.vantastudio.dk/#org"
    }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Kan chatbotten svare på andre sprog end dansk?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ja, moderne sprogmodeller forstår og svarer på mange sprog. Det er en god idé at teste svarene på de sprog, dine kunder bruger."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hvad hvis chatbotten svarer forkert?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Risikoen mindskes ved at give den præcis viden og tydelige grænser, så den siger, at den ikke ved det, frem for at gætte. Hold også øje med samtalerne, og ret den viden, den bygger på, når noget er forkert."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kan chatbotten booke tider?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Det afhænger af bookingsystemet. Giver systemet adgang via en API, kan chatbotten i nogle tilfælde finde ledige tider eller oprette en booking. Ellers kan den henvise direkte til online booking."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Erstatter en chatbot min kundeservice?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nej. Den tager de gentagne spørgsmål og sørger for, at ingen henvendelser går tabt uden for åbningstiden, så der er mere tid til de samtaler, der kræver et menneske."
+     }
+    }
+   ]
   }
  ]
 }
@@ -137,26 +174,62 @@
 <section class="pg-hero"><div class="wrap">
   <nav aria-label="Brødkrummer"><ol class="crumbs"><li><a href="/">Forside</a></li><li><a href="/indsigter">Indsigter</a></li><li aria-current="page">Hvordan fungerer en AI-chatbot til virksomheder?</li></ol></nav>
   <h1 class="serif">Hvordan fungerer en AI-chatbot til virksomheder?</h1>
-  <p class="lead">Hvad en AI-chatbot kan, hvor den henter sin viden, og hvor grænserne bør gå.</p><p class="art-meta">Af Felix Nylander Justesen · <time datetime="2026-10-25">25. oktober 2026</time></p>
+  <p class="lead">Hvad en AI-chatbot kan, hvor den henter sin viden, og hvor grænserne bør gå.</p><p class="art-meta">Af <a href="/om-vanta">Felix Nylander Justesen</a> · <time datetime="2026-10-25">25. oktober 2026</time> · Opdateret <time datetime="2026-11-08">8. november 2026</time></p>
   
 </div></section>
 <section class="sec"><div class="wrap"><article class="prose rv">
 <p>En AI-chatbot er et chatvindue på din hjemmeside, hvor besøgende kan stille spørgsmål og få svar i almindeligt sprog. Moderne chatbots bygger på store sprogmodeller, der forstår spørgsmål formuleret på mange forskellige måder – også med stavefejl eller på andre sprog.</p>
 <h2 class="serif">Hvor får chatbotten sin viden fra?</h2>
 <p>En sprogmodel ved meget generelt, men intet om netop din virksomhed. Derfor får chatbotten adgang til den viden, den skal bruge: ydelser, priser, åbningstider, betingelser og svar på de spørgsmål, kunderne typisk stiller. Når en besøgende spørger, finder chatbotten de relevante oplysninger og formulerer et svar ud fra dem.</p>
+<p>Det betyder også, at chatbotten aldrig bliver bedre end den viden, den får. Er prislisten forældet, bliver svarene det også. Derfor er det vigtigt, at nogen har ansvaret for at holde den opdateret.</p>
+<h2 class="serif">Sådan foregår en samtale</h2>
+<ol>
+<li>Den besøgende skriver et spørgsmål – fx «Har I åbent lørdag?»</li>
+<li>Chatbotten finder de relevante oplysninger i den viden, den har fået.</li>
+<li>Sprogmodellen formulerer et svar ud fra de oplysninger i et naturligt sprog.</li>
+<li>Kan chatbotten ikke svare sikkert, tilbyder den at sende spørgsmålet videre til en person.</li>
+</ol>
+<p>Det hele tager typisk få sekunder, og den besøgende oplever det som en almindelig samtale.</p>
 <h2 class="serif">Hvad kan den typisk hjælpe med?</h2>
 <ul>
 <li>Svar på almindelige spørgsmål – også uden for åbningstiden.</li>
+<li>Svare på de samme spørgsmål på flere sprog.</li>
 <li>Guide besøgende til den rigtige side, fx booking eller kontakt.</li>
 <li>Tage imod en henvendelse med kontaktoplysninger, så en person kan følge op.</li>
 <li>Slå oplysninger op i andre systemer, hvor det teknisk er muligt og aftalt.</li>
 </ul>
 <h2 class="serif">Hvad bør den ikke gøre?</h2>
 <p>En god chatbot kender sine grænser. Den skal ikke gætte, når den ikke kender svaret, og den skal ikke træffe beslutninger, der kræver en faglig vurdering. I stedet bør den sige, at den ikke ved det, og tilbyde at sende spørgsmålet videre. Det er også vigtigt at fortælle de besøgende, at de taler med en chatbot, og at håndtere de oplysninger, de skriver, i overensstemmelse med reglerne om databeskyttelse.</p>
+<p>EU’s AI-forordning stiller desuden krav om, at det skal være tydeligt for brugerne, når de taler med en AI.</p>
+<h2 class="serif">Et eksempel</h2>
+<p>Forestil dig en frisørsalon, hvor de samme spørgsmål går igen: Hvad koster en klipning? Kan jeg parkere ved salonen? Har I tid i morgen? En chatbot kan svare på de to første ud fra salonens prisliste og praktiske oplysninger og henvise til online booking for at finde en ledig tid. Spørger en kunde om noget, der kræver en faglig vurdering – fx en behandling ved en hudlidelse – svarer chatbotten, at det bør afklares med salonen, og tilbyder at tage imod en henvendelse.</p>
 <h2 class="serif">Hvornår giver det mening?</h2>
 <p>En chatbot giver mest værdi, når du får mange gentagne spørgsmål, eller når kunderne ofte har brug for svar uden for åbningstiden. Får du få og meget forskellige henvendelser, er en tydelig FAQ og en god kontaktformular måske nok.</p>
+<p>Et godt tegn er, hvis du eller dine medarbejdere ofte skriver de samme svar på mail, i beskeder og i telefonen.</p>
+<h2 class="serif">Data og sikkerhed</h2>
+<p>Spørg, hvor samtalerne gemmes, hvor længe, og om leverandøren bruger dem til at træne sine modeller. Indgå en databehandleraftale, og bed ikke de besøgende om flere oplysninger, end der er brug for.</p>
+<p>Skriv i din privatlivspolitik, at hjemmesiden bruger en chatbot, og hvad oplysningerne bruges til.</p>
+<h2 class="serif">Løbende forbedring</h2>
+<p>En chatbot bliver bedre af at blive fulgt. Ved at læse samtalerne igennem kan du se, hvilke spørgsmål den ikke kunne svare på, og tilføje den manglende viden. Ændrer du priser eller åbningstider, skal chatbottens viden også opdateres.</p>
+<p>Nogle chatbotløsninger kan også vise, hvilke spørgsmål der bliver stillet oftest. Det er nyttig viden til både din hjemmeside og din FAQ.</p>
 <h2 class="serif">Kom i gang</h2>
-<p>Start med at samle de spørgsmål, kunderne oftest stiller, og de svar, du giver. Det er fundamentet for en chatbot, der svarer korrekt. Læs mere om <a href="/loesninger/ai-chatbot">AI-chatbot hos Vanta Studio</a>.</p></article></div></section><section class="ending" aria-labelledby="end-t"><div class="wrap rv">
+<p>Start med at samle det, chatbotten skal bygge på:</p>
+<ul>
+<li>De spørgsmål, kunderne oftest stiller, og de svar, du plejer at give.</li>
+<li>Ydelser, priser, åbningstider og praktiske oplysninger.</li>
+<li>Betingelser for fx aflysning og betaling.</li>
+<li>Hvad chatbotten ikke skal svare på, og hvem den skal sende henvendelser videre til.</li>
+</ul>
+<p>Det er fundamentet for en chatbot, der svarer korrekt – og har du allerede en FAQ-side, er du nået langt. Læs mere om <a href="/loesninger/ai-chatbot">AI-chatbot hos Vanta Studio</a>.</p>
+<h2 class="serif">Ofte stillede spørgsmål</h2>
+<h3>Kan chatbotten svare på andre sprog end dansk?</h3>
+<p>Ja, moderne sprogmodeller forstår og svarer på mange sprog. Det er en god idé at teste svarene på de sprog, dine kunder bruger.</p>
+<h3>Hvad hvis chatbotten svarer forkert?</h3>
+<p>Risikoen mindskes ved at give den præcis viden og tydelige grænser, så den siger, at den ikke ved det, frem for at gætte. Hold også øje med samtalerne, og ret den viden, den bygger på, når noget er forkert.</p>
+<h3>Kan chatbotten booke tider?</h3>
+<p>Det afhænger af bookingsystemet. Giver systemet adgang via en API, kan chatbotten i nogle tilfælde finde ledige tider eller oprette en booking. Ellers kan den henvise direkte til online booking.</p>
+<h3>Erstatter en chatbot min kundeservice?</h3>
+<p>Nej. Den tager de gentagne spørgsmål og sørger for, at ingen henvendelser går tabt uden for åbningstiden, så der er mere tid til de samtaler, der kræver et menneske.</p></article></div></section><section class="ending" aria-labelledby="end-t"><div class="wrap rv">
   <h2 class="serif" id="end-t">Vil du vide, hvad det kan betyde for din virksomhed?</h2>
   <p>Det starter med en uforpligtende samtale. Du taler direkte med mig – den samme person, som analyserer og bygger løsningen.</p>
   <a class="glass-btn" href="/kontakt">Book en samtale <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>

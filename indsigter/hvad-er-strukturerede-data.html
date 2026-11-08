@@ -107,7 +107,7 @@
    "headline": "Hvad er strukturerede data, og hvorfor betyder de noget?",
    "description": "Strukturerede data forklaret enkelt: hvad schema.org er, hvilke typer der er relevante for virksomheder, og hvordan de hjælper Google og AI-tjenester med at forstå din hjemmeside.",
    "datePublished": "2026-10-25",
-   "dateModified": "2026-10-25",
+   "dateModified": "2026-11-08",
    "inLanguage": "da",
    "image": "https://www.vantastudio.dk/assets/og-vanta.jpg",
    "mainEntityOfPage": "https://www.vantastudio.dk/indsigter/hvad-er-strukturerede-data",
@@ -120,6 +120,43 @@
    "publisher": {
     "@id": "https://www.vantastudio.dk/#org"
    }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Kan strukturerede data skade min hjemmeside?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ikke når de er korrekte. Men markering, der er vildledende eller ikke stemmer med indholdet, kan betyde, at Google ser bort fra den – og i grove tilfælde kan Google give siden en manuel handling."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Skal alle sider have strukturerede data?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Det er en god idé, at virksomhedsoplysningerne går igen på tværs af hjemmesiden, og at hver side er markeret efter, hvad den indeholder – en artikel som artikel, en ydelse som ydelse. Det vigtigste er, at markeringen er korrekt."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Er strukturerede data nødvendige for at blive nævnt i AI-svar?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nej, AI-tjenester kan også forstå almindelig tekst. Men strukturerede data giver en entydig beskrivelse, der gør det lettere at forstå oplysningerne og forbinde dem med den rigtige virksomhed."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hvor lang tid går der, før Google bruger markeringen?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Google skal først gennemgå siden igen. Det kan tage fra få dage til nogle uger. Du kan bede om en ny gennemgang af vigtige sider i Google Search Console."
+     }
+    }
+   ]
   }
  ]
 }
@@ -137,13 +174,23 @@
 <section class="pg-hero"><div class="wrap">
   <nav aria-label="Brødkrummer"><ol class="crumbs"><li><a href="/">Forside</a></li><li><a href="/indsigter">Indsigter</a></li><li aria-current="page">Hvad er strukturerede data, og hvorfor betyder de noget?</li></ol></nav>
   <h1 class="serif">Hvad er strukturerede data, og hvorfor betyder de noget?</h1>
-  <p class="lead">En enkel forklaring på schema.org – og hvorfor det hjælper søgemaskiner og AI med at forstå din virksomhed.</p><p class="art-meta">Af Felix Nylander Justesen · <time datetime="2026-10-25">25. oktober 2026</time></p>
+  <p class="lead">En enkel forklaring på schema.org – og hvorfor det hjælper søgemaskiner og AI med at forstå din virksomhed.</p><p class="art-meta">Af <a href="/om-vanta">Felix Nylander Justesen</a> · <time datetime="2026-10-25">25. oktober 2026</time> · Opdateret <time datetime="2026-11-08">8. november 2026</time></p>
   
 </div></section>
 <section class="sec"><div class="wrap"><article class="prose rv">
 <p>Når et menneske ser en hjemmeside, forstår det hurtigt, hvad der er virksomhedens navn, telefonnummer og ydelser. For en maskine er det sværere. Strukturerede data er en måde at fortælle søgemaskiner og AI-tjenester præcis, hvad indholdet betyder.</p>
 <h2 class="serif">Hvordan ser det ud?</h2>
 <p>Strukturerede data skrives typisk i formatet JSON-LD og lægges usynligt i hjemmesidens kode. De bruger et fælles ordforråd fra schema.org, som de store søgemaskiner står bag. Et eksempel kunne være oplysningen om, at siden handler om en virksomhed med et bestemt navn, en e-mailadresse og et område, den betjener.</p>
+<p>Et forenklet eksempel for en tænkt virksomhed kunne se sådan ud:</p>
+<pre><code>{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Klinik Eksempel",
+  "url": "https://www.example.com",
+  "email": "kontakt@example.com",
+  "areaServed": "Aarhus"
+}</code></pre>
+<p>Koden ligger i et <code>&lt;script&gt;</code>-element i sidens HTML. Den besøgende ser den ikke, men søgemaskiner og AI-tjenester kan læse den.</p>
 <h2 class="serif">Relevante typer for virksomheder</h2>
 <ul>
 <li><strong>Organization / LocalBusiness</strong> – virksomhedens navn, kontaktoplysninger, logo og eventuelt adresse og åbningstider.</li>
@@ -152,15 +199,47 @@
 <li><strong>Article</strong> – artikler med forfatter og dato.</li>
 <li><strong>BreadcrumbList</strong> – hvor en side ligger i hjemmesidens struktur.</li>
 </ul>
+<p>En egenskab, der er værd at kende, er <strong>sameAs</strong>. Her linker du til virksomhedens profiler på fx LinkedIn, Facebook eller X. Det hjælper tjenesterne med at forstå, at hjemmesiden og profilerne hører til den samme virksomhed – især hvis andre virksomheder har et navn, der ligner dit.</p>
 <h2 class="serif">Hvorfor er det vigtigt?</h2>
 <p>Strukturerede data gør det lettere for søgemaskiner at forstå og præsentere dit indhold, og de kan i nogle tilfælde give mulighed for udvidede visninger i søgeresultaterne. De giver også AI-tjenester en entydig beskrivelse af, hvem du er, og hvad du tilbyder. Strukturerede data er dog ikke en genvej til bedre placeringer – de forudsætter, at indholdet på siden er godt og stemmer overens med det, der er markeret.</p>
+<h2 class="serif">Hvad betyder det for AI-søgning?</h2>
+<p>AI-tjenester, der søger på nettet, skal hurtigt finde ud af, hvem en side handler om, og om oplysningerne passer med det, de finder andre steder. Strukturerede data gør det entydigt: Her er virksomhedens navn, her er dens hjemmeside, her er dens profiler, og her er de ydelser, den tilbyder. Når de samme oplysninger går igen i din Google-virksomhedsprofil og på dine sociale medier, bliver billedet af virksomheden mere sammenhængende.</p>
+<h2 class="serif">Et eksempel: virksomhed, ydelse og artikel</h2>
+<p>Tænk på en hjemmeside for en rådgivningsvirksomhed. Forsiden beskriver virksomheden med Organization og links til dens profiler. Hver ydelsesside er markeret med Service og peger tilbage på virksomheden som udbyder. Artiklerne er markeret med Article, med forfatterens navn og datoen for, hvornår de blev skrevet og senest opdateret. Tilsammen fortæller det maskinerne, hvem der tilbyder hvad – og hvem der står bag indholdet.</p>
+<h2 class="serif">Sådan kommer du i gang</h2>
+<ol>
+<li>Start med virksomheden: navn, logo, kontaktoplysninger, adresse (hvis kunderne kommer forbi) og links til dine profiler.</li>
+<li>Markér dine ydelser med Service og dine artikler med Article, så forfatter og dato fremgår.</li>
+<li>Har du en FAQ, så markér spørgsmål og svar med FAQPage – med præcis den tekst, der står på siden.</li>
+<li>Tilføj BreadcrumbList, så det er tydeligt, hvor hver side hører til.</li>
+<li>Test markeringen, og ret de fejl og advarsler, du får.</li>
+</ol>
+<p>Bruger du et system som WordPress, Shopify eller Wix, kan en del af markeringen ofte klares med indbyggede funktioner eller en udvidelse. Tjek alligevel resultatet – automatisk markering er ikke altid fuldstændig.</p>
+<h2 class="serif">Typiske fejl</h2>
+<ul>
+<li>Markering, der ikke stemmer med siden – fx en pris i koden, som ikke står i teksten.</li>
+<li>Flere modstridende beskrivelser af den samme virksomhed på forskellige sider.</li>
+<li>Anmeldelser i koden, som ikke er ægte eller ikke vises på siden.</li>
+<li>Forældede oplysninger, fordi markeringen blev glemt, da siden blev opdateret.</li>
+</ul>
 <h2 class="serif">Gode råd</h2>
 <ul>
 <li>Markér kun det, der faktisk står på siden.</li>
 <li>Hold oplysningerne opdaterede og ens med resten af nettet.</li>
+<li>Brug de samme oplysninger i markeringen som i din Google-virksomhedsprofil.</li>
 <li>Test markeringen med Googles værktøj til udvidede resultater.</li>
+<li>Tjek, at koden følger schema.org, med Schema Markup Validator (validator.schema.org).</li>
 </ul>
-<p>Alle sider på vantastudio.dk har strukturerede data. Vil du have det på din egen hjemmeside, er det en del af mit arbejde med <a href="/ydelser/seo-aeo-geo">SEO, AEO og GEO</a>.</p></article></div></section><section class="ending" aria-labelledby="end-t"><div class="wrap rv">
+<p>Alle sider på vantastudio.dk har strukturerede data. Vil du have det på din egen hjemmeside, er det en del af mit arbejde med <a href="/ydelser/seo-aeo-geo">SEO, AEO og GEO</a>.</p>
+<h2 class="serif">Ofte stillede spørgsmål</h2>
+<h3>Kan strukturerede data skade min hjemmeside?</h3>
+<p>Ikke når de er korrekte. Men markering, der er vildledende eller ikke stemmer med indholdet, kan betyde, at Google ser bort fra den – og i grove tilfælde kan Google give siden en manuel handling.</p>
+<h3>Skal alle sider have strukturerede data?</h3>
+<p>Det er en god idé, at virksomhedsoplysningerne går igen på tværs af hjemmesiden, og at hver side er markeret efter, hvad den indeholder – en artikel som artikel, en ydelse som ydelse. Det vigtigste er, at markeringen er korrekt.</p>
+<h3>Er strukturerede data nødvendige for at blive nævnt i AI-svar?</h3>
+<p>Nej, AI-tjenester kan også forstå almindelig tekst. Men strukturerede data giver en entydig beskrivelse, der gør det lettere at forstå oplysningerne og forbinde dem med den rigtige virksomhed.</p>
+<h3>Hvor lang tid går der, før Google bruger markeringen?</h3>
+<p>Google skal først gennemgå siden igen. Det kan tage fra få dage til nogle uger. Du kan bede om en ny gennemgang af vigtige sider i Google Search Console.</p></article></div></section><section class="ending" aria-labelledby="end-t"><div class="wrap rv">
   <h2 class="serif" id="end-t">Vil du vide, hvad det kan betyde for din virksomhed?</h2>
   <p>Det starter med en uforpligtende samtale. Du taler direkte med mig – den samme person, som analyserer og bygger løsningen.</p>
   <a class="glass-btn" href="/kontakt">Book en samtale <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
