@@ -101,6 +101,7 @@
 <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:"Fraunces";src:url("assets/fonts/fraunces.woff2") format("woff2");font-weight:100 400;font-style:normal;font-display:block}
+@font-face{font-family:"Fraunces";src:url("assets/fonts/fraunces-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
 @font-face{font-family:"Inter";src:url("assets/fonts/inter.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 
 :root{
@@ -133,7 +134,8 @@ img,svg{display:block}
 [id]{scroll-margin-top:96px}
 .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--px)}
 .serif{font-family:"Fraunces","Times New Roman",serif;font-weight:200;font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 0;letter-spacing:-.025em}
-.grad{background:linear-gradient(100deg,var(--cyan),var(--lilac) 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* Fremhævede ord: hvide og i Fraunces' kursiv (tidligere et cyan-lilla farveforløb) */
+.grad{color:#fff;font-style:italic}
 
 /* Sidens lys i baggrunden */
 .glow{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
@@ -250,7 +252,6 @@ section{position:relative}
 /* ---------- Afslutning ---------- */
 .close{padding:clamp(100px,14vw,200px) 0;text-align:center}
 .close blockquote{max-width:1000px;margin:0 auto;font-size:clamp(28px,3.8vw,56px);line-height:1.12}
-.close blockquote em{font-style:normal}
 .close p{max-width:520px;margin:28px auto 40px;color:var(--mist-70)}
 .btn{display:inline-flex;align-items:center;gap:12px;padding:16px 32px;border-radius:999px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;transition:background-color .3s}
 .btn:hover{background-color:rgba(255,255,255,.05)}
