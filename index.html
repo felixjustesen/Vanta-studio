@@ -230,11 +230,18 @@ img,svg,video{display:block}
 .eclipse-text p{margin:0;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
 /* De fire områder er åbne felter med en tynd linje over, mellem og under dem. Hvert felt har
    linjen over sig og det sidste også linjen under, så linjerne toner frem sammen med felterne.
-   Titel og beskrivelse står tættere sammen end felterne, så de tydeligt hører sammen. */
+   Titel og beskrivelse står tættere sammen end felterne, så de tydeligt hører sammen.
+   Hele feltet er et link til ydelsessiden, og pilen til højre viser, at man kan trykke. */
 .eclipse-areas{margin:0 0 clamp(32px,4.5svh,44px);padding:0;list-style:none}
-.eclipse-areas li{display:grid;gap:10px;padding:30px 0;border-top:1px solid rgba(255,255,255,.2)}
+.eclipse-areas li{border-top:1px solid rgba(255,255,255,.2)}
 .eclipse-areas li:last-child{border-bottom:1px solid rgba(255,255,255,.2)}
+.eclipse-areas a{display:grid;grid-template-columns:1fr auto;column-gap:32px;row-gap:10px;align-items:center;padding:30px 0}
+.eclipse-areas h3,.eclipse-areas p{grid-column:1}
 .eclipse-areas h3{margin:0;font-size:clamp(15px,1.15vw,17px);font-weight:500;line-height:1.3;letter-spacing:-.005em;color:#fff}
+.eclipse-areas svg{grid-column:2;grid-row:1/3;width:18px;height:18px;color:rgba(255,255,255,.55);transition:color .2s,transform .3s var(--ease)}
+@media (hover:hover) and (pointer:fine){
+  .eclipse-areas a:hover svg{color:#fff;transform:translateX(4px)}
+}
 .eclipse-pill{display:inline-flex;align-items:center;height:44px;padding:0 1.4em;border-radius:999px;background:#fff;color:#161616;font-size:14px;letter-spacing:.02em;text-shadow:none;transition:background-color .2s}
 .eclipse-pill:hover{background:#ffe6d6}
 /* Små skærme og højformat: stregen går i hele bredden, så teksten starter længere nede, og skiven rykkes lidt til højre */
@@ -242,7 +249,7 @@ img,svg,video{display:block}
   .eclipse{padding:180px var(--px) 8svh}
   .eclipse-ring{left:calc(var(--px) + 170px)}
 }
-@media (max-width:760px){.eclipse-areas li{padding:22px 0}}
+@media (max-width:760px){.eclipse-areas a{padding:22px 0}}
 
 /* ---------- Afsluttende CTA: video der styres af musen + skrivemaskine ---------- */
 .hej-run{position:relative;z-index:1;height:190vh;margin-top:-190vh}
@@ -368,10 +375,10 @@ img,svg,video{display:block}
   <div class="eclipse-text">
     <h2 id="flere-kunder-titel">Fire&nbsp;discipliner. Ét&nbsp;studie.</h2>
     <ul class="eclipse-areas">
-      <li><h3>Webdesign</h3><p>Hjemmesider med fokus på design, oplevelse og henvendelser.</p></li>
-      <li><h3>Synlighed</h3><p>SEO, AEO og GEO, der gør din virksomhed synlig i søgemaskiner og AI-svar.</p></li>
-      <li><h3>AI &amp; automatisering</h3><p>Chatbots og workflows, der sparer tid i hverdagen.</p></li>
-      <li><h3>Digitale systemer</h3><p>CRM, booking og løsninger, der samler virksomheden.</p></li>
+      <li><a href="/ydelser/hjemmesider"><h3>Webdesign</h3><p>Hjemmesider med fokus på design, oplevelse og henvendelser.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="/ydelser/seo-aeo-geo"><h3>Synlighed</h3><p>SEO, AEO og GEO, der gør din virksomhed synlig i søgemaskiner og AI-svar.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="/ydelser/ai-automatisering"><h3>AI &amp; automatisering</h3><p>Chatbots og workflows, der sparer tid i hverdagen.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="/ydelser/integrationer"><h3>Digitale systemer</h3><p>CRM, booking og løsninger, der samler virksomheden.</p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
     </ul>
     <a class="eclipse-pill" href="/om-vanta">Læs mere om Vanta</a>
   </div>
