@@ -70,18 +70,23 @@
 .prose pre code{font-size:inherit;color:var(--mist-80)}
 .note{margin-top:28px!important;padding:18px 22px;border-radius:14px;background:rgba(34,211,238,.06);box-shadow:inset 0 0 0 1px rgba(34,211,238,.22);font-size:15px!important}
 
-/* Kort */
-.cards{display:grid;gap:16px}
-@media (min-width:720px){.cards{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:1100px){.cards.c4{grid-template-columns:repeat(4,1fr)}.cards.c3{grid-template-columns:repeat(3,1fr)}}
-.card{position:relative;display:flex;flex-direction:column;padding:28px 26px 30px;border-radius:20px;background:linear-gradient(180deg,rgba(237,233,254,.04),rgba(237,233,254,.01));box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;color:inherit;transition:box-shadow .4s,transform .5s var(--ease)}
-a.card:hover{box-shadow:inset 0 0 0 1px rgba(34,211,238,.5),0 20px 50px -30px rgba(34,211,238,.5);transform:translateY(-3px)}
-.card .nr{font-size:11px;letter-spacing:.2em;color:var(--mist-60)}
-.card h3{margin:22px 0 10px;font-family:"Fraunces",serif;font-weight:300;font-variation-settings:"opsz" 72;font-size:clamp(23px,2vw,28px);line-height:1.1;letter-spacing:-.02em;color:#fff}
-.card p{margin:0;flex:1;font-size:15px;line-height:1.6;color:var(--mist-80)}
-.card .more{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:14px;color:var(--cyan)}
-.card .more svg{transition:transform .3s}
-a.card:hover .more svg{transform:translateX(3px)}
+/* Kort: én liste i stil med "Fire discipliner. Ét studie." på forsiden. Felterne er åbne og har en
+   tynd linje over, mellem og under sig. Titel og beskrivelse står tæt sammen, og pilen til højre
+   viser, at hele rækken er et link. Nummeret og teksten "Læs mere" står stadig i HTML'en (og læses
+   op af skærmlæsere), men vises ikke. */
+.cards{max-width:960px}
+.card{display:grid;grid-template-columns:1fr auto;column-gap:32px;row-gap:10px;align-items:center;padding:30px 0;border-top:1px solid rgba(255,255,255,.2);text-decoration:none;color:inherit}
+.card:last-child{border-bottom:1px solid rgba(255,255,255,.2)}
+.card .nr{display:none}
+.card h3{grid-column:1;margin:0;font-family:"Inter",system-ui,sans-serif;font-weight:500;font-size:clamp(15px,1.15vw,17px);line-height:1.3;letter-spacing:-.005em;color:#fff}
+.card p{grid-column:1;margin:0;font-size:clamp(13px,1vw,15px);line-height:1.55;color:rgba(247,247,247,.82)}
+.card .more{grid-column:2;grid-row:1/3;display:flex;font-size:0;color:rgba(255,255,255,.55);transition:color .2s}
+.card .more svg{width:18px;height:18px;transition:transform .3s var(--ease)}
+@media (hover:hover) and (pointer:fine){
+  a.card:hover .more{color:#fff}
+  a.card:hover .more svg{transform:translateX(4px)}
+}
+@media (max-width:760px){.card{padding:22px 0}}
 
 /* Nummererede trin */
 .steps{margin:0;padding:0;list-style:none;counter-reset:st;max-width:880px}
