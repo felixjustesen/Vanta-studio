@@ -550,7 +550,7 @@ add("/om-vanta", page(
     "/om-vanta",
     f"Om Vanta Studio – {FOUNDER}",
     f"Vanta Studio er et selvstændigt digitalt bureau, grundlagt og drevet af {FOUNDER}. Du har direkte kontakt med den, der analyserer og bygger din løsning.",
-    'Én person. <span class="grad">Hele vejen.</span>',
+    'Design og teknologi, <span class="grad">samlet ét sted.</span>',
     prose(f'''
 <h2 class="serif">Hvem står bag?</h2>
 <p>Vanta Studio er et selvstændigt digitalt bureau, grundlagt og drevet af mig, {FOUNDER}. Jeg hjælper virksomheder med at udnytte deres digitale potentiale gennem hjemmesider, AI, automatisering og skræddersyede løsninger.</p>
@@ -571,7 +571,7 @@ add("/om-vanta", page(
     ])
     + ending_html("Lad os tage en snak", "Fortæl mig om din virksomhed. Jeg svarer selv – inden for 24 timer."),
     crumbs=[("/", "Forside"), ("/om-vanta", "Om Vanta")],
-    lead="Et selvstændigt digitalt bureau med fokus på design, teknologi, AI og automatisering.",
+    lead="En hjemmeside er mere end et design. Den skal have funktioner, der er bygget til netop din virksomheds flaskehalse.",
     ld=[{"@type": "AboutPage", "url": SITE + "/om-vanta", "about": {"@id": SITE + "/#org"}},
         {"@type": "Person", "name": FOUNDER, "worksFor": {"@id": SITE + "/#org"}, "jobTitle": "Grundlægger"}],
 ))
