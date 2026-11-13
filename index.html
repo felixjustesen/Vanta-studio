@@ -321,10 +321,12 @@ img,svg,video{display:block}
 </head>
 <body>
 <div class="page">
-  <!-- Herovideo: data-hero="ny" viser Mux-videoen, data-hero="gammel" den tidligere video. -->
+  <!-- Herovideo: data-hero="ny" viser den nye video, data-hero="gammel" den tidligere video.
+       Den nye lå før hos Mux (s8pMcOvMQXc4GD6AX4e1o01xFogFxipmuKltNfSYza0200), men linket blev
+       spærret 2026-11-13. Nu ligger videoen på sitet selv i 1280×668, uden omkodning. -->
   <video class="bg" autoplay loop muted playsinline preload="auto" aria-hidden="true"
     data-hero="ny"
-    data-ny="https://stream.mux.com/s8pMcOvMQXc4GD6AX4e1o01xFogFxipmuKltNfSYza0200.m3u8"
+    data-ny="/assets/video/hero.mp4"
     data-gammel="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260717_084049_407d831b-67ef-4e76-9330-45386e0a9915.mp4"></video>
   <div class="shade" aria-hidden="true"></div>
 
@@ -445,6 +447,8 @@ img,svg,video{display:block}
   var gammel = video.dataset.gammel;
   var src = video.dataset[video.dataset.hero] || gammel;
   function play(url) { video.src = url; video.play().catch(function () {}); }
+  // Kan videoen ikke hentes, vises den gamle i stedet, så heroen aldrig står tom
+  video.addEventListener("error", function () { if (video.src.indexOf(gammel) < 0) play(gammel); });
   if (!/\.m3u8(\?|$)/.test(src)) return play(src);
   // HLS-video afspilles med hls.js. Kan browseren ikke bruge den, prøves browserens egen
   // afspiller (iPhone), og ellers vises den gamle video.
