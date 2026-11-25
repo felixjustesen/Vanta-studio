@@ -92,7 +92,9 @@
   function render(){
     accept.disabled=privacyBlocked();
     if(privacyBlocked())status.textContent='Din browsers privatlivssignal holder valgfri statistik slået fra.';
-    else if(choice==='accepted'&&(analyticsFailed||heatmapFailed))status.textContent='Noget af statistikken kunne ikke indlæses. Du kan prøve at tillade alle igen.';
+    else if(choice==='accepted'&&analyticsFailed&&heatmapFailed)status.textContent='Statistik kunne ikke indlæses. Dit valg er gemt.';
+    else if(choice==='accepted'&&analyticsFailed)status.textContent='Besøgsstatistik kunne ikke indlæses. Dit valg er gemt.';
+    else if(choice==='accepted'&&heatmapFailed)status.textContent='Heatmap kunne ikke indlæses. Dit valg er gemt.';
     else if(describeChoice&&choice==='accepted')status.textContent='Dit valg: al statistik er tilladt.';
     else if(describeChoice&&choice==='rejected')status.textContent='Dit valg: kun nødvendige funktioner.';
     else status.textContent='';
