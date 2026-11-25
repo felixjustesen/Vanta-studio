@@ -1,7 +1,7 @@
-/* Scoped, fixed controls: no change to the animated page's document geometry. */
+/* Fixed consent panel; preferences stay in normal footer flow. */
 .hm-consent,.hm-consent *,.hm-preferences{box-sizing:border-box}
 .hm-consent[hidden]{display:none!important}
-.hm-consent{position:fixed;bottom:64px;left:20px;z-index:2147483000;width:min(540px,calc(100vw - 40px));max-height:calc(100dvh - 100px);overflow:auto;padding:23px;border:1px solid #d9dee5;border-radius:14px;background:#fff;color:#172033;box-shadow:0 14px 55px rgba(3,7,24,.2);font-family:"Inter",Arial,sans-serif;font-size:16px;line-height:1.55;text-align:left;color-scheme:light}
+.hm-consent{position:fixed;bottom:20px;left:20px;z-index:2147483000;width:min(540px,calc(100vw - 40px));max-height:calc(100dvh - 40px);overflow:auto;padding:23px;border:1px solid #d9dee5;border-radius:14px;background:#fff;color:#172033;box-shadow:0 14px 55px rgba(3,7,24,.2);font-family:"Inter",Arial,sans-serif;font-size:16px;line-height:1.55;text-align:left;color-scheme:light}
 .hm-consent h2{margin:0 0 10px;font-family:inherit;font-size:18px;font-weight:600;line-height:1.35;letter-spacing:-.02em;color:#172033}
 .hm-consent p{margin:0 0 11px;font-size:16px;line-height:1.55;color:#495369}
 .hm-consent .hm-privacy{display:inline;color:#263d6e;text-decoration:underline;text-underline-offset:3px;font-size:14px}
@@ -11,10 +11,12 @@
 .hm-consent .hm-choice{display:inline-flex;align-items:center;justify-content:center;flex:1;min-height:46px;padding:11px 14px;border:1px solid #35435b;border-radius:7px;background:#fff;color:#172033;font:600 14px/1.4 "Inter",Arial,sans-serif;letter-spacing:0;text-transform:none;cursor:pointer;box-shadow:none}
 .hm-consent .hm-choice:hover{background:#edf1f7}
 .hm-consent .hm-choice:disabled{opacity:.55;cursor:not-allowed}
-.hm-preferences{position:fixed;bottom:14px;left:20px;z-index:2147483001;display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:9px 15px;border:1px solid #d3d9e2;border-radius:20px;background:#fff;color:#24334c;box-shadow:0 3px 15px rgba(3,7,24,.14);font:500 14px/1.3 "Inter",Arial,sans-serif;letter-spacing:0;text-transform:none;cursor:pointer}
-.hm-preferences:hover{background:#edf1f7}
+.hm-preferences{position:static;display:inline-block;flex-shrink:0;padding:4px 0;border:0;border-radius:0;background:transparent;color:inherit;box-shadow:none;font:inherit;font-size:14px;line-height:1.4;letter-spacing:0;text-transform:none;text-align:left;white-space:nowrap;cursor:pointer}
+.hm-preferences:hover{text-decoration:underline;text-underline-offset:3px}
+footer .bottom-links{flex-wrap:wrap}
+.hm-preferences-footer{display:flex;justify-content:flex-end;padding:16px 24px;background:#0f172a;color:#ede9fe}
 .hm-consent .hm-choice:focus-visible,.hm-consent .hm-privacy:focus-visible,.hm-preferences:focus-visible{outline:3px solid #3155ff;outline-offset:3px}
 .hm-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-@media(max-width:600px){.hm-consent{left:12px;bottom:65px;width:calc(100vw - 24px);padding:18px}.hm-preferences{left:12px}.hm-consent h2{font-size:17px}.hm-consent-actions{gap:8px}.hm-consent .hm-choice{padding:10px 8px}}
+@media(max-width:600px){.hm-consent{left:12px;bottom:12px;width:calc(100vw - 24px);padding:18px}.hm-consent h2{font-size:17px}.hm-consent-actions{gap:8px}.hm-consent .hm-choice{padding:10px 8px}}
 @media(max-width:380px){.hm-consent-actions{flex-direction:column}.hm-consent .hm-choice{flex:auto}}
 @media(prefers-reduced-motion:reduce){.hm-consent,.hm-preferences,.hm-choice{scroll-behavior:auto}}

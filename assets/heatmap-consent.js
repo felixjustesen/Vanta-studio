@@ -85,6 +85,15 @@
   var announcement=document.getElementById('hm-consent-announcement');
   if(!panel||!accept||!reject||!preferences||!status)return;
 
+  // Keep access to the saved choice in the footer, outside the viewport overlay.
+  var preferenceFooter=document.querySelector('footer .foot-links, footer .bottom-links, footer.site-footer .wrap')||document.querySelector('footer:last-of-type');
+  if(!preferenceFooter){
+    preferenceFooter=document.createElement('footer');
+    preferenceFooter.className='hm-preferences-footer';
+    document.body.appendChild(preferenceFooter);
+  }
+  preferenceFooter.appendChild(preferences);
+
   function stop(){
     if(window.VantaHeatmap)window.VantaHeatmap.revokeConsent();
   }
@@ -169,15 +178,15 @@
   accept.addEventListener('click',function(){
     if(privacyBlocked()){stop();render();return;}
     remember('accepted');analyticsFailed=false;heatmapFailed=false;start();closePanel();
-    preferences.focus();announce('Du har tilladt al statistik. Du kan ændre dit valg i Cookieindstillinger.');
+    preferences.focus({preventScroll:true});announce('Du har tilladt al statistik. Du kan ændre dit valg i Cookieindstillinger.');
   });
   reject.addEventListener('click',function(){
     choice='rejected';expiresAt=0;sessionOnly=false;
     stop();remember('rejected');analyticsFailed=false;heatmapFailed=false;render();closePanel();
-    preferences.focus();announce('Kun nødvendige funktioner er tilladt. Nye statistikmålinger er stoppet.');
+    preferences.focus({preventScroll:true});announce('Kun nødvendige funktioner er tilladt. Nye statistikmålinger er stoppet.');
   });
   preferences.addEventListener('click',function(){if(panel.hidden)openPanel(true,true);else closePanel();});
-  panel.addEventListener('keydown',function(event){if(event.key==='Escape'){closePanel();preferences.focus();}});
+  panel.addEventListener('keydown',function(event){if(event.key==='Escape'){closePanel();preferences.focus({preventScroll:true});}});
   window.addEventListener('storage',function(event){
     if(event.key!==KEY&&event.key!==null)return;
     var saved=readChoice();
