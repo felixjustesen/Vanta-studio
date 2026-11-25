@@ -1071,8 +1071,11 @@ PRIVATLIV = f"""
 <li><strong>Serverlogs:</strong> opbevares i den periode, hostingudbyderen anvender, typisk kort tid.</li>
 </ul>
 
-<h2 class="serif">8. Cookies</h2>
-<p>Hjemmesiden bruger <strong>ikke cookies</strong> og ingen analyse-, statistik- eller sporingsværktøjer. Skrifttyperne ligger på hjemmesidens egen server. Derfor vises der ikke et cookie-banner.</p>
+<h2 class="serif" id="heatmap">8. Webstatistik og valgfri heatmap-analyse</h2>
+<p>Hjemmesiden indlæser Vercel Web Analytics via hostingudbyderen. Derudover kan du frivilligt tillade Vanta Studios egen heatmap-analyse på forsiden. Dit valg gælder heatmap-målingen og ændrer ikke Vercels eksisterende webstatistik.</p>
+<p>Heatmap aktiveres kun efter din tilladelse og måler klik, musebevægelser, scrolldybde og tid, hvor markerede sektioner er synlige i en aktiv fane. Kontaktformularen, formularfelter, indtastet tekst og tastetryk er udeladt. Målingerne bruger et tilfældigt sessions-ID frem for navn eller e-mail; der oprettes ikke en identitet, der følger dig mellem besøg.</p>
+<p>Målingerne sendes via hjemmesidens eget modtagepunkt og kan ses i Vanta Studios private heatmap-dashboard. Data, der er mere end 30 dage gamle, ryddes op, næste gang modtagepunktet modtager en måling. Der er ikke en særskilt tidsstyret sletning, så oprydning kan ske senere, hvis der ikke kommer nye målinger.</p>
+<p>Dit valg om heatmap gemmes lokalt i browseren i højst 30 dage. Du kan ændre det via <strong>Analysvalg</strong> nederst på forsiden. Afviser du eller trækker din tilladelse tilbage, stopper nye heatmap-målinger straks; tidligere gemte målinger følger oprydningen beskrevet ovenfor. Browserens Global Privacy Control og Do Not Track respekteres ved at holde heatmap slået fra. Skrifttyperne ligger på hjemmesidens egen server.</p>
 
 <h2 class="serif">9. Dine rettigheder</h2>
 <p>Efter databeskyttelsesforordningen har du ret til at:</p>
