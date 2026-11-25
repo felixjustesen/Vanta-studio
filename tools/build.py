@@ -193,6 +193,8 @@ def page(path, title, desc, h1, body, crumbs=None, lead=None, actions=True, ld=N
 <link rel="preload" href="/assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/menu.css">
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/heatmap-consent.css">
+<script defer src="/assets/heatmap-consent.js"></script>
 <script type="application/ld+json">
 {ldjson}
 </script>
@@ -1007,9 +1009,9 @@ def todo(t):
 
 LEGAL_DATO = "25. oktober 2026"
 
-def legal_page(path, title, desc, h1, lead, body, crumb):
+def legal_page(path, title, desc, h1, lead, body, crumb, updated=LEGAL_DATO):
     return page(path, title, desc, h1,
-                sec(f'<div class="prose legal rv"><p class="art-meta">Senest opdateret: {LEGAL_DATO}</p>{body}</div>'),
+                sec(f'<div class="prose legal rv"><p class="art-meta">Senest opdateret: {updated}</p>{body}</div>'),
                 crumbs=[("/", "Forside"), (path, crumb)], lead=lead, actions=False)
 
 PRIVATLIV = f"""
@@ -1072,10 +1074,10 @@ PRIVATLIV = f"""
 </ul>
 
 <h2 class="serif" id="heatmap">8. Webstatistik og valgfri heatmap-analyse</h2>
-<p>Hjemmesiden indlæser Vercel Web Analytics via hostingudbyderen. Derudover kan du frivilligt tillade Vanta Studios egen heatmap-analyse på forsiden. Dit valg gælder heatmap-målingen og ændrer ikke Vercels eksisterende webstatistik.</p>
+<p>Med dit samtykke bruger Vanta Studio Vercel Web Analytics til besøgsstatistik og egen heatmap-analyse på forsiden til at forbedre hjemmesiden. Begge målinger er frivillige og indlæses først, når du vælger <strong>Tillad alle</strong>. Vælger du <strong>Tillad kun nødvendige</strong>, bruges ingen af disse målinger. Vercel modtager statistik om besøg, herunder sideadresse, henvisningsside og overordnede browser- og enhedsoplysninger. Vercel Web Analytics bruger ikke cookies til at identificere besøgende. Læs mere om <a href="https://vercel.com/docs/analytics/privacy-policy">Vercels behandling af webstatistik</a>.</p>
 <p>Heatmap aktiveres kun efter din tilladelse og måler klik, musebevægelser, scrolldybde og tid, hvor markerede sektioner er synlige i en aktiv fane. Kontaktformularen, formularfelter, indtastet tekst og tastetryk er udeladt. Målingerne bruger et tilfældigt sessions-ID frem for navn eller e-mail; der oprettes ikke en identitet, der følger dig mellem besøg.</p>
 <p>Målingerne sendes via hjemmesidens eget modtagepunkt og kan ses i Vanta Studios private heatmap-dashboard. Data, der er mere end 30 dage gamle, ryddes op, næste gang modtagepunktet modtager en måling. Der er ikke en særskilt tidsstyret sletning, så oprydning kan ske senere, hvis der ikke kommer nye målinger.</p>
-<p>Dit valg om heatmap gemmes lokalt i browseren i højst 30 dage. Du kan ændre det via <strong>Analysvalg</strong> nederst på forsiden. Afviser du eller trækker din tilladelse tilbage, stopper nye heatmap-målinger straks; tidligere gemte målinger følger oprydningen beskrevet ovenfor. Browserens Global Privacy Control og Do Not Track respekteres ved at holde heatmap slået fra. Skrifttyperne ligger på hjemmesidens egen server.</p>
+<p>Dit valg gemmes som en nødvendig indstilling i browserens localStorage under <code>vanta-statistics-consent:v2</code> i højst 30 dage. Det er ikke et besøgs-ID. Du kan altid trække dit samtykke tilbage via <strong>Cookieindstillinger</strong> nederst på siden ved at vælge <strong>Tillad kun nødvendige</strong>. Det stopper nye heatmap- og statistikhændelser; tidligere afsendte oplysninger tilbagekaldes ikke. Tidligere gemte heatmap-målinger følger oprydningen beskrevet ovenfor. Browserens Global Privacy Control og Do Not Track respekteres ved at holde begge målinger slået fra. Skrifttyperne ligger på hjemmesidens egen server.</p>
 
 <h2 class="serif">9. Dine rettigheder</h2>
 <p>Efter databeskyttelsesforordningen har du ret til at:</p>
@@ -1166,7 +1168,7 @@ add("/privacy-policy", legal_page(
     "Sådan behandler Vanta Studio personoplysninger fra kontaktformularer og forespørgsler om samtaler – hvilke oplysninger, hvorfor, hvor længe og dine rettigheder.",
     "Privatlivspolitik",
     "Her kan du læse, hvilke oplysninger Vanta Studio behandler, hvorfor, hvor længe – og hvilke rettigheder du har.",
-    PRIVATLIV, "Privatlivspolitik"))
+    PRIVATLIV, "Privatlivspolitik", updated="26. november 2026"))
 
 add("/terms-of-service", legal_page(
     "/terms-of-service",

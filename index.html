@@ -321,7 +321,7 @@ img,svg,video{display:block}
 </style>
 <link rel="stylesheet" href="/assets/menu.css">
 <link rel="stylesheet" href="/assets/heatmap-consent.css">
-  <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/assets/heatmap-consent.js"></script>
 </head>
 <body>
 <div class="page" data-heatmap-section="hero">
@@ -890,17 +890,16 @@ img,svg,video{display:block}
 </script>
 <script src="/assets/menu.js" defer></script>
 <section id="hm-consent" class="hm-consent" data-heatmap-ignore aria-labelledby="hm-consent-title" hidden>
-  <h2 id="hm-consent-title">Må jeg se, hvordan du bruger forsiden?</h2>
-  <p>Med dit samtykke bruger jeg et heatmap til at måle klik, musebevægelser, scroll og tid i sidens sektioner. Det hjælper mig med at forbedre siden. Kontaktformularen indgår ikke.</p>
-  <a class="hm-privacy" href="/privacy-policy#heatmap">Læs om heatmap og dit valg</a>
+  <h2 id="hm-consent-title">Cookies og statistik</h2>
+  <p>Vi bruger cookies og lignende teknologier til statistik og til at forbedre hjemmesiden. Med din tilladelse måler Vercel besøg på hjemmesiden, mens Vanta Studio måler klik, musebevægelser, scroll og tid på forsiden. Du kan altid ændre dit valg i Cookieindstillinger.</p>
+  <a class="hm-privacy" href="/privacy-policy#heatmap">Læs mere</a>
   <p id="hm-consent-status" class="hm-consent-status" aria-live="polite"></p>
   <div class="hm-consent-actions">
-    <button id="hm-reject" class="hm-choice" type="button">Afvis heatmap</button>
-    <button id="hm-accept" class="hm-choice" type="button">Tillad heatmap</button>
+    <button id="hm-reject" class="hm-choice" type="button">Tillad kun nødvendige</button>
+    <button id="hm-accept" class="hm-choice" type="button">Tillad alle</button>
   </div>
 </section>
-<button id="hm-preferences" class="hm-preferences" type="button" data-heatmap-ignore aria-controls="hm-consent" aria-expanded="false">Analysvalg</button>
+<button id="hm-preferences" class="hm-preferences" type="button" data-heatmap-ignore aria-controls="hm-consent" aria-expanded="false">Cookieindstillinger</button>
 <p id="hm-consent-announcement" class="hm-sr" data-heatmap-ignore role="status" aria-live="polite"></p>
-<script src="/assets/heatmap-consent.js" defer></script>
 </body>
 </html>
