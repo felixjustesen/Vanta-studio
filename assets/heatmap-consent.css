@@ -1,8 +1,9 @@
 /* Scoped, fixed controls: no change to the animated page's document geometry. */
+.hm-consent,.hm-consent *,.hm-preferences{box-sizing:border-box}
 .hm-consent[hidden]{display:none!important}
-.hm-consent{position:fixed;bottom:64px;left:20px;z-index:2147483000;width:min(560px,calc(100vw - 40px));max-height:calc(100dvh - 100px);overflow:auto;padding:23px;border:1px solid #d9dee5;border-radius:14px;background:#fff;color:#172033;box-shadow:0 14px 55px rgba(3,7,24,.2);font-family:"Inter",Arial,sans-serif;font-size:15px;line-height:1.55;text-align:left;color-scheme:light}
+.hm-consent{position:fixed;bottom:64px;left:20px;z-index:2147483000;width:min(540px,calc(100vw - 40px));max-height:calc(100dvh - 100px);overflow:auto;padding:23px;border:1px solid #d9dee5;border-radius:14px;background:#fff;color:#172033;box-shadow:0 14px 55px rgba(3,7,24,.2);font-family:"Inter",Arial,sans-serif;font-size:16px;line-height:1.55;text-align:left;color-scheme:light}
 .hm-consent h2{margin:0 0 10px;font-family:inherit;font-size:18px;font-weight:600;line-height:1.35;letter-spacing:-.02em;color:#172033}
-.hm-consent p{margin:0 0 11px;font-size:15px;line-height:1.55;color:#495369}
+.hm-consent p{margin:0 0 11px;font-size:16px;line-height:1.55;color:#495369}
 .hm-consent .hm-privacy{display:inline;color:#263d6e;text-decoration:underline;text-underline-offset:3px;font-size:14px}
 .hm-consent .hm-consent-status{margin:11px 0 0;font-size:14px;color:#495369}
 .hm-consent .hm-consent-status:empty{display:none}
@@ -15,4 +16,5 @@
 .hm-consent .hm-choice:focus-visible,.hm-consent .hm-privacy:focus-visible,.hm-preferences:focus-visible{outline:3px solid #3155ff;outline-offset:3px}
 .hm-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @media(max-width:600px){.hm-consent{left:12px;bottom:65px;width:calc(100vw - 24px);padding:18px}.hm-preferences{left:12px}.hm-consent h2{font-size:17px}.hm-consent-actions{gap:8px}.hm-consent .hm-choice{padding:10px 8px}}
+@media(max-width:380px){.hm-consent-actions{flex-direction:column}.hm-consent .hm-choice{flex:auto}}
 @media(prefers-reduced-motion:reduce){.hm-consent,.hm-preferences,.hm-choice{scroll-behavior:auto}}

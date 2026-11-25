@@ -1,8 +1,12 @@
 # Heatmap på Vantas forside
 
 Forsiden bruger Vanta Heatmap efter et udtrykkeligt valg. Kontaktformularen,
-samtykkebanneret og analysevalget er udeladt fra tracking. Eksisterende Vercel
-Web Analytics fortsætter som før og styres ikke af dette heatmapvalg.
+samtykkebanneret og cookieindstillingerne er udeladt fra tracking.
+Cookiebanneret styrer både Vercel Web Analytics på alle sider og heatmap på
+forsiden. Begge kræver “Tillad alle”; “Tillad kun nødvendige” stopper nye
+hændelser. Det tidligere heatmapvalg genbruges ikke som tilladelse til statistik.
+Valget gemmes i `vanta-statistics-consent:v2` i højst 30 dage. Vercels
+`beforeSend`-kontrol kontrollerer også tilladelsen før hver hændelse.
 
 ## Forbindelse
 
@@ -40,5 +44,5 @@ ikke distribueret beskyttelse mod misbrug.
 
 Formularafsendelse og eksisterende animationer er ikke ændret. Ved væsentlige
 layoutændringer skal version, modtagerens tilladte version og sidebillede
-opdateres sammen. Fjern homepage-scriptet `/assets/heatmap-consent.js` for at
-stoppe nye heatmapbesøg; eksisterende data administreres i dashboardet.
+opdateres sammen. Den fælles `/assets/heatmap-consent.js` styrer samtykket og indlæser kun
+heatmap på forsiden; eksisterende data administreres i dashboardet.
