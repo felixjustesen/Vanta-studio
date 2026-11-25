@@ -5,7 +5,8 @@ samtykkebanneret og cookieindstillingerne er udeladt fra tracking.
 Cookiebanneret styrer både Vercel Web Analytics på alle sider og heatmap på
 forsiden. Begge kræver “Tillad alle”; “Tillad kun nødvendige” stopper nye
 hændelser. Det tidligere heatmapvalg genbruges ikke som tilladelse til statistik.
-Valget gemmes i `vanta-statistics-consent:v2` i højst 30 dage. Vercels
+Valget kan ændres via det diskrete link “Cookieindstillinger” i footeren; der
+er ingen fast knap oven på siden. Valget gemmes i `vanta-statistics-consent:v2` i højst 30 dage. Vercels
 `beforeSend`-kontrol kontrollerer også tilladelsen før hver hændelse.
 
 ## Forbindelse

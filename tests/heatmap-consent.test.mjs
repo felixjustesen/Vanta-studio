@@ -22,14 +22,15 @@ function setup(options={}){
   value.fire=(name,event={})=>{for(const fn of [...(listeners.get(name)||[])])fn(event);};
   return value;
  }
- const document={activeElement:null,getElementById:id=>nodes.get(id)||null,querySelector:selector=>selector==='link[href="/assets/heatmap-consent.css"]'?links.find(link=>link.href==='/assets/heatmap-consent.css')||null:null};
+ const document={activeElement:null,getElementById:id=>nodes.get(id)||null,querySelector:selector=>selector==='link[href="/assets/heatmap-consent.css"]'?links.find(link=>link.href==='/assets/heatmap-consent.css')||null:selector.startsWith('footer')?footer:null};
  function element(tag,id){
-  const node=eventTarget({tagName:tag.toUpperCase(),id:id||'',hidden:id==='hm-consent',disabled:false,textContent:'',attrs:{},setAttribute(name,value){this.attrs[name]=value;},focus(){document.activeElement=this;}});
+  const node=eventTarget({tagName:tag.toUpperCase(),id:id||'',hidden:id==='hm-consent',disabled:false,textContent:'',attrs:{},children:[],appendChild(child){this.children.push(child);child.parentElement=this;return child;},setAttribute(name,value){this.attrs[name]=value;},focus(){document.activeElement=this;}});
   node.click=()=>{if(!node.disabled)node.fire('click');};
   Object.defineProperty(node,'innerHTML',{set(value){node.markup=value;for(const match of value.matchAll(/<([a-z]+)([^>]*\bid="([^"]+)"[^>]*)>([^<]*)/g)){const child=element(match[1],match[3]);child.textContent=match[4];child.hidden=/\bhidden\b/.test(match[2]);nodes.set(child.id,child);}},get(){return node.markup||'';}});
   if(id)nodes.set(id,node);
   return node;
  }
+ const footer=element('nav');
  function append(node){if(node.tagName==='SCRIPT')scripts.push(node);else if(node.tagName==='LINK')links.push(node);else wrappers.push(node);return node;}
  document.body={appendChild:append};document.head={appendChild:append};document.createElement=tag=>element(tag);
  if(!options.missingDOM)for(const id of ['hm-consent','hm-accept','hm-reject','hm-preferences','hm-consent-status','hm-consent-announcement'])element(id.startsWith('hm-consent')?'section':'button',id);
