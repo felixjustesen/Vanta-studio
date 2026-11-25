@@ -143,8 +143,21 @@ test('re-acceptance reuses the loaded vendor and tracker rather than adding dupl
  h.rerun();assert.equal(h.scripts.length,2);assert.equal(h.wrappers.length,0);
 });
 
-test('load errors stay explicit in settings and do not enable the heatmap',()=>{
- const h=setup();h.node('hm-accept').click();heatmaps(h)[0].onerror();analytics(h)[0].onerror();assert.equal(h.active,false);assert.match(h.node('hm-consent-status').textContent,/ikke indlæses/);
+test('blocked visit statistics does not imply the successfully loaded heatmap failed',()=>{
+ const h=setup();h.node('hm-accept').click();h.loadHeatmap();analytics(h)[0].onerror();
+ assert.equal(h.active,true);assert.equal(h.node('hm-consent-status').textContent,'Besøgsstatistik kunne ikke indlæses. Dit valg er gemt.');
+ assert.equal(JSON.parse(h.storage.get(KEY)).value,'accepted');
+});
+
+test('a heatmap load error does not imply successfully loaded visit statistics failed',()=>{
+ const h=setup();h.node('hm-accept').click();h.loadAnalytics();heatmaps(h)[0].onerror();
+ assert.equal(h.active,false);assert.ok(h.emit());assert.equal(h.node('hm-consent-status').textContent,'Heatmap kunne ikke indlæses. Dit valg er gemt.');
+});
+
+test('both blocked scripts report a combined load failure without asking for permission again',()=>{
+ const h=setup();h.node('hm-accept').click();heatmaps(h)[0].onerror();analytics(h)[0].onerror();
+ assert.equal(h.active,false);assert.equal(h.node('hm-consent-status').textContent,'Statistik kunne ikke indlæses. Dit valg er gemt.');
+ assert.equal(JSON.parse(h.storage.get(KEY)).value,'accepted');
 });
 
 test('homepage excludes the complete contact form and consent UI and has no unconditional analytics tag',()=>{
